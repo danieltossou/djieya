@@ -48,18 +48,6 @@ ActiveRecord::Schema.define(version: 2019_08_21_171458) do
     t.index ["user_id"], name: "index_classe_rooms_on_user_id"
   end
 
-  create_table "classes", force: :cascade do |t|
-    t.string "libelle"
-    t.boolean "etat"
-    t.bigint "user_id", null: false
-    t.bigint "montant"
-    t.bigint "ecole_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ecole_id"], name: "index_classes_on_ecole_id"
-    t.index ["user_id"], name: "index_classes_on_user_id"
-  end
-
   create_table "dossiers", force: :cascade do |t|
     t.string "libelle"
     t.bigint "ecole_id", null: false
@@ -112,8 +100,6 @@ ActiveRecord::Schema.define(version: 2019_08_21_171458) do
   add_foreign_key "annees", "users"
   add_foreign_key "classe_rooms", "ecoles"
   add_foreign_key "classe_rooms", "users"
-  add_foreign_key "classes", "ecoles"
-  add_foreign_key "classes", "users"
   add_foreign_key "dossiers", "ecoles"
   add_foreign_key "dossiers", "users"
   add_foreign_key "ecoles", "users"
