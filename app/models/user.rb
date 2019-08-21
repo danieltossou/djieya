@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   has_many :annees
+  has_many :ecoles
+  has_many :classeRooms
+  has_many :dossiers
 end

@@ -1,0 +1,27 @@
+<%= form_with(model: ecole, local: true) do |form| %>
+  <% if ecole.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ecole.errors.count, "error") %> prohibited this ecole from being saved:</h2>
+
+      <ul>
+        <% ecole.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :libelle %>
+    <%= form.text_field :libelle %>
+  </div>
+
+  <div class="field">
+    <%= form.label :etat %>
+    <%= form.check_box :etat %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

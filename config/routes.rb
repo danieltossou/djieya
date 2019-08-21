@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :dossiers
+  resources :classe_rooms
+  resources :ecoles
   resources :annees
   devise_for :users
   root to: 'pages#index'

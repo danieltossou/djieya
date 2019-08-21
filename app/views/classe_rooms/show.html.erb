@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Libelle:</strong>
+  <%= @classe_room.libelle %>
+</p>
+
+<p>
+  <strong>Etat:</strong>
+  <%= @classe_room.etat %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @classe_room.user_id %>
+</p>
+
+<p>
+  <strong>Montant:</strong>
+  <%= @classe_room.montant %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @classe_room.ecole_id %>
+</p>
+
+<%= link_to 'Edit', edit_classe_room_path(@classe_room) %> |
+<%= link_to 'Back', classe_rooms_path %>
