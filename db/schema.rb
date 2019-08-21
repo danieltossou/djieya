@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_131246) do
+ActiveRecord::Schema.define(version: 2019_08_21_171458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
 
   create_table "annees", force: :cascade do |t|
     t.string "libelle"
@@ -90,6 +102,8 @@ ActiveRecord::Schema.define(version: 2019_08_21_131246) do
     t.datetime "date_derniere_deconnexion"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_users_on_admin_id"
     t.index ["ecole_id"], name: "index_users_on_ecole_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -103,4 +117,5 @@ ActiveRecord::Schema.define(version: 2019_08_21_131246) do
   add_foreign_key "dossiers", "ecoles"
   add_foreign_key "dossiers", "users"
   add_foreign_key "ecoles", "users"
+  add_foreign_key "users", "admins"
 end
