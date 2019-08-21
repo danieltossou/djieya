@@ -46,7 +46,9 @@
 <h6><i class="fas fa-coins"></i>&nbsp;&nbsp;Caisse</h6>
 </div>
 <div class="aside-bottom aside-margin">
-<h6 class="text-center">Déconnexion &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
+<h6 class="text-center"><%= link_to 'Déconnexion', destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
+
+<h6 class="text-center"><%= link_to 'DéconnexionAdmin', destroy_admin_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
 </div>
 </aside>
 <main class="col-10 invisible">
