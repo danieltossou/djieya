@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Libelle:</strong>
+  <%= @annee.libelle %>
+</p>
+
+<p>
+  <strong>Etat:</strong>
+  <%= @annee.etat %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @annee.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_annee_path(@annee) %> |
+<%= link_to 'Back', annees_path %>
