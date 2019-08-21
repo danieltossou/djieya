@@ -1,0 +1,106 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 2019_08_21_131246) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "annees", force: :cascade do |t|
+    t.string "libelle"
+    t.boolean "etat"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_annees_on_user_id"
+  end
+
+  create_table "classe_rooms", force: :cascade do |t|
+    t.string "libelle"
+    t.boolean "etat"
+    t.bigint "user_id", null: false
+    t.bigint "montant"
+    t.bigint "ecole_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ecole_id"], name: "index_classe_rooms_on_ecole_id"
+    t.index ["user_id"], name: "index_classe_rooms_on_user_id"
+  end
+
+  create_table "classes", force: :cascade do |t|
+    t.string "libelle"
+    t.boolean "etat"
+    t.bigint "user_id", null: false
+    t.bigint "montant"
+    t.bigint "ecole_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ecole_id"], name: "index_classes_on_ecole_id"
+    t.index ["user_id"], name: "index_classes_on_user_id"
+  end
+
+  create_table "dossiers", force: :cascade do |t|
+    t.string "libelle"
+    t.bigint "ecole_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ecole_id"], name: "index_dossiers_on_ecole_id"
+    t.index ["user_id"], name: "index_dossiers_on_user_id"
+  end
+
+  create_table "ecoles", force: :cascade do |t|
+    t.string "libelle"
+    t.boolean "etat"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_ecoles_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "nom"
+    t.string "prenom"
+    t.text "adresse"
+    t.bigint "contact"
+    t.string "sexe"
+    t.string "matricule"
+    t.bigint "ecole_id"
+    t.boolean "etat"
+    t.boolean "presence"
+    t.string "categorie"
+    t.datetime "date_derniere_connexion"
+    t.datetime "date_derniere_deconnexion"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ecole_id"], name: "index_users_on_ecole_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "annees", "users"
+  add_foreign_key "classe_rooms", "ecoles"
+  add_foreign_key "classe_rooms", "users"
+  add_foreign_key "classes", "ecoles"
+  add_foreign_key "classes", "users"
+  add_foreign_key "dossiers", "ecoles"
+  add_foreign_key "dossiers", "users"
+  add_foreign_key "ecoles", "users"
+end

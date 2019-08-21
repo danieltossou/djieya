@@ -37,10 +37,10 @@
 </div><br>
 <h6><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Tableau de bord</h6>
 <hr>
-<h6><i class="far fa-calendar"></i>&nbsp;&nbsp;Année scolaire</h6><br>
+<h6><i class="far fa-calendar"></i>&nbsp;&nbsp;<%= link_to 'Année scolaire', annees_path %></h6><br>
 <h6><i class="fas fa-users"></i>&nbsp;&nbsp;Utilisateurs</h6><br>
 <h6><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;Etudiants</h6><br>
-<h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;Classes</h6><br>
+<h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', classe_rooms_path %></h6><br>
 <h6><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;Emploi du temps</h6><br>
 <h6><i class="fas fa-credit-card"></i>&nbsp;&nbsp;Versements</h6><br>
 <h6><i class="fas fa-coins"></i>&nbsp;&nbsp;Caisse</h6>
@@ -69,8 +69,12 @@
 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
 </div>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% if notice %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert"><%= alert %></p>
+<% end %>
 <%= yield %>
 </div>
 </div>

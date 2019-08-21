@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Classe Rooms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Libelle</th>
+      <th>Etat</th>
+      <th>User</th>
+      <th>Montant</th>
+      <th>Ecole</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @classe_rooms.each do |classe_room| %>
+      <tr>
+        <td><%= classe_room.libelle %></td>
+        <td><%= classe_room.etat %></td>
+        <td><%= classe_room.user_id %></td>
+        <td><%= classe_room.montant %></td>
+        <td><%= classe_room.ecole_id %></td>
+        <td><%= link_to 'Show', classe_room %></td>
+        <td><%= link_to 'Edit', edit_classe_room_path(classe_room) %></td>
+        <td><%= link_to 'Destroy', classe_room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Classe Room', new_classe_room_path %>

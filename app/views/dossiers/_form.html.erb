@@ -1,0 +1,27 @@
+<%= form_with(model: dossier, local: true) do |form| %>
+  <% if dossier.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dossier.errors.count, "error") %> prohibited this dossier from being saved:</h2>
+
+      <ul>
+        <% dossier.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :libelle %>
+    <%= form.text_field :libelle %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ecole_id %>
+    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
