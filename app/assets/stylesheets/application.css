@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+ body, html {
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    }
+    
+    #left {
+    height: 100%;
+    -webkit-text-fill-color: white;
+    }
+    
+    .aside-margin {
+    margin-left: 15px;
+    }
+    
+    .signout-icon {
+    margin-left: 15vh;
+    }
+    
+    .aside-bottom {
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    }
+    
+    .aside-top {
+    margin-top: 3vh;
+    }
