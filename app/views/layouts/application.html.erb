@@ -54,20 +54,23 @@
 </main>
 <main class="col offset-2 h-100">
 <div class="row bg-light">
-<div class="col-12 py-2">
-<nav class="fixed">
-<div class="nav nav-tabs" id="nav-tab" role="tablist">
-<a class="nav-item nav-link active col-6" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><h5 class="text-center">ECOLE DE MUSIQUE</h5></a>
-<a class="nav-item nav-link col-6" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><h5 class="text-center">LYCÉE NDV</h5></a>
+  <div class="col-12 py-2">
+    <nav class="fixed">
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <% Ecole.all.each do |ecole| %>
+        <a class="nav-item nav-link col-6" id="nav-home-tab" data-toggle="tab" href="#<%=ecole.libelle%>" role="tab" aria-controls="nav-home" aria-selected="true"><h5 class="text-center"><%= ecole.libelle %></h5></a>
+        <% end %>
+      </div>
+    
+    </nav>
+  </div>
 </div>
-</nav>
-</div>
-</div>
-<div class="row bg-white">
-<div class="col-12 py-4">
-<div class="tab-content" id="nav-tabContent">
-<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
-<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+  <div class="row bg-white">
+  <div class="col-12 py-4">
+  <div class="tab-content" id="nav-tabContent">
+      <% Ecole.all.each do |ecole| %>
+  <div class="tab-pane fade" id="<%=ecole.libelle%>" role="tabpanel" aria-labelledby="nav-home-tab"><%=ecole.libelle%></div>
+    <% end %>
 </div>
 <% if notice %>
   <p class="notice"><%= notice %></p>
