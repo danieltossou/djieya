@@ -1,0 +1,108 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nom:</strong>
+  <%= @etudiant.nom %>
+</p>
+
+<p>
+  <strong>Prenom:</strong>
+  <%= @etudiant.prenom %>
+</p>
+
+<p>
+  <strong>Sexe:</strong>
+  <%= @etudiant.sexe %>
+</p>
+
+<p>
+  <strong>Date naissance:</strong>
+  <%= @etudiant.date_naissance %>
+</p>
+
+<p>
+  <strong>Matricule:</strong>
+  <%= @etudiant.matricule %>
+</p>
+
+<p>
+  <strong>Num inscription:</strong>
+  <%= @etudiant.num_inscription %>
+</p>
+
+<p>
+  <strong>Classe room:</strong>
+  <%= @etudiant.classe_room_id %>
+</p>
+
+<p>
+  <strong>Oriente:</strong>
+  <%= @etudiant.oriente %>
+</p>
+
+<p>
+  <strong>Nationnalite:</strong>
+  <%= @etudiant.nationnalite %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @etudiant.email %>
+</p>
+
+<p>
+  <strong>Adresse:</strong>
+  <%= @etudiant.adresse %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @etudiant.contact %>
+</p>
+
+<p>
+  <strong>Maladie:</strong>
+  <%= @etudiant.maladie %>
+</p>
+
+<p>
+  <strong>Nom parent:</strong>
+  <%= @etudiant.nom_parent %>
+</p>
+
+<p>
+  <strong>Contact parent:</strong>
+  <%= @etudiant.contact_parent %>
+</p>
+
+<p>
+  <strong>Lien parente:</strong>
+  <%= @etudiant.lien_parente %>
+</p>
+
+<p>
+  <strong>Email parent:</strong>
+  <%= @etudiant.email_parent %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= @etudiant.photo %>
+</p>
+
+<p>
+  <strong>Autre:</strong>
+  <%= @etudiant.autre %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @etudiant.ecole_id %>
+</p>
+<% unless @etudiant.dossiers.empty? %>
+    <p><b>Dossier fournie</b></p>
+    <h6><%= @etudiant.dossiers.map(&:libelle).join(' - ') %></h6>
+<% end %>
+
+<%= link_to 'Edit', edit_etudiant_path(@etudiant) %> |
+<%= link_to 'Back', etudiants_path %>

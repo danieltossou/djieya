@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Etudiants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Sexe</th>
+      <th>Date naissance</th>
+      <th>Matricule</th>
+      <th>Num inscription</th>
+      <th>Classe room</th>
+      <th>Oriente</th>
+      <th>Nationnalite</th>
+      <th>Email</th>
+      <th>Adresse</th>
+      <th>Contact</th>
+      <th>Maladie</th>
+      <th>Nom parent</th>
+      <th>Contact parent</th>
+      <th>Lien parente</th>
+      <th>Email parent</th>
+      <th>Photo</th>
+      <th>Autre</th>
+      <th>Ecole</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @etudiants.each do |etudiant| %>
+      <tr>
+        <td><%= etudiant.nom %></td>
+        <td><%= etudiant.prenom %></td>
+        <td><%= etudiant.sexe %></td>
+        <td><%= etudiant.date_naissance %></td>
+        <td><%= etudiant.matricule %></td>
+        <td><%= etudiant.num_inscription %></td>
+        <td><%= etudiant.classe_room_id %></td>
+        <td><%= etudiant.oriente %></td>
+        <td><%= etudiant.nationnalite %></td>
+        <td><%= etudiant.email %></td>
+        <td><%= etudiant.adresse %></td>
+        <td><%= etudiant.contact %></td>
+        <td><%= etudiant.maladie %></td>
+        <td><%= etudiant.nom_parent %></td>
+        <td><%= etudiant.contact_parent %></td>
+        <td><%= etudiant.lien_parente %></td>
+        <td><%= etudiant.email_parent %></td>
+        <td><%= etudiant.photo %></td>
+        <td><%= etudiant.autre %></td>
+        <td><%= etudiant.ecole_id %></td>
+        <td><%= link_to 'Show', etudiant %></td>
+        <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
+        <td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Etudiant', new_etudiant_path %>

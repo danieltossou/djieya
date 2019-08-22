@@ -24,7 +24,7 @@ class AnneesController < ApplicationController
   # POST /annees
   # POST /annees.json
   def create
-    @annee = current_user.annees.new(annee_params)
+    @annee = current_admin.annees.new(annee_params)
 
     respond_to do |format|
       if @annee.save
@@ -69,6 +69,6 @@ class AnneesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def annee_params
-      params.require(:annee).permit(:libelle, :etat, :user_id)
+      params.require(:annee).permit(:libelle, :etat, :admin_id)
     end
 end
