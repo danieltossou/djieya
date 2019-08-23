@@ -28,54 +28,57 @@
   </head>
 
 <body>
-<div class="container-fluid">
-<div class="row">
-<aside class="col-2 px-0 position-fixed bg-dark" id="left">
-<div class="w-100 aside-margin aside-top">
-<div>
-  <h6><%= current_user.email if user_signed_in? %><%= current_admin.email if admin_signed_in? %></h6>
-<p>Année: 2018-2019</p>
-</div><br>
-<h6><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Tableau de bord</h6>
-<hr>
-<h6><i class="far fa-calendar"></i>&nbsp;&nbsp;<%= link_to 'Année scolaire', annees_path %></h6><br>
-<h6><i class="fas fa-users"></i>&nbsp;&nbsp;Utilisateurs</h6><br>
-<h6><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;<%= link_to 'Etudiants', etudiants_path %></h6><br>
-<h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', classe_rooms_path %></h6><br>
-<h6><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;Emploi du temps</h6><br>
-<h6><i class="fas fa-credit-card"></i>&nbsp;&nbsp;<%= link_to 'Versements', versements_path %></h6><br>
-<h6><i class="fas fa-coins"></i>&nbsp;&nbsp;Caisse</h6>
-</div>
-<div class="aside-bottom aside-margin">
-  <% if user_signed_in? %>
-<h6 class="text-center"><%= link_to 'Déconnexion', destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
-<% end %>
-<% if admin_signed_in? %>
-<h6 class="text-center"><%= link_to 'Déconnexion', destroy_admin_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
-<% end %>
-</div>
-</aside>
-<main class="col-10 invisible">
-<!--hidden spacer-->
-</main>
-<main class="col offset-2 h-100">
-<div class="row bg-light">
-  <div class="col-12 py-2">
-    <nav class="fixed">
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <% Ecole.all.each do |ecole| %>
-        <a class="nav-item nav-link col-6" id="nav-home-tab" data-toggle="tab" href="#<%=ecole.libelle%>" role="tab" aria-controls="nav-home" aria-selected="true"><h5 class="text-center"><%= ecole.libelle %></h5></a>
-        <% end %>
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="col-2 px-0 position-fixed bg-dark" id="left">
+        <div class="w-100 aside-margin aside-top">
+          <div>
+            <h6><%= current_user.email if user_signed_in? %><%= current_admin.email if admin_signed_in? %></h6>
+            <p>Année: 2018-2019</p>
+          </div><br>
+          <h6><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Tableau de bord</h6>
+          <hr>
+          <h6><i class="far fa-calendar"></i>&nbsp;&nbsp;<%= link_to 'Année scolaire', annees_path %></h6><br>
+          <h6><i class="fas fa-users"></i>&nbsp;&nbsp;Utilisateurs</h6><br>
+          <h6><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;<%= link_to 'Etudiants', etudiants_path %></h6><br>
+          <h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', classe_rooms_path %></h6><br>
+          <h6><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;Emploi du temps</h6><br>
+          <h6><i class="fas fa-credit-card"></i>&nbsp;&nbsp;<%= link_to 'Versements', versements_path %></h6><br>
+          <h6><i class="fas fa-coins"></i>&nbsp;&nbsp;Caisse</h6>
+        </div>
+        <div class="aside-bottom aside-margin">
+          <% if user_signed_in? %>
+            <h6 class="text-center"><%= link_to 'Déconnexion', destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
+          <% end %>
+          <% if admin_signed_in? %>
+            <h6 class="text-center"><%= link_to 'Déconnexion', destroy_admin_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
+          <% end %>
+        </div>
+      </aside>
+      <main class="col-10 invisible">
+      <!--hidden spacer-->
+      </main>
+    <main class="col offset-2 h-100">
+      <div class="row bg-light">
+        <div class="col-12 py-2">
+          <nav class="fixed">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <% Ecole.all.each do |ecole| %>
+                  <a class="nav-item nav-link col-6" id="nav-home-tab" data-toggle="tab" href="#<%=ecole.libelle%>" role="tab" aria-controls="nav-home" aria-selected="true"><h5 class="text-center"><%= ecole.libelle %></h5></a>
+              <% end %>
+            </div>
+          </nav>
+          <%= yield %>
+        </div>
       </div>
-    </div>
-    <%= yield %>
-    <<!-- script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-          let base = document.getElementById('ancre');
-          let mod = document.getElementById('modalEmploye');
-          base.appendChild(mod);
-      });
-    </<!--> -->
+    </main>
+      <!-- script type="text/javascript">
+          document.addEventListener('DOMContentLoaded', () => {
+            let base = document.getElementById('ancre');
+            let mod = document.getElementById('modalEmploye');
+            base.appendChild(mod);
+        });
+      </<!-->
   </body>
 </html>
 
