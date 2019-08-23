@@ -37,11 +37,11 @@
             <p>Année: 2018-2019</p>
           </div><br>
           <h6><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Tableau de bord</h6>
-          <hr>
-          <h6><i class="far fa-calendar"></i>&nbsp;&nbsp;<%= link_to 'Année scolaire', annees_path %></h6><br>
-          <h6><i class="fas fa-users"></i>&nbsp;&nbsp;Utilisateurs</h6><br>
+          <hr />
+          <h6><i class="far fa-calendar"></i>&nbsp;&nbsp;<%= link_to 'Année scolaire', menu_annees_path %></h6><br>
+          <h6><i class="fas fa-users"></i>&nbsp;&nbsp;<%= link_to 'Utilisateurs', employes_path %></h6><br>
           <h6><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;<%= link_to 'Etudiants', etudiants_path %></h6><br>
-          <h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', classe_rooms_path %></h6><br>
+          <h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', menu_classes_path %></h6><br>
           <h6><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;Emploi du temps</h6><br>
           <h6><i class="fas fa-credit-card"></i>&nbsp;&nbsp;<%= link_to 'Versements', versements_path %></h6><br>
           <h6><i class="fas fa-coins"></i>&nbsp;&nbsp;Caisse</h6>
@@ -68,9 +68,11 @@
               <% end %>
             </div>
           </nav>
-          <%= yield %>
+          
         </div>
+        
       </div>
+      <%= yield %>
     </main>
       <!-- script type="text/javascript">
           document.addEventListener('DOMContentLoaded', () => {
