@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_171458) do
+ActiveRecord::Schema.define(version: 2019_08_22_231939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 2019_08_21_171458) do
   create_table "annees", force: :cascade do |t|
     t.string "libelle"
     t.boolean "etat"
-    t.bigint "user_id", null: false
+    t.bigint "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_annees_on_user_id"
+    t.index ["admin_id"], name: "index_annees_on_admin_id"
   end
 
   create_table "classe_rooms", force: :cascade do |t|
@@ -58,13 +58,65 @@ ActiveRecord::Schema.define(version: 2019_08_21_171458) do
     t.index ["user_id"], name: "index_dossiers_on_user_id"
   end
 
+  create_table "dossiers_etudiants", id: false, force: :cascade do |t|
+    t.bigint "dossier_id"
+    t.bigint "etudiant_id"
+    t.index ["dossier_id"], name: "index_dossiers_etudiants_on_dossier_id"
+    t.index ["etudiant_id"], name: "index_dossiers_etudiants_on_etudiant_id"
+  end
+
   create_table "ecoles", force: :cascade do |t|
     t.string "libelle"
     t.boolean "etat"
+    t.bigint "admin_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_ecoles_on_admin_id"
+  end
+
+  create_table "etudiants", force: :cascade do |t|
+    t.string "nom"
+    t.string "prenom"
+    t.string "sexe"
+    t.datetime "date_naissance"
+    t.string "matricule"
+    t.string "num_inscription"
+    t.bigint "classe_room_id", null: false
+    t.boolean "oriente"
+    t.string "nationnalite"
+    t.string "email"
+    t.text "adresse"
+    t.bigint "contact"
+    t.string "maladie"
+    t.string "nom_parent"
+    t.bigint "contact_parent"
+    t.string "lien_parente"
+    t.string "email_parent"
+    t.string "photo"
+    t.string "autre"
+    t.bigint "ecole_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_ecoles_on_user_id"
+    t.index ["classe_room_id"], name: "index_etudiants_on_classe_room_id"
+    t.index ["ecole_id"], name: "index_etudiants_on_ecole_id"
+    t.index ["user_id"], name: "index_etudiants_on_user_id"
+  end
+
+  create_table "inscriptions", force: :cascade do |t|
+    t.bigint "etudiant_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "annee_id", null: false
+    t.bigint "classe_room_id", null: false
+    t.bigint "ecole_id", null: false
+    t.bigint "montant"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["annee_id"], name: "index_inscriptions_on_annee_id"
+    t.index ["classe_room_id"], name: "index_inscriptions_on_classe_room_id"
+    t.index ["ecole_id"], name: "index_inscriptions_on_ecole_id"
+    t.index ["etudiant_id"], name: "index_inscriptions_on_etudiant_id"
+    t.index ["user_id"], name: "index_inscriptions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,11 +149,19 @@ ActiveRecord::Schema.define(version: 2019_08_21_171458) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "annees", "users"
+  add_foreign_key "annees", "admins"
   add_foreign_key "classe_rooms", "ecoles"
   add_foreign_key "classe_rooms", "users"
   add_foreign_key "dossiers", "ecoles"
   add_foreign_key "dossiers", "users"
-  add_foreign_key "ecoles", "users"
+  add_foreign_key "ecoles", "admins"
+  add_foreign_key "etudiants", "classe_rooms"
+  add_foreign_key "etudiants", "ecoles"
+  add_foreign_key "etudiants", "users"
+  add_foreign_key "inscriptions", "annees"
+  add_foreign_key "inscriptions", "classe_rooms"
+  add_foreign_key "inscriptions", "ecoles"
+  add_foreign_key "inscriptions", "etudiants"
+  add_foreign_key "inscriptions", "users"
   add_foreign_key "users", "admins"
 end

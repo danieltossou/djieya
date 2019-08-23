@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Etudiant:</strong>
+  <%= @inscription.etudiant_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @inscription.user_id %>
+</p>
+
+<p>
+  <strong>Annee:</strong>
+  <%= @inscription.annee_id %>
+</p>
+
+<p>
+  <strong>Classe room:</strong>
+  <%= @inscription.classe_room_id %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @inscription.ecole_id %>
+</p>
+
+<p>
+  <strong>Montant:</strong>
+  <%= @inscription.montant %>
+</p>
+
+<%= link_to 'Edit', edit_inscription_path(@inscription) %> |
+<%= link_to 'Back', inscriptions_path %>

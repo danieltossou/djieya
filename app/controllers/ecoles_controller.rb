@@ -24,7 +24,7 @@ class EcolesController < ApplicationController
   # POST /ecoles
   # POST /ecoles.json
   def create
-    @ecole = current_user.ecoles.new(ecole_params)
+    @ecole = current_admin.ecoles.new(ecole_params)
 
     respond_to do |format|
       if @ecole.save
@@ -69,6 +69,6 @@ class EcolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ecole_params
-      params.require(:ecole).permit(:libelle, :etat, :user_id)
+      params.require(:ecole).permit(:libelle, :etat, :admin_id)
     end
 end

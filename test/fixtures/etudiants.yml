@@ -1,0 +1,45 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nom: MyString
+  prenom: MyString
+  sexe: false
+  date_naissance: 2019-08-22 14:45:16
+  matricule: MyString
+  num_inscription: MyString
+  classe_room: one
+  oriente: false
+  nationnalite: MyString
+  email: MyString
+  adresse: MyText
+  contact: 1
+  maladie: MyString
+  nom_parent: MyString
+  contact_parent: 1
+  lien_parente: MyString
+  email_parent: MyString
+  photo: MyString
+  autre: MyString
+  ecole: one
+
+two:
+  nom: MyString
+  prenom: MyString
+  sexe: false
+  date_naissance: 2019-08-22 14:45:16
+  matricule: MyString
+  num_inscription: MyString
+  classe_room: two
+  oriente: false
+  nationnalite: MyString
+  email: MyString
+  adresse: MyText
+  contact: 1
+  maladie: MyString
+  nom_parent: MyString
+  contact_parent: 1
+  lien_parente: MyString
+  email_parent: MyString
+  photo: MyString
+  autre: MyString
+  ecole: two
