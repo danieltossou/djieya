@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Nom </th>
+      <th>Contact</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.nom %></td>
+        <td><%= user.contact %></td>
+        <td>
+          <%= link_to 'Activer', activer_path(user), method: :put unless user.etat %> 
+          <%= link_to 'Desactiver', desactiver_path(user), method: :patch, data: { confirm: 'Voulez-vous desactiver l\'user?' } if user.etat %> 
+
+        </td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New user', new_user_registration_path %>
+<p id="notice"><%= notice %></p>
