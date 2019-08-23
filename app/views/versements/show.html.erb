@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Montant:</strong>
+  <%= @versement.montant %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @versement.user_id %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @versement.ecole_id %>
+</p>
+
+<p>
+  <strong>Annee:</strong>
+  <%= @versement.annee_id %>
+</p>
+
+<p>
+  <strong>Etudiant:</strong>
+  <%= @versement.etudiant_id %>
+</p>
+
+<%= link_to 'Edit', edit_versement_path(@versement) %> |
+<%= link_to 'Back', versements_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_22_231939) do
+ActiveRecord::Schema.define(version: 2019_08_23_005358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,20 @@ ActiveRecord::Schema.define(version: 2019_08_22_231939) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "versements", force: :cascade do |t|
+    t.bigint "montant"
+    t.bigint "user_id", null: false
+    t.bigint "ecole_id", null: false
+    t.bigint "annee_id", null: false
+    t.bigint "etudiant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["annee_id"], name: "index_versements_on_annee_id"
+    t.index ["ecole_id"], name: "index_versements_on_ecole_id"
+    t.index ["etudiant_id"], name: "index_versements_on_etudiant_id"
+    t.index ["user_id"], name: "index_versements_on_user_id"
+  end
+
   add_foreign_key "annees", "admins"
   add_foreign_key "classe_rooms", "ecoles"
   add_foreign_key "classe_rooms", "users"
@@ -164,4 +178,8 @@ ActiveRecord::Schema.define(version: 2019_08_22_231939) do
   add_foreign_key "inscriptions", "etudiants"
   add_foreign_key "inscriptions", "users"
   add_foreign_key "users", "admins"
+  add_foreign_key "versements", "annees"
+  add_foreign_key "versements", "ecoles"
+  add_foreign_key "versements", "etudiants"
+  add_foreign_key "versements", "users"
 end

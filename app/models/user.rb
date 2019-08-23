@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :classeRooms
   has_many :dossiers
   has_many :etudiants
+  has_many :versements
   # belongs_to :admin
 
   after_create do

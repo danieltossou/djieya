@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :versements
   resources :inscriptions
   resources :etudiants
   devise_for :admins, path: 'admins'
