@@ -16,7 +16,6 @@ class PagesController < ApplicationController
   end
 
   def desactiver
-    puts "+++++++++++++++++++++++++++++="
     @user = User.find(params[:id])
     @user.update(etat: false)
   end
