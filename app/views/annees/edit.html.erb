@@ -1,6 +1,16 @@
-<h1>Editing Annee</h1>
-
-<%= render 'form', annee: @annee %>
-
-<%= link_to 'Show', @annee %> |
-<%= link_to 'Back', annees_path %>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="card">
+            <div class="card-header">
+            <h2 class="text-center">MODIFIER ANNEE</h2>
+            </div>
+            <div class="card-body">
+                <%= render 'form', annee: @annee %>
+            </div>
+            <div class="card-footer">
+                <%# link_to 'Show', @annee, :class => 'btn btn-default' %> |
+                <%= link_to 'RETOUR', annees_path, :class => 'btn btn-default' %> 
+            </div>
+        </div>
+    </div>
+</div>
