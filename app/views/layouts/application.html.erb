@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Djieya</title>
-<%= csrf_meta_tags %>
-<%= csp_meta_tag %>
+  <head>
+    <title>Djieya</title>
+    <%= csrf_meta_tags %> 
+    <%= csp_meta_tag %>
 
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<!-- Font awesome icons kit -->
-<script src="https://kit.fontawesome.com/46589638fc.js"></script>
+    <!-- Font awesome icons kit -->
+    <script src="https://kit.fontawesome.com/46589638fc.js"></script>
 
-<!-- Google fonts Poppins -->
-<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <!-- Google fonts Poppins -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 
-<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
 
+<<<<<<< HEAD
 <body>
 <div class="container-fluid">
 <div class="row">
@@ -66,30 +67,74 @@
           <% Ecole.all.each do |ecole| %>
         <a class="nav-item nav-link col-6" id="nav-home-tab" data-toggle="tab" href="#<%=ecole.libelle%>" role="tab" aria-controls="nav-home" aria-selected="true"><h5 class="text-center"><%= ecole.libelle %></h5></a>
         <% end %>
+=======
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <aside class="col-2 px-0 position-fixed bg-dark" id="left">
+          <div class="w-100 aside-margin aside-top">
+            <div>
+              <p>Année: 2018-2019</p>
+            </div><br>
+            <h6><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Tableau de bord</h6>
+            <hr>
+            <h6><i class="far fa-calendar"></i>&nbsp;&nbsp;<%= link_to 'Année scolaire', menu_annees_path %></h6><br>
+            <h6><i class="fas fa-users"></i>&nbsp;&nbsp;<%= link_to 'Utilisateurs', employes_path %></h6><br>
+            <h6><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;Etudiants</h6><br>
+            <h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', menu_classes_path %></h6><br>
+            <h6><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;Emploi du temps</h6><br>
+            <h6><i class="fas fa-credit-card"></i>&nbsp;&nbsp;Versements</h6><br>
+            <h6><i class="fas fa-coins"></i>&nbsp;&nbsp;Caisse</h6>
+          </div>
+          <div class="aside-bottom aside-margin">
+            <h6 class="text-center"><%= link_to 'Déconnexion', destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
+
+            <h6 class="text-center"><%= link_to 'DéconnexionAdmin', destroy_admin_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
+          </div>
+        </aside>
+        <main class="col-10 invisible">
+        <!--hidden spacer-->
+        </main> 
+        <main class="col offset-2 h-100">
+          <div class="row bg-light">
+            <div class="col-12 py-2">
+              <nav class="fixed">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <% Ecole.all.each do |ecole| %>
+                    <a class="nav-item nav-link col-6" id="nav-home-tab" data-toggle="tab" href="#<%=ecole.libelle%>" role="tab" aria-controls="nav-home" aria-selected="true"><h5 class="text-center"><%= ecole.libelle %></h5></a>
+                  <% end %>
+                </div>
+              
+              </nav>
+            </div>
+          </div>
+          <div class="row bg-white">
+            <div class="col-12 py-4">
+              <div class="tab-content" id="nav-tabContent">
+                <% Ecole.all.each do |ecole| %>
+                  <div class="tab-pane fade" id="<%=ecole.libelle%>" role="tabpanel" aria-labelledby="nav-home-tab"><%=ecole.libelle%></div>
+                <% end %>
+              </div>
+              <% if notice %>
+                <p class="notice"><%= notice %></p>
+              <% end %>
+              <% if alert %>
+                <p class="alert"><%= alert %></p>
+              <% end %>
+              <%= yield %>
+            </div>
+          </div>
+        </main>
+>>>>>>> feature/design_elm_base
       </div>
-    
-    </nav>
-  </div>
-</div>
-  <div class="row bg-white">
-  <div class="col-12 py-4">
-  <div class="tab-content" id="nav-tabContent">
-      <% Ecole.all.each do |ecole| %>
-  <div class="tab-pane fade" id="<%=ecole.libelle%>" role="tabpanel" aria-labelledby="nav-home-tab"><%=ecole.libelle%></div>
-    <% end %>
-</div>
-<% if notice %>
-  <p class="notice"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert"><%= alert %></p>
-<% end %>
-<%= yield %>
-</div>
-</div>
-</main>
-</div>
-</div>
-</body>
+    </div>
+    <<!-- script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+          let base = document.getElementById('ancre');
+          let mod = document.getElementById('modalEmploye');
+          base.appendChild(mod);
+      });
+    </<!--> -->
+  </body>
 </html>
 

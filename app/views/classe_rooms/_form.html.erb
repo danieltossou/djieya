@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :libelle %>
-    <%= form.text_field :libelle %>
+    <%= form.label :Libelle %>
+    <%= form.text_field :libelle, :class => 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :etat %>
+    <%= form.label :Etat %>
     <%= form.check_box :etat %>
   </div>
 
   <div class="field">
-    <%= form.label :montant %>
-    <%= form.number_field :montant %>
+    <%= form.label :Montant %>
+    <%= form.number_field :montant, :class => 'form-control' %>
   </div>
 
   <div class="field">
@@ -32,6 +32,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
   </div>
 <% end %>

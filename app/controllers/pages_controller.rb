@@ -21,4 +21,15 @@ class PagesController < ApplicationController
     @user.update(etat: false)
   end
 
+  def employes
+  end
+
+  def menu_annees
+  end
+  
+  def menu_classes
+    
+  end
+  
+  
 end
