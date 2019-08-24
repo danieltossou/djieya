@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :classe_rooms
   resources :ecoles
   resources :annees
-  devise_for :users, path: 'users', controllers: { registrations: 'users/registrations' }
+  devise_for :users, path: 'users', controllers: { registrations: 'users/registrations', sessions:'users/sessions' }
   root to: 'pages#index'
   get 'users', to: 'pages#users', as: 'users'
   get 'users/:id', to: 'pages#user', as: 'user'
