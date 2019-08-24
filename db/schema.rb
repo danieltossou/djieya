@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_005358) do
+ActiveRecord::Schema.define(version: 2019_08_23_013207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,20 @@ ActiveRecord::Schema.define(version: 2019_08_23_005358) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_annees_on_admin_id"
+  end
+
+  create_table "caisses", force: :cascade do |t|
+    t.bigint "montant"
+    t.string "libelle"
+    t.string "operation"
+    t.bigint "user_id", null: false
+    t.bigint "ecole_id", null: false
+    t.bigint "annee_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["annee_id"], name: "index_caisses_on_annee_id"
+    t.index ["ecole_id"], name: "index_caisses_on_ecole_id"
+    t.index ["user_id"], name: "index_caisses_on_user_id"
   end
 
   create_table "classe_rooms", force: :cascade do |t|
@@ -164,6 +178,9 @@ ActiveRecord::Schema.define(version: 2019_08_23_005358) do
   end
 
   add_foreign_key "annees", "admins"
+  add_foreign_key "caisses", "annees"
+  add_foreign_key "caisses", "ecoles"
+  add_foreign_key "caisses", "users"
   add_foreign_key "classe_rooms", "ecoles"
   add_foreign_key "classe_rooms", "users"
   add_foreign_key "dossiers", "ecoles"

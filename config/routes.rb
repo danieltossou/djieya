@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :caisses do
+    collection do
+      get 'depense_new'
+      get 'depenses'
+      post 'depense_create'
+    end
+  end
   resources :versements
   resources :inscriptions
   resources :etudiants

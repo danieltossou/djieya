@@ -28,6 +28,10 @@ class VersementsController < ApplicationController
 
     respond_to do |format|
       if @versement.save
+
+        puts @libelle = "Versement de l'etudiant #{@versement.etudiant.nom} #{@versement.etudiant.prenom} ( #{@versement.etudiant.num_inscription})"
+        Caisse.create!(montant: @versement.montant, libelle: @libelle, operation: 'entrée', ecole_id: @versement.ecole_id, annee_id: @versement.annee_id, user_id: current_user.id)
+        
         format.html { redirect_to @versement, notice: 'Versement was successfully created.' }
         format.json { render :show, status: :created, location: @versement }
       else
