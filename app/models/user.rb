@@ -11,13 +11,14 @@ class User < ApplicationRecord
   has_many :caisses
   # belongs_to :admin
 
-  after_create do
-    @user = User.last
-    @id = @user.id.to_s
-    @date = Time.now.strftime("%Y").to_s
-    @nom = @user.nom[0].to_s
-    @prenom = @user.prenom[0].to_s
-    puts @matricule = @date+'-'+@id+'-'+@nom+''+@prenom
-    @user.update(matricule: @matricule)
-  end
+  #after_create do
+  #  @user = User.last
+  #  @id = @user.id.to_s
+  #  @date = Time.now.strftime("%Y").to_s
+  #  @nom = @user.nom[0].to_s
+  #  @prenom = @user.prenom[0].to_s
+  #  @matricule = @date+'-'+@id+'-'+@nom+''+@prenom
+  #  @user.update(matricule: @matricule)
+  #end
+  
 end

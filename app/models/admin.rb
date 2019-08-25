@@ -6,4 +6,5 @@ class Admin < ApplicationRecord
 
   has_many :annees
   has_many :ecoles
+  has_many :users
 end
