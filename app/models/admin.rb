@@ -12,4 +12,8 @@ class Admin < ApplicationRecord
   has_many :enseignants
   has_many :jours
   has_many :heures
+  has_many :caisses
+  has_many :classeRooms
+  has_many :dossiers
+  has_many :etudiants
 end

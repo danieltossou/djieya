@@ -31,6 +31,7 @@ class MatieresController < ApplicationController
     else
       redirect_to new_matiere_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
     end
+    
     respond_to do |format|
       if @matiere.save
         format.html { redirect_to @matiere, notice: 'Matiere was successfully created.' }

@@ -24,7 +24,13 @@ class EtudiantsController < ApplicationController
   # POST /etudiants
   # POST /etudiants.json
   def create
-    @etudiant = current_user.etudiants.new(etudiant_params)
+    if current_admin
+      @etudiant = current_admin.etudiants.new(etudiant_params)
+    elsif current_user
+      @etudiant = current_user.etudiants.new(etudiant_params)
+    else
+      redirect_to new_etudiant_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
     @montant = @etudiant.classe_room.montant
     @annee = 1
     respond_to do |format|
@@ -72,7 +78,11 @@ class EtudiantsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def etudiant_params
     # Generation d'un numero d'inscription automatique
+    if Etudiant.last == nil
+      @last_etudiant = 0
+    else
       @last_etudiant = Etudiant.last.id
+    end
       @id = @last_etudiant + 1
       @date = Time.now.strftime("%Y").to_s
       @nom = params[:etudiant][:nom][0].to_s

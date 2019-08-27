@@ -54,8 +54,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # protected
 
   def user_params
-    @last_user = User.last.id
-    @id = @last_user + 1
+
+    if User.last == nil
+      @last_user = 0
+    else
+      @last_user = User.last.id
+    end
+      @id = @last_user + 1
     @date = Time.now.strftime("%Y").to_s
     @nom = params[:user][:nom][0].to_s
     @prenom = params[:user][:prenom][0].to_s

@@ -24,8 +24,14 @@ class AnneesController < ApplicationController
   # POST /annees
   # POST /annees.json
   def create
-    @annee = current_admin.annees.new(annee_params)
-
+    if current_admin
+      @annee = current_admin.annees.new(annee_params)
+    elsif current_user
+      @annee = current_user.annees.new(annee_params)
+    else
+      redirect_to new_annee_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
+    
     respond_to do |format|
       if @annee.save
         format.html { redirect_to @annee, notice: 'Annee was successfully created.' }

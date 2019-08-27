@@ -24,7 +24,13 @@ class EcolesController < ApplicationController
   # POST /ecoles
   # POST /ecoles.json
   def create
-    @ecole = current_admin.ecoles.new(ecole_params)
+    if current_admin
+      @ecole = current_admin.ecoles.new(ecole_params)
+    elsif current_user
+      @ecole = current_user.ecoles.new(ecole_params)
+    else
+      redirect_to new_ecole_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
 
     respond_to do |format|
       if @ecole.save

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :validatable
          
+  has_many :annees
   has_many :classeRooms
   has_many :dossiers
   has_many :etudiants

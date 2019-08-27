@@ -25,7 +25,13 @@ class VersementsController < ApplicationController
   # POST /versements
   # POST /versements.json
   def create
-    @versement = current_user.versements.new(versement_params)
+    if current_admin
+      @versement = current_admin.versements.new(eversement_params)
+    elsif current_user
+      @versement = current_user.versements.new(versement_params)
+    else
+      redirect_to new_versement_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
 
     respond_to do |format|
       if @versement.save

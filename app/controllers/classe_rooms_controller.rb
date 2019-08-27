@@ -24,7 +24,13 @@ class ClasseRoomsController < ApplicationController
   # POST /classe_rooms
   # POST /classe_rooms.json
   def create
-    @classe_room = current_user.classeRooms.new(classe_room_params)
+    if current_admin
+      @classe_room = current_admin.classeRooms.new(classe_room_params)
+    elsif current_user
+      @classe_room = current_user.classeRooms.new(classe_room_params)
+    else
+      redirect_to new_classe_room_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
 
     respond_to do |format|
       if @classe_room.save

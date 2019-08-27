@@ -53,7 +53,13 @@ class CaissesController < ApplicationController
   # POST /caisses
   # POST /caisses.json
   def create
-    @caiss = Caisse.new(caiss_params)
+    if current_admin
+      @caiss = current_admin.caisses.new(caisse_params)
+    elsif current_user
+      @caiss = current_user.caisses.new(caisse_params)
+    else
+      redirect_to new_caisse_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
 
     respond_to do |format|
       if @caiss.save

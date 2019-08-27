@@ -24,7 +24,13 @@ class DossiersController < ApplicationController
   # POST /dossiers
   # POST /dossiers.json
   def create
-    @dossier = current_user.dossiers.new(dossier_params)
+    if current_admin
+      @dossier = current_admin.dossiers.new(dossier_params)
+    elsif current_user
+      @dossier = current_user.dossiers.new(dossier_params)
+    else
+      redirect_to new_dossier_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
 
     respond_to do |format|
       if @dossier.save
