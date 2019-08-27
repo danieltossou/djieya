@@ -21,7 +21,8 @@ class CreateEtudiants < ActiveRecord::Migration[6.0]
       t.string :photo
       t.string :autre
       t.references :ecole, null: false, foreign_key: true
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: true, foreign_key: true
+      t.references :admin, null: true, foreign_key: true
 
       t.timestamps
     end

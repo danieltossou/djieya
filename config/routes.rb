@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :heures
+  resources :jours
+  resources :enseignants
+  resources :salles
+  resources :matieres
   resources :caisses do
     collection do
       get 'depense_new'
@@ -34,5 +39,7 @@ Rails.application.routes.draw do
   get '/employes', to: 'pages#employes'
   get '/menu_annees', to: 'pages#menu_annees'
   get '/menu_classes', to: 'pages#menu_classes'
+  get '/matiere_enseigne', to: 'pages#matiere_enseigne', as: 'matiere_enseigne'
+  post '/matiere_enseigne', to: 'pages#create_matiere_enseigne', as: 'create_matiere_enseigne'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

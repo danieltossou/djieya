@@ -9,6 +9,11 @@ class User < ApplicationRecord
   has_many :etudiants
   has_many :versements
   has_many :caisses
+  has_many :matieres
+  has_many :salles
+  has_many :enseignants
+  has_many :jours
+  has_many :heures
   # belongs_to :admin
 
   #after_create do

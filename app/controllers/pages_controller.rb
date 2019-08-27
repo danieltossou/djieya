@@ -30,5 +30,13 @@ class PagesController < ApplicationController
     
   end
   
+  def matiere_enseigne
+    @matieres = Matiere.all
+    @enseignants = Enseignant.all
+  end
+  
+  def create_matiere_enseigne
+    puts params[:enseignant].inspect
+  end
   
 end

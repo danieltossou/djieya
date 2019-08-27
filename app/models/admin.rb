@@ -7,4 +7,9 @@ class Admin < ApplicationRecord
   has_many :annees
   has_many :ecoles
   has_many :users
+  has_many :matieres
+  has_many :salles
+  has_many :enseignants
+  has_many :jours
+  has_many :heures
 end

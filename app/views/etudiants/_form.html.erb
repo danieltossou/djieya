@@ -108,7 +108,8 @@
   </div>
 
   <div class="field">
-      <%= form.collection_check_boxes(:dossier_ids, Dossier.all, :id, :libelle) %>  </div><br>
+      <%= form.collection_check_boxes(:dossier_ids, Dossier.all, :id, :libelle) %>
+  </div><br>
   <div class="actions">
     <%= form.submit %>
   </div>
