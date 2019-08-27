@@ -9,6 +9,17 @@ Rails.application.routes.draw do
   resources :versements
   resources :inscriptions
   resources :etudiants
+  
+  # Routes des versement d'un etudiant
+    get 'etudiants/:etudiant_id/versements', to: 'versements#etudiant_index', as: 'etudiant_versements'
+    get 'etudiants/:etudiant_id/versements/new', to: 'versements#etudiant_new', as: 'new_etudiant_versement'
+    post 'etudiants/:etudiant_id/versements', to: 'versements#etudiant_create', as: 'create_etudiant_versement'
+    get '/etudiants/:etudiant_id/versements/:id/edit', to: 'versements#etudiant_edit', as: 'edit_etudiant_versement'
+    get '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_show', as: 'show_etudiant_versement'
+    patch '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_update', as: 'update_etudiant_versement'
+    put '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_update'
+    delete '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_destroy'
+
   devise_for :admins, path: 'admins'
   resources :dossiers
   resources :classe_rooms
