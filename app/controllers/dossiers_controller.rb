@@ -1,6 +1,7 @@
 class DossiersController < ApplicationController
   before_action :set_dossier, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /dossiers
   # GET /dossiers.json
   def index

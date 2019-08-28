@@ -58,3 +58,6 @@ gem 'devise', '~> 4.2'
 
 # Upload de photo de l'etudiant
 gem 'carrierwave', '~> 0.11.2'
+
+# Limit des accès
+gem 'cancancan', '~> 1.13', '>= 1.13.1'

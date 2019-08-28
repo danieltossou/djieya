@@ -1,6 +1,7 @@
 class AnneesController < ApplicationController
   before_action :set_annee, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /annees
   # GET /annees.json
   def index
@@ -31,7 +32,7 @@ class AnneesController < ApplicationController
     else
       redirect_to new_annee_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
     end
-    
+
     respond_to do |format|
       if @annee.save
         format.html { redirect_to @annee, notice: 'Annee was successfully created.' }

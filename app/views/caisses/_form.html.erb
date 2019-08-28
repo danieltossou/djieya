@@ -1,10 +1,10 @@
-<%= form_with(model: caiss, local: true) do |form| %>
-  <% if caiss.errors.any? %>
+<%= form_with(model: @caisse, local: true) do |form| %>
+  <% if @caisse.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(caiss.errors.count, "error") %> prohibited this caiss from being saved:</h2>
+      <h2><%= pluralize(@caisse.errors.count, "error") %> prohibited this caisse from being saved:</h2>
 
       <ul>
-        <% caiss.errors.full_messages.each do |message| %>
+        <% @caisse.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

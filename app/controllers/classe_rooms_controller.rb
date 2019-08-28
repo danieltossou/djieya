@@ -1,6 +1,7 @@
 class ClasseRoomsController < ApplicationController
   before_action :set_classe_room, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /classe_rooms
   # GET /classe_rooms.json
   def index

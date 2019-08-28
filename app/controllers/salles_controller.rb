@@ -1,6 +1,7 @@
 class SallesController < ApplicationController
   before_action :set_salle, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /salles
   # GET /salles.json
   def index

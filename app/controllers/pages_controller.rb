@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  #authorize_resource :class => pages
+
   def index
   end
 

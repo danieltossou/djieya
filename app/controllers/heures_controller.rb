@@ -1,6 +1,7 @@
 class HeuresController < ApplicationController
   before_action :set_heure, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /heures
   # GET /heures.json
   def index

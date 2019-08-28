@@ -1,9 +1,10 @@
 class CaissesController < ApplicationController
-  before_action :set_caiss, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_caisse, only: [:show, :edit, :update, :destroy]
+  
   # GET /caisses
   # GET /caisses.json
   def index
+    authorize! :index, Caisse
     @annee = 1
     @ecole = 1
     @inscrits = Inscription.where(annee_id: @annee).where(ecole_id: @ecole).all
@@ -39,35 +40,39 @@ class CaissesController < ApplicationController
   # GET /caisses/1
   # GET /caisses/1.json
   def show
+    authorize! :show, Caisse
   end
 
   # GET /caisses/new
   def new
-    @caiss = Caisse.new
+    authorize! :new, Caisse
+    @caisse = Caisse.new
   end
 
   # GET /caisses/1/edit
   def edit
+    authorize! :edit, Caisse
   end
 
   # POST /caisses
   # POST /caisses.json
   def create
+    authorize! :create, Caisse
     if current_admin
-      @caiss = current_admin.caisses.new(caisse_params)
+      @caisse = current_admin.caisses.new(caisse_params)
     elsif current_user
-      @caiss = current_user.caisses.new(caisse_params)
+      @caisse = current_user.caisses.new(caisse_params)
     else
       redirect_to new_caisse_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
     end
 
     respond_to do |format|
-      if @caiss.save
-        format.html { redirect_to @caiss, notice: 'Caisse was successfully created.' }
-        format.json { render :show, status: :created, location: @caiss }
+      if @caisse.save
+        format.html { redirect_to @caisse, notice: 'Caisse was successfully created.' }
+        format.json { render :show, status: :created, location: @caisse }
       else
         format.html { render :new }
-        format.json { render json: @caiss.errors, status: :unprocessable_entity }
+        format.json { render json: @caisse.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -75,13 +80,14 @@ class CaissesController < ApplicationController
   # PATCH/PUT /caisses/1
   # PATCH/PUT /caisses/1.json
   def update
+    authorize! :update, Caisse
     respond_to do |format|
-      if @caiss.update(caiss_params)
-        format.html { redirect_to @caiss, notice: 'Caisse was successfully updated.' }
-        format.json { render :show, status: :ok, location: @caiss }
+      if @caisse.update(caisse_params)
+        format.html { redirect_to @caisse, notice: 'Caisse was successfully updated.' }
+        format.json { render :show, status: :ok, location: @caisse }
       else
         format.html { render :edit }
-        format.json { render json: @caiss.errors, status: :unprocessable_entity }
+        format.json { render json: @caisse.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,7 +95,8 @@ class CaissesController < ApplicationController
   # DELETE /caisses/1
   # DELETE /caisses/1.json
   def destroy
-    @caiss.destroy
+    authorize! :destroy, Caisse
+    @caisse.destroy
     respond_to do |format|
       format.html { redirect_to caisses_url, notice: 'Caisse was successfully destroyed.' }
       format.json { head :no_content }
@@ -97,14 +104,17 @@ class CaissesController < ApplicationController
   end
 
   def depenses
+    authorize! :depenses, Caisse
     @depenses = Caisse.sortie.all
   end
 
   def depense_new
+    authorize! :depense_new, Caisse
     @caisse = Caisse.new
   end
 
   def depense_create
+    authorize! :depense_create, Caisse
     params[:caisse][:operation] = 'depense'
     Caisse.create(montant: params[:caisse][:montant], libelle: params[:caisse][:libelle], operation: 'depense', user_id: current_user.id, ecole_id: params[:caisse][:ecole_id], annee_id: params[:caisse][:annee_id])
     # current_user.caisses.create(params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :ecole_id, :annee_id))
@@ -112,12 +122,12 @@ class CaissesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_caiss
-      @caiss = Caisse.find(params[:id])
+    def set_caisse
+      @caisse = Caisse.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def caiss_params
+    def caisse_params
       params.require(:caiss).permit(:montant, :libelle, :operation, :user_id, :ecole_id, :annee_id)
     end
 end
