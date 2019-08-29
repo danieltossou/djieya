@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :heures
   has_many :creneaus
   has_many :disponibilites
+  has_many :semestres
   # belongs_to :admin
 
   #after_create do

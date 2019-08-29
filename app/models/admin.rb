@@ -18,4 +18,5 @@ class Admin < ApplicationRecord
   has_many :etudiants
   has_many :creneaus
   has_many :disponibilites
+  has_many :semestres
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_145355) do
+ActiveRecord::Schema.define(version: 2019_08_29_114531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -252,6 +252,18 @@ ActiveRecord::Schema.define(version: 2019_08_28_145355) do
     t.index ["user_id"], name: "index_salles_on_user_id"
   end
 
+  create_table "semestres", force: :cascade do |t|
+    t.string "libelle"
+    t.bigint "ecole_id", null: false
+    t.bigint "admin_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_semestres_on_admin_id"
+    t.index ["ecole_id"], name: "index_semestres_on_ecole_id"
+    t.index ["user_id"], name: "index_semestres_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -349,6 +361,9 @@ ActiveRecord::Schema.define(version: 2019_08_28_145355) do
   add_foreign_key "salles", "admins"
   add_foreign_key "salles", "ecoles"
   add_foreign_key "salles", "users"
+  add_foreign_key "semestres", "admins"
+  add_foreign_key "semestres", "ecoles"
+  add_foreign_key "semestres", "users"
   add_foreign_key "users", "admins"
   add_foreign_key "versements", "admins"
   add_foreign_key "versements", "annees"
