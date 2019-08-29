@@ -16,4 +16,6 @@ class Admin < ApplicationRecord
   has_many :classeRooms
   has_many :dossiers
   has_many :etudiants
+  has_many :creneaus
+  has_many :disponibilites
 end

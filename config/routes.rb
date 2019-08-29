@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :disponibilites
+  resources :creneaus
   resources :heures
   resources :jours
   resources :enseignants

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_192735) do
+ActiveRecord::Schema.define(version: 2019_08_28_145355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,36 @@ ActiveRecord::Schema.define(version: 2019_08_27_192735) do
     t.bigint "matiere_id", null: false
     t.index ["classe_room_id"], name: "index_classe_rooms_matieres_on_classe_room_id"
     t.index ["matiere_id"], name: "index_classe_rooms_matieres_on_matiere_id"
+  end
+
+  create_table "creneaus", force: :cascade do |t|
+    t.string "debut"
+    t.string "fin"
+    t.bigint "admin_id"
+    t.bigint "user_id"
+    t.bigint "ecole_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_creneaus_on_admin_id"
+    t.index ["ecole_id"], name: "index_creneaus_on_ecole_id"
+    t.index ["user_id"], name: "index_creneaus_on_user_id"
+  end
+
+  create_table "disponibilites", force: :cascade do |t|
+    t.bigint "creneau_id", null: false
+    t.bigint "enseignant_id", null: false
+    t.bigint "jour_id", null: false
+    t.bigint "admin_id"
+    t.bigint "user_id"
+    t.bigint "ecole_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_disponibilites_on_admin_id"
+    t.index ["creneau_id"], name: "index_disponibilites_on_creneau_id"
+    t.index ["ecole_id"], name: "index_disponibilites_on_ecole_id"
+    t.index ["enseignant_id"], name: "index_disponibilites_on_enseignant_id"
+    t.index ["jour_id"], name: "index_disponibilites_on_jour_id"
+    t.index ["user_id"], name: "index_disponibilites_on_user_id"
   end
 
   create_table "dossiers", force: :cascade do |t|
@@ -280,6 +310,15 @@ ActiveRecord::Schema.define(version: 2019_08_27_192735) do
   add_foreign_key "classe_rooms", "users"
   add_foreign_key "classe_rooms_matieres", "classe_rooms"
   add_foreign_key "classe_rooms_matieres", "matieres"
+  add_foreign_key "creneaus", "admins"
+  add_foreign_key "creneaus", "ecoles"
+  add_foreign_key "creneaus", "users"
+  add_foreign_key "disponibilites", "admins"
+  add_foreign_key "disponibilites", "creneaus"
+  add_foreign_key "disponibilites", "ecoles"
+  add_foreign_key "disponibilites", "enseignants"
+  add_foreign_key "disponibilites", "jours"
+  add_foreign_key "disponibilites", "users"
   add_foreign_key "dossiers", "ecoles"
   add_foreign_key "dossiers", "users"
   add_foreign_key "ecoles", "admins"

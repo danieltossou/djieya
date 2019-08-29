@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :enseignants
   has_many :jours
   has_many :heures
+  has_many :creneaus
+  has_many :disponibilites
   # belongs_to :admin
 
   #after_create do

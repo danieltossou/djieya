@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Debut:</strong>
+  <%= @creneau.debut %>
+</p>
+
+<p>
+  <strong>Fin:</strong>
+  <%= @creneau.fin %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @creneau.admin_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @creneau.user_id %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @creneau.ecole_id %>
+</p>
+
+<%= link_to 'Edit', edit_creneau_path(@creneau) %> |
+<%= link_to 'Back', creneaus_path %>

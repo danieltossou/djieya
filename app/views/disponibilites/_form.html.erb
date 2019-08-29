@@ -1,0 +1,35 @@
+<%= form_with(model: disponibilite, local: true) do |form| %>
+  <% if disponibilite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(disponibilite.errors.count, "error") %> prohibited this disponibilite from being saved:</h2>
+
+      <ul>
+        <% disponibilite.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% for creneau in Creneau.all %>
+    <%= form.check_box :creneau_ids, {multiple: true}, creneau.id, nil %>
+    <%= "#{creneau.debut} - #{creneau.fin}" %>
+    <% end %>
+  </div><br>
+
+  <div class="field">
+    <%= form.label :enseignant_id %>
+    <%= form.select :enseignant_id, Enseignant.pluck(:nom, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :jour_id %>
+    <%= form.select :jour_id, Jour.pluck(:libelle, :id) %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
