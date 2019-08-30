@@ -1,0 +1,93 @@
+<%= form_with(model: @cour, local: true) do |form| %>
+  <% if @cour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cour.errors.count, "error") %> prohibited this cour from being saved:</h2>
+
+      <ul>
+        <% @cour.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :semestre_id %>
+    <%= form.select :semestre_id, Semestre.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :classe_room_id %>
+    <%= form.select :classe_room_id, ClasseRoom.all.collect { |x| [x.libelle, x.id]}, {:include_hidden => false}, :multiple => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enseignant_id %>
+    <%= form.select :enseignant_id, Enseignant.pluck(:nom, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :matiere_id %>
+    <%= form.select :matiere_id, Matiere.where(id: 0) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salle_id %>
+    <%= form.select :salle_id, Salle.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Horaire %>
+    <%= form.label :Debut %>
+    <%= form.select :creneau_debut, Creneau.pluck(:debut, :id) %>
+    <%= form.label :Fin %>
+    <%= form.select :creneau_fin, Creneau.pluck(:fin, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :jour_id %>
+    <%= form.select :jour_id, Jour.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nombre_heure %>
+    <%= form.number_field :nombre_heure %>
+  </div>
+
+  <div class="field">
+    <%= form.label :numero_cours %>
+    <%= form.text_field :numero_cours %>
+  </div>
+
+  <div class="field">
+    <%= form.label :numero_cours_g %>
+    <%= form.text_field :numero_cours_g %>
+  </div>
+
+  <div class="field">
+    <%= form.label :annee_id %>
+    <%= form.select :annee_id , Annee.pluck(:libelle, :id)%>
+  </div>
+
+  <div class="field">
+    <%= form.label :ecole_id %>
+    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+  </div>
+<button>Click</button>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<script>
+  $('#cour_classe_room_id').change( () => {
+    let cour_classe_room_id = $('#cour_classe_room_id option:selected').val();
+    if (cour_classe_room_id) {
+      $.get("/matieres", function (data) {
+        console.log(data);
+        alert("Load was performed.");
+      })
+    }
+
+    
+  })
+</script>

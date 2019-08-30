@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :cours do
+    collection do
+      get 'cours/matieres', to: 'cours#matieres'
+    end
+  end
   resources :semestres
   resources :disponibilites
   resources :creneaus
