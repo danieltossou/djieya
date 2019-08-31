@@ -60,22 +60,9 @@
 </main>
 <main class="col offset-2 h-100">
 <div class="row bg-light">
-  <!-- <div class="col-12 py-2">
-    <nav class="fixed">
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <%# Ecole.all.each do |ecole| %>
-        <a class="nav-item nav-link col-6" id="nav-home-tab" data-toggle="tab" href="#<%=ecole.libelle%>" role="tab" aria-controls="nav-home" aria-selected="true"><h5 class="text-center"><%= ecole.libelle %></h5></a>
-        <%# end %>
-      </div>
-    </div> -->
-    <%= yield %>
-    <!-- script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-          let base = document.getElementById('ancre');
-          let mod = document.getElementById('modalEmploye');
-          base.appendChild(mod);
-      });
-    </<!--> 
+  <div class="col-12 py-2">
+      <%= yield %>
+  </div> 
   </body>
 </html>
 
