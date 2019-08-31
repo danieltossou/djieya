@@ -1,6 +1,7 @@
 class EcolesController < ApplicationController
   before_action :set_ecole, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /ecoles
   # GET /ecoles.json
   def index
@@ -24,16 +25,19 @@ class EcolesController < ApplicationController
   # POST /ecoles
   # POST /ecoles.json
   def create
-    @ecole = current_admin.ecoles.new(ecole_params)
-
-    respond_to do |format|
-      if @ecole.save
-        format.html { redirect_to @ecole, notice: 'Ecole was successfully created.' }
-        format.json { render :show, status: :created, location: @ecole }
-      else
-        format.html { render :new }
-        format.json { render json: @ecole.errors, status: :unprocessable_entity }
+    if current_admin
+      @ecole = current_admin.ecoles.new(ecole_params)
+      respond_to do |format|
+        if @ecole.save
+          format.html { redirect_to @ecole, notice: 'Ecole was successfully created.' }
+          format.json { render :show, status: :created, location: @ecole }
+        else
+          format.html { render :new }
+          format.json { render json: @ecole.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to ecoles_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
     end
   end
 

@@ -1,6 +1,7 @@
 class ClasseRoomsController < ApplicationController
   before_action :set_classe_room, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /classe_rooms
   # GET /classe_rooms.json
   def index
@@ -24,7 +25,13 @@ class ClasseRoomsController < ApplicationController
   # POST /classe_rooms
   # POST /classe_rooms.json
   def create
-    @classe_room = current_user.classeRooms.new(classe_room_params)
+    if current_admin
+      @classe_room = current_admin.classeRooms.new(classe_room_params)
+    elsif current_user
+      @classe_room = current_user.classeRooms.new(classe_room_params)
+    else
+      redirect_to new_classe_room_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
 
     respond_to do |format|
       if @classe_room.save
@@ -69,6 +76,6 @@ class ClasseRoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classe_room_params
-      params.require(:classe_room).permit(:libelle, :etat, :user_id, :montant, :ecole_id)
+      params.require(:classe_room).permit(:libelle, :etat, :user_id, :montant, :ecole_id, matiere_ids: [])
     end
 end

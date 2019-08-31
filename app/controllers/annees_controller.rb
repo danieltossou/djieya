@@ -1,6 +1,7 @@
 class AnneesController < ApplicationController
   before_action :set_annee, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /annees
   # GET /annees.json
   def index
@@ -24,7 +25,13 @@ class AnneesController < ApplicationController
   # POST /annees
   # POST /annees.json
   def create
-    @annee = current_admin.annees.new(annee_params)
+    if current_admin
+      @annee = current_admin.annees.new(annee_params)
+    elsif current_user
+      @annee = current_user.annees.new(annee_params)
+    else
+      redirect_to new_annee_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
 
     respond_to do |format|
       if @annee.save

@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Depenses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Libelle</th>
+      <th>Montant</th>
+      <th>User</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @depenses.each do |depense| %>
+      <tr>
+        <td><%= depense.libelle %></td>
+        <td><%= depense.montant %></td>
+        <td><%= depense.user.nom %> <%=  depense.user.prenom %></td></tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Retour', caisses_path %>

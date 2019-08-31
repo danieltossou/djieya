@@ -1,0 +1,52 @@
+<%= form_with(model: enseignant, local: true) do |form| %>
+  <% if enseignant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(enseignant.errors.count, "error") %> prohibited this enseignant from being saved:</h2>
+
+      <ul>
+        <% enseignant.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nom %>
+    <%= form.text_field :nom %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prenom %>
+    <%= form.text_field :prenom %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact %>
+    <%= form.number_field :contact %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :adresse %>
+    <%= form.text_field :adresse %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sexe %><br />
+    Homme<%= form.radio_button :sexe, "Homme"%>
+    Femme<%= form.radio_button :sexe, "Femme"%>
+  </div>
+
+  <div class="field">
+    <%= form.collection_check_boxes(:matiere_ids, Matiere.all, :id, :libelle, :label => "Les matières enseignés") %>
+  </div><br>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

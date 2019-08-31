@@ -31,6 +31,11 @@
     <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
   </div>
 
+  <div class="field">
+    <%= form.label 'Les matières à enseigner dans cette classe' %>
+    <%= form.collection_check_boxes(:matiere_ids, Matiere.all, :id, :libelle) %>
+  </div><br>
+
   <div class="actions">
     <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
   </div>

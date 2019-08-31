@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Libelle:</strong>
+  <%= @heure.libelle %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @heure.ecole_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @heure.user_id %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @heure.admin_id %>
+</p>
+
+<%= link_to 'Edit', edit_heure_path(@heure) %> |
+<%= link_to 'Back', heures_path %>

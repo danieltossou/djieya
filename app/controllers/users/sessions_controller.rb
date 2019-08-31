@@ -2,21 +2,23 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-
+  after_action :update_presence_true, only: [:create] 
+  before_action :update_presence_false, only: [:destroy] 
   # GET /resource/sign_in
   # def new
   #   super
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+  end
+
 
   # protected
 
@@ -24,4 +26,14 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def update_presence_true
+    current_user.update(presence: true, date_derniere_connexion: Time.now.utc)
+  end
+
+  def update_presence_false
+    current_user.update(presence: false, date_derniere_deconnexion: Time.now.utc)
+  end
+
+
 end

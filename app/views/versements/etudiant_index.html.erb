@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Versements</h1>
+<h3>
+<%= "#{@etudiant.nom} #{@etudiant.prenom}" %>
+</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Montant</th>
+      <th>User</th>
+      <th>Ecole</th>
+      <th>Annee</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @versements.each do |versement| %>
+      <tr>
+        <td><%= versement.montant %></td>
+        <td><%= versement.user_id %></td>
+        <td><%= versement.ecole_id %></td>
+        <td><%= versement.annee_id %></td>
+        <td><%= link_to 'Show', versement %></td>
+        <td><%= link_to 'Edit', edit_etudiant_versement_path(@etudiant, versement) %></td>
+        <td><%= link_to 'Destroy', versement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Versement', new_etudiant_versement_path(params[:etudiant_id]) %>

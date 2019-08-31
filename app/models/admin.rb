@@ -6,4 +6,17 @@ class Admin < ApplicationRecord
 
   has_many :annees
   has_many :ecoles
+  has_many :users
+  has_many :matieres
+  has_many :salles
+  has_many :enseignants
+  has_many :jours
+  has_many :heures
+  has_many :caisses
+  has_many :classeRooms
+  has_many :dossiers
+  has_many :etudiants
+  has_many :creneaus
+  has_many :disponibilites
+  has_many :semestres
 end

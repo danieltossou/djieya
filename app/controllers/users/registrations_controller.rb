@@ -11,7 +11,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    # super
+    # Si c'est l'admin qui crèe
+    if current_admin
+      @user = current_admin.users.new(user_params)
+    else
+      @user = User.new(user_params)    
+    end
+
+    if @user.save
+      #sign_in(@user) # On connecte l'utilisateur lors de l'inscription
+      redirect_to users_path, notice: 'Inscription effectué avec succes.'
+    else
+      render :new
+    end
   end
 
   # GET /resource/edit
@@ -39,6 +52,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # protected
+
+  def user_params
+
+    if User.last == nil
+      @last_user = 0
+    else
+      @last_user = User.last.id
+    end
+      @id = @last_user + 1
+    @date = Time.now.strftime("%Y").to_s
+    @nom = params[:user][:nom][0].to_s
+    @prenom = params[:user][:prenom][0].to_s
+    @matricule = @date+'-'+@id.to_s+'-'+@nom+''+@prenom
+    params[:user][:matricule] = @matricule
+    if current_user
+      params[:user][:crea_user] = current_user.id
+    end
+
+    params.require(:user).permit(:nom, :prenom, :adresse, :contact, :sexe, :matricule, :etat, :categorie, :ecole_id, :admin_id, :crea_user, :email, :password, :password_confirmation)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params

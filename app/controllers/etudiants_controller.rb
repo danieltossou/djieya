@@ -1,6 +1,7 @@
 class EtudiantsController < ApplicationController
   before_action :set_etudiant, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /etudiants
   # GET /etudiants.json
   def index
@@ -24,7 +25,13 @@ class EtudiantsController < ApplicationController
   # POST /etudiants
   # POST /etudiants.json
   def create
-    @etudiant = current_user.etudiants.new(etudiant_params)
+    if current_admin
+      @etudiant = current_admin.etudiants.new(etudiant_params)
+    elsif current_user
+      @etudiant = current_user.etudiants.new(etudiant_params)
+    else
+      redirect_to new_etudiant_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
+    end
     @montant = @etudiant.classe_room.montant
     @annee = 1
     respond_to do |format|
@@ -71,7 +78,20 @@ class EtudiantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def etudiant_params
-      params.require(:etudiant).permit(:nom, :prenom, :sexe, :date_naissance, :matricule, :num_inscription, :classe_room_id, :oriente, :nationnalite, :email, :adresse, :contact, :maladie, :nom_parent, :contact_parent, :lien_parente, :email_parent, :photo, :autre, :ecole_id, :user_id, dossier_ids: [])
+    # Generation d'un numero d'inscription automatique
+    if Etudiant.last == nil
+      @last_etudiant = 0
+    else
+      @last_etudiant = Etudiant.last.id
+    end
+      @id = @last_etudiant + 1
+      @date = Time.now.strftime("%Y").to_s
+      @nom = params[:etudiant][:nom][0].to_s
+      @prenom = params[:etudiant][:prenom][0].to_s
+      @num_inscr = @date+'-'+@id.to_s+'-'+@nom+''+@prenom
+      params[:etudiant][:num_inscription] = @num_inscr
+
+      params.require(:etudiant).permit(:nom, :prenom, :sexe, :date_naissance, :montant, :matricule, :num_inscription, :classe_room_id, :oriente, :nationnalite, :email, :adresse, :contact, :maladie, :nom_parent, :contact_parent, :lien_parente, :email_parent, :photo, :autre, :ecole_id, :user_id, dossier_ids: [])
     end
 
 
