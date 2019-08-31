@@ -53,3 +53,7 @@
     .genre {
        display: inline;
     }
+
+    .commencer-top {
+       display: inline-block;
+    }

@@ -1,36 +1,67 @@
-<div class="container">
-    <div class="row justify-content-md-center">
-      <div class="card">
-        <div class="card-header">
-          <h2 class="text-center">CONNEXION</h2>
-        </div>
-        <div class="card-body">
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <div class="field">
-              <%= f.label :Email %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control' %>
-            </div>
-  
-            <div class="field">
-              <%= f.label :'Mot de passe' %><br />
-              <%= f.password_field :password, autocomplete: "current-password", :class => 'form-control' %>
-            </div>
-  
-            <% if devise_mapping.rememberable? %>
-              <div class="field">
-                <%= f.check_box :remember_me %>
-                <%= f.label :'Rester connecter' %>
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="text-center">CONNEXION</h2>
               </div>
-            <% end %>
-  
-            <div class="actions">
-              <%= f.submit "ENTRER", :class => 'btn btn-primary' %>
+              <div class="card-body">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <div class="field">
+                    <%= f.label :Email %><br />
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control' %>
+                  </div>
+        
+                  <div class="field">
+                    <%= f.label :'Mot de passe' %><br />
+                    <%= f.password_field :password, autocomplete: "current-password", :class => 'form-control' %>
+                  </div>
+        
+                  <% if devise_mapping.rememberable? %>
+                    <div class="field">
+                      <%= f.check_box :remember_me %>
+                      <%= f.label :'Rester connecter' %>
+                    </div>
+                  <% end %>
+        
+                  <div class="actions">
+                    <%= f.submit "ENTRER", :class => 'btn btn-primary' %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="card-footer">
+                  <%= render "users/shared/links" %>
+              </div>
             </div>
-          <% end %>
+          </div>
         </div>
-        <div class="card-footer">
-            <%= render "users/shared/links" %>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(
+    $('#exampleModal').modal('toggle')
+  );
+</script>

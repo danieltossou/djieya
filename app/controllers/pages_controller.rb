@@ -50,4 +50,8 @@ class PagesController < ApplicationController
     puts params[:enseignant].inspect
   end
 
+  def commencer
+    
+  end
+
 end

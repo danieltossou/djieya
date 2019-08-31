@@ -60,14 +60,14 @@
 </main>
 <main class="col offset-2 h-100">
 <div class="row bg-light">
-  <div class="col-12 py-2">
+  <!-- <div class="col-12 py-2">
     <nav class="fixed">
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <% Ecole.all.each do |ecole| %>
+          <%# Ecole.all.each do |ecole| %>
         <a class="nav-item nav-link col-6" id="nav-home-tab" data-toggle="tab" href="#<%=ecole.libelle%>" role="tab" aria-controls="nav-home" aria-selected="true"><h5 class="text-center"><%= ecole.libelle %></h5></a>
-        <% end %>
+        <%# end %>
       </div>
-    </div>
+    </div> -->
     <%= yield %>
     <!-- script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
