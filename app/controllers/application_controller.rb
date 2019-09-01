@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+
+  # Message d'erreur lorsqu'on accède aux interdits
     rescue_from CanCan::AccessDenied do |exception|
         respond_to do |format|
           format.json { head :forbidden, content_type: 'text/html' }
@@ -6,4 +8,6 @@ class ApplicationController < ActionController::Base
           format.js   { head :forbidden, content_type: 'text/html' }
         end
       end
+
+
 end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :cours do
     collection do
-      get 'cours/matieres', to: 'cours#matieres'
+      get 'matieres', to: 'cours#matieres', format: :json
     end
   end
   resources :semestres

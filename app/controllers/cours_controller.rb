@@ -24,11 +24,18 @@ class CoursController < ApplicationController
   # POST /cours
   # POST /cours.json
   def create
-    if current_admin
+    
+    params[:cour][:ecole_id] = 1
+
+      #Ajout de la classe en groupe
+      params[:cour][:classe_room_id].unshift(params[:cour][:first_classe_room_id])
 
       @creneau = params[:cour][:creneau_debut].to_i 
       @nombre_heure = params[:cour][:creneau_fin].to_i - params[:cour][:creneau_debut].to_i + 1
       @classe_rooms = params[:cour][:classe_room_id]
+
+    if current_admin
+      
         # Enregistrement des cours pour chaque creneau
         @nombre_heure.times do 
           # Enregistrement pour chaque chaque par creneau
@@ -40,9 +47,6 @@ class CoursController < ApplicationController
 
     elsif current_user
 
-      @creneau = params[:cour][:creneau_debut].to_i 
-      @nombre_heure = params[:cour][:creneau_fin].to_i - params[:cour][:creneau_debut].to_i + 1
-      @classe_rooms = params[:cour][:classe_room_id]
         # Enregistrement des cours pour chaque creneau
         @nombre_heure.times do 
           # Enregistrement pour chaque chaque par creneau
@@ -90,12 +94,11 @@ class CoursController < ApplicationController
   end
 
   # Request ajax pour les matieres par rapport a une classe
-  def matieres
-    @matieres = Matiere.all
-    if request.xhr?
-      render partial: 'matieres', locals: {template: @matieres}
-    end
-
+  def matieres()
+    @matieres = Matiere.all;
+    puts string = "Pisco Pa";
+    # puts "++++++++++++++++++++#{id}"
+    return string;
   end
 
   private
@@ -106,8 +109,6 @@ class CoursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cour_params
-      params[:cour][:annee_id] = 1
-      params[:cour][:ecole_id] = 1
-      params.require(:cour).permit(:enseignant_id, :matiere_id, :salle_id, :creneau_debut, :creneau_fin, :jour_id, :nombre_heure, :numero_cours, :numero_cours_g, :annee_id, :ecole_id, :semestre_id, :user_id, :admin_id, :classe_room_id)
+      params.require(:cour).permit(:enseignant_id, :matiere_id, :salle_id, :creneau_debut, :creneau_fin, :jour_id, :nombre_heure, :numero_cours, :numero_cours_g, :annee_id, :ecole_id, :semestre_id, :user_id, :admin_id, :first_classe_room_id, :classe_room_id)
     end
 end

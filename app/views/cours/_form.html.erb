@@ -18,6 +18,11 @@
 
   <div class="field">
     <%= form.label :classe_room_id %>
+    <%= form.select :classe_room_id, ClasseRoom.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Gouper avec ...' %>
     <%= form.select :classe_room_id, ClasseRoom.all.collect { |x| [x.libelle, x.id]}, {:include_hidden => false}, :multiple => true %>
   </div>
 
@@ -73,7 +78,7 @@
     <%= form.label :ecole_id %>
     <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
   </div>
-<button>Click</button>
+
   <div class="actions">
     <%= form.submit %>
   </div>
@@ -82,12 +87,11 @@
   $('#cour_classe_room_id').change( () => {
     let cour_classe_room_id = $('#cour_classe_room_id option:selected').val();
     if (cour_classe_room_id) {
-      $.get("/matieres", function (data) {
-        console.log(data);
-        alert("Load was performed.");
+      $.get("/cours/matieres", (data) => {
+        alert(data);
+        $('#cour_matiere_id').html(data);
+        $('#cour_matiere_id').change();
       })
-    }
-
-    
-  })
+    }    
+  });
 </script>
