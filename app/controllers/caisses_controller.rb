@@ -5,8 +5,8 @@ class CaissesController < ApplicationController
   # GET /caisses.json
   def index
     authorize! :index, Caisse
-    @annee = 1
-    @ecole = 1
+    @annee = annee_active.id if annee_active?
+    @ecole = ecole.id if ecole?
     @inscrits = Inscription.where(annee_id: @annee).where(ecole_id: @ecole).all
     # Montant qui doit etre perçus en rapport avec les inscrit
     @avoir = 0
@@ -128,6 +128,7 @@ class CaissesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def caisse_params
+      params[:caiss][:ecole_id] = ecole.id if ecole?
       params.require(:caiss).permit(:montant, :libelle, :operation, :user_id, :ecole_id, :annee_id)
     end
 end

@@ -17,7 +17,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :Etat %>
+    <%= form.label :Activé %>
     <%= form.check_box :etat %>
   </div>
 
@@ -27,10 +27,9 @@
   </div>
 
   <div class="field">
-    <%= form.label :ecole_id %>
-    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+    <%= form.hidden_field :ecole_id %>
   </div>
-
+  
   <div class="field">
     <%= form.label 'Les matières à enseigner dans cette classe' %>
     <%= form.collection_check_boxes(:matiere_ids, Matiere.all, :id, :libelle) %>

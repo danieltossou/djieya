@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_29_114531) do
+ActiveRecord::Schema.define(version: 2019_09_02_193908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,36 @@ ActiveRecord::Schema.define(version: 2019_08_29_114531) do
     t.index ["matiere_id"], name: "index_classe_rooms_matieres_on_matiere_id"
   end
 
+  create_table "cours", force: :cascade do |t|
+    t.bigint "enseignant_id", null: false
+    t.bigint "matiere_id", null: false
+    t.bigint "classe_room_id", null: false
+    t.bigint "salle_id", null: false
+    t.bigint "creneau_id", null: false
+    t.bigint "jour_id", null: false
+    t.integer "nombre_heure"
+    t.string "numero_cours"
+    t.string "numero_cours_g"
+    t.bigint "annee_id", null: false
+    t.bigint "ecole_id", null: false
+    t.bigint "semestre_id", null: false
+    t.bigint "user_id"
+    t.bigint "admin_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_cours_on_admin_id"
+    t.index ["annee_id"], name: "index_cours_on_annee_id"
+    t.index ["classe_room_id"], name: "index_cours_on_classe_room_id"
+    t.index ["creneau_id"], name: "index_cours_on_creneau_id"
+    t.index ["ecole_id"], name: "index_cours_on_ecole_id"
+    t.index ["enseignant_id"], name: "index_cours_on_enseignant_id"
+    t.index ["jour_id"], name: "index_cours_on_jour_id"
+    t.index ["matiere_id"], name: "index_cours_on_matiere_id"
+    t.index ["salle_id"], name: "index_cours_on_salle_id"
+    t.index ["semestre_id"], name: "index_cours_on_semestre_id"
+    t.index ["user_id"], name: "index_cours_on_user_id"
+  end
+
   create_table "creneaus", force: :cascade do |t|
     t.string "debut"
     t.string "fin"
@@ -111,6 +141,8 @@ ActiveRecord::Schema.define(version: 2019_08_29_114531) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_dossiers_on_admin_id"
     t.index ["ecole_id"], name: "index_dossiers_on_ecole_id"
     t.index ["user_id"], name: "index_dossiers_on_user_id"
   end
@@ -322,6 +354,17 @@ ActiveRecord::Schema.define(version: 2019_08_29_114531) do
   add_foreign_key "classe_rooms", "users"
   add_foreign_key "classe_rooms_matieres", "classe_rooms"
   add_foreign_key "classe_rooms_matieres", "matieres"
+  add_foreign_key "cours", "admins"
+  add_foreign_key "cours", "annees"
+  add_foreign_key "cours", "classe_rooms"
+  add_foreign_key "cours", "creneaus"
+  add_foreign_key "cours", "ecoles"
+  add_foreign_key "cours", "enseignants"
+  add_foreign_key "cours", "jours"
+  add_foreign_key "cours", "matieres"
+  add_foreign_key "cours", "salles"
+  add_foreign_key "cours", "semestres"
+  add_foreign_key "cours", "users"
   add_foreign_key "creneaus", "admins"
   add_foreign_key "creneaus", "ecoles"
   add_foreign_key "creneaus", "users"
@@ -331,6 +374,7 @@ ActiveRecord::Schema.define(version: 2019_08_29_114531) do
   add_foreign_key "disponibilites", "enseignants"
   add_foreign_key "disponibilites", "jours"
   add_foreign_key "disponibilites", "users"
+  add_foreign_key "dossiers", "admins"
   add_foreign_key "dossiers", "ecoles"
   add_foreign_key "dossiers", "users"
   add_foreign_key "ecoles", "admins"

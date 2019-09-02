@@ -4,4 +4,5 @@ class Disponibilite < ApplicationRecord
   belongs_to :enseignant
   belongs_to :jour
   belongs_to :ecole
+
 end

@@ -76,7 +76,7 @@ class SemestresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def semestre_params
-      params[:semestre][:ecole_id] = 1
+      params[:semestre][:ecole_id] = ecole.id if ecole?
       params.require(:semestre).permit(:libelle, :admin_id, :user_id, :ecole_id)
     end
 end

@@ -6,6 +6,12 @@
       </div>
       <div class="card-body">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          
+          <div class="field">
+            <%= f.label :Ecole %><br />
+            <%= f.select :ecole_ids, Ecole.pluck(:libelle, :id), :class => 'form-control' %>
+          </div>
+          
           <div class="field">
             <%= f.label :Email %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control' %>

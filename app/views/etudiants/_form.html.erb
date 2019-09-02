@@ -103,8 +103,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :ecole_id %>
-    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+    <%= form.hidden_field :ecole_id %>
   </div>
 
   <div class="field">
