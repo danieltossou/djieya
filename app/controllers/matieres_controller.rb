@@ -5,7 +5,8 @@ class MatieresController < ApplicationController
   # GET /matieres
   # GET /matieres.json
   def index
-    @matieres = Matiere.all
+    @ecole = ecole.id if ecole?
+    @matieres = Matiere.ecole(@ecole).all
   end
 
   # GET /matieres/1

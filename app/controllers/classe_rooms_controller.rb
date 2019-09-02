@@ -5,7 +5,8 @@ class ClasseRoomsController < ApplicationController
   # GET /classe_rooms
   # GET /classe_rooms.json
   def index
-    @classe_rooms = ClasseRoom.all
+    @ecole = ecole.id if ecole?
+    @classe_rooms = ClasseRoom.ecole(@ecole).all
   end
 
   # GET /classe_rooms/1

@@ -5,7 +5,8 @@ class EtudiantsController < ApplicationController
   # GET /etudiants
   # GET /etudiants.json
   def index
-    @etudiants = Etudiant.all
+    @ecole = ecole.id if ecole?
+    @etudiants = Etudiant.ecole(@ecole).all
   end
 
   # GET /etudiants/1

@@ -4,7 +4,8 @@ class DisponibilitesController < ApplicationController
   # GET /disponibilites
   # GET /disponibilites.json
   def index
-    @disponibilites = Disponibilite.all
+    @ecole = ecole.id if ecole?
+    @disponibilites = Disponibilite.ecole(@ecole).all
   end
 
   # GET /disponibilites/1

@@ -4,7 +4,8 @@ class SemestresController < ApplicationController
   # GET /semestres
   # GET /semestres.json
   def index
-    @semestres = Semestre.all
+    @ecole = ecole.id if ecole?
+    @semestres = Semestre.ecole(@ecole).all
   end
 
   # GET /semestres/1

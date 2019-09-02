@@ -5,6 +5,9 @@ class Etudiant < ApplicationRecord
   has_many :versements
   has_and_belongs_to_many :dossiers
 
+  default_scope { order(nom: :asc) }
+  scope :ecole, -> (ecole) { where(ecole_id: ecole) }
+
   mount_uploader :photo, PhotoUploader
 
   after_create do

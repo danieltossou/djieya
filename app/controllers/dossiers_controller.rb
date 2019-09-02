@@ -6,7 +6,8 @@ class DossiersController < ApplicationController
   # GET /dossiers
   # GET /dossiers.json
   def index
-    @dossiers = Dossier.all
+    @ecole = ecole.id if ecole?
+    @dossiers = Dossier.ecole(@ecole).all
   end
 
   # GET /dossiers/1

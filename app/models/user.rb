@@ -21,6 +21,9 @@ class User < ApplicationRecord
   has_many :semestres
   # belongs_to :admin
 
+  default_scope { order(nom: :asc) }
+  scope :ecole, -> (ecole) { where(ecole_id: ecole) }
+
   #after_create do
   #  @user = User.last
   #  @id = @user.id.to_s

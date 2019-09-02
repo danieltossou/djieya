@@ -7,7 +7,8 @@ class CaissesController < ApplicationController
     authorize! :index, Caisse
     @annee = annee_active.id if annee_active?
     @ecole = ecole.id if ecole?
-    @inscrits = Inscription.where(annee_id: @annee).where(ecole_id: @ecole).all
+    @inscrits = Inscription.annee(@annee).ecole(@ecole).all
+
     # Montant qui doit etre perçus en rapport avec les inscrit
     @avoir = 0
     @inscrits.each do |inscris|
@@ -15,7 +16,7 @@ class CaissesController < ApplicationController
     end
 
     # Montant déjà perçu
-    @versements = Versement.where(annee_id: @annee).where(ecole_id: @ecole).all
+    @versements = Versement.annee(@annee).ecole(@ecole).all
     @deja_perçu = 0
     @versements.each do |versement|
       @deja_perçu += versement.montant
@@ -26,7 +27,7 @@ class CaissesController < ApplicationController
 
     # Total des depenses
     @depense = 0
-    @sorties = Caisse.where(annee_id: @annee).where(ecole_id: @ecole).sortie.all
+    @sorties = Caisse.annee(@annee).ecole(@ecole).sortie.all
     @sorties.each do |sortie|
       @depense += sortie.montant
     end

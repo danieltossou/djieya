@@ -6,7 +6,9 @@ class VersementsController < ApplicationController
   # GET /versements
   # GET /versements.json
   def index
-    @versements = Versement.all
+    @annee = annee_active.id if annee_active?
+    @ecole = ecole.id if ecole?
+    @versements = Versement.ecole(@ecole).annee(@annee).all
   end
 
   # GET /versements/1
@@ -78,7 +80,9 @@ class VersementsController < ApplicationController
   # GET /etudiants/1/versements/
   # GET /etudiants/1/versements.json
   def etudiant_index
-    @versements = Versement.where(etudiant_id: params[:etudiant_id])
+    @etudiant = params[:etudiant_id]
+    @annee = annee_active.id if annee_active?
+    @versements = Versement.etudiant(@etudiant).annee(@annee)
   end
 
   # GET /etudiants/1/versements/1

@@ -5,4 +5,5 @@ class Disponibilite < ApplicationRecord
   belongs_to :jour
   belongs_to :ecole
 
+  scope :ecole, -> (ecole) { where(ecole_id: ecole) }
 end
