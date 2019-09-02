@@ -16,19 +16,16 @@
     <%= form.number_field :montant %>
   </div>
 
-  <div class="field">
-    <%= form.label :ecole_id %>
-    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
-  </div>
+  <% if !@versement.persisted? %>
+    <div class="field">
+      <%= form.label :etudiant_id %>
+      <%= form.select :etudiant_id, Etudiant.pluck(:nom, :id) %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :annee_id %>
-    <%= form.select :annee_id, Annee.pluck(:libelle, :id) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :etudiant_id %>
-    <%= form.select :etudiant_id, Etudiant.pluck(:nom, :id) %>
+    <%= form.hidden_field :annee_id %>
   </div>
 
   <div class="actions">

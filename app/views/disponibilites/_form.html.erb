@@ -28,6 +28,10 @@
     <%= form.select :jour_id, Jour.pluck(:libelle, :id) %>
   </div>
 
+  <div class="field">
+    <%= form.hidden_field :ecole_id %>
+  </div>
+
 
   <div class="actions">
     <%= form.submit %>

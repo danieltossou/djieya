@@ -76,7 +76,7 @@ class CreneausController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def creneau_params
-      params[:creneau][:ecole_id] = 1
+      params[:creneau][:ecole_id] = ecole.id
       params.require(:creneau).permit(:debut, :fin, :admin_id, :user_id, :ecole_id)
     end
 end

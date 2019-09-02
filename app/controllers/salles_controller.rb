@@ -5,7 +5,8 @@ class SallesController < ApplicationController
   # GET /salles
   # GET /salles.json
   def index
-    @salles = Salle.all
+    @ecole = ecole.id if ecole?
+    @salles = Salle.ecole(@ecole).all
   end
 
   # GET /salles/1
@@ -77,7 +78,7 @@ class SallesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def salle_params
-      params[:salle][:ecole_id] = 1
+      params[:salle][:ecole_id] = ecole.id if ecole?
       params.require(:salle).permit(:libelle, :ecole_id, :user_id, :admin_id)
     end
 end

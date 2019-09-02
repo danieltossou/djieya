@@ -5,7 +5,8 @@ class ClasseRoomsController < ApplicationController
   # GET /classe_rooms
   # GET /classe_rooms.json
   def index
-    @classe_rooms = ClasseRoom.all
+    @ecole = ecole.id if ecole?
+    @classe_rooms = ClasseRoom.ecole(@ecole).all
   end
 
   # GET /classe_rooms/1
@@ -25,9 +26,9 @@ class ClasseRoomsController < ApplicationController
   # POST /classe_rooms
   # POST /classe_rooms.json
   def create
-    if current_admin
+    if current_admin       
       @classe_room = current_admin.classeRooms.new(classe_room_params)
-    elsif current_user
+    elsif current_user                                          
       @classe_room = current_user.classeRooms.new(classe_room_params)
     else
       redirect_to new_classe_room_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
@@ -76,6 +77,7 @@ class ClasseRoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classe_room_params
-      params.require(:classe_room).permit(:libelle, :etat, :user_id, :montant, :ecole_id, matiere_ids: [])
+      params[:classe_room][:ecole_id] = ecole.id
+      params.require(:classe_room).permit(:libelle, :etat, :user_id, :admin_id, :montant, :ecole_id, matiere_ids: [])
     end
 end

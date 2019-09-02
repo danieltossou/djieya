@@ -1,11 +1,13 @@
 class DossiersController < ApplicationController
   before_action :set_dossier, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  #load_and_authorize_resource
+  skip_before_action :est_connecte?, only: :new
   
   # GET /dossiers
   # GET /dossiers.json
   def index
-    @dossiers = Dossier.all
+    @ecole = ecole.id if ecole?
+    @dossiers = Dossier.ecole(@ecole).all
   end
 
   # GET /dossiers/1
@@ -15,6 +17,7 @@ class DossiersController < ApplicationController
 
   # GET /dossiers/new
   def new
+    puts ecole.libelle
     @dossier = Dossier.new
   end
 
@@ -76,6 +79,7 @@ class DossiersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dossier_params
+      params[:dossier][:ecole_id] = ecole.id if ecole?
       params.require(:dossier).permit(:libelle, :ecole_id, :user_id)
     end
 end
