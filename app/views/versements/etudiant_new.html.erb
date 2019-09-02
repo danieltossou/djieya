@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :montant %>
-    <%= form.number_field :montant %>
+    <%= form.number_field :montant, :class => 'form-control' %>
   </div>
 
   <div class="field">
@@ -27,6 +27,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
   </div>
 <% end %>

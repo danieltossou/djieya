@@ -1,7 +1,7 @@
 class VersementsController < ApplicationController
   before_action :set_etudiant, only: [:etudiant_index, :etudiant_show, :etudiant_new, :etudiant_create, :etudiant_edit, :etudiant_update, :etudiant_destroy]
   before_action :set_versement, only: [:show, :edit, :update, :destroy, :etudiant_edit, :etudiant_update]
-  load_and_authorize_resource
+  #load_and_authorize_resource
   
   # GET /versements
   # GET /versements.json

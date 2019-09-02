@@ -43,7 +43,20 @@ Rails.application.routes.draw do
   get '/menu_annees', to: 'pages#menu_annees'
   get '/menu_classes', to: 'pages#menu_classes'
   get '/commencer', to: 'pages#commencer'
+  get '/configuration', to: 'pages#configuration'
   get '/matiere_enseigne', to: 'pages#matiere_enseigne', as: 'matiere_enseigne'
   post '/matiere_enseigne', to: 'pages#create_matiere_enseigne', as: 'create_matiere_enseigne'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  #Snotify_to :users, with_devise: :users, devise_default_routes: true
+    
+  #devise_scope :user || :admin do
+  #    authenticated :user || :admin do
+  #      root :to => 'pages#index'
+        #delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_all_session
+  #    end
+  #    unauthenticated :user || :admin do
+  #      root :to => 'users/sessions#new', as: :unauthenticated_root
+  #    end
+  #end
+
 end

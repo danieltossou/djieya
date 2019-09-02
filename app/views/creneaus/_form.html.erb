@@ -1,27 +1,16 @@
 <%= form_with(model: creneau, local: true) do |form| %>
-  <% if creneau.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(creneau.errors.count, "error") %> prohibited this creneau from being saved:</h2>
-
-      <ul>
-        <% creneau.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="field">
     <%= form.label :debut %>
-    <%= form.text_field :debut %>
+    <%= form.text_field :debut, :class => 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :fin %>
-    <%= form.text_field :fin %>
+    <%= form.text_field :fin, :class => 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
   </div>
 <% end %>

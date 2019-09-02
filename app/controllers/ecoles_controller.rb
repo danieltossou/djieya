@@ -1,6 +1,6 @@
 class EcolesController < ApplicationController
   before_action :set_ecole, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  #load_and_authorize_resource
   
   # GET /ecoles
   # GET /ecoles.json

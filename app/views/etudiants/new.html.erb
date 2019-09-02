@@ -1,5 +1,16 @@
-<h1>New Etudiant</h1>
 
-<%= render 'form', etudiant: @etudiant %>
-
-<%= link_to 'Back', etudiants_path %>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="card">
+            <div class="card-header">
+            <h2 class="text-center">NOUVEL ETUDIANT</h2>
+            </div>
+            <div class="card-body">
+                <%= render 'form', etudiant: @etudiant %>
+            </div>
+            <div class="card-footer">
+                <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %> 
+            </div>
+        </div>
+    </div>
+</div>
