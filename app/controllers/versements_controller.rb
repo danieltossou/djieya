@@ -6,7 +6,9 @@ class VersementsController < ApplicationController
   # GET /versements
   # GET /versements.json
   def index
-    @versements = Versement.all
+    @annee = annee_active.id if annee_active?
+    @ecole = ecole.id if ecole?
+    @versements = Versement.ecole(@ecole).annee(@annee).all
   end
 
   # GET /versements/1
@@ -27,9 +29,9 @@ class VersementsController < ApplicationController
   # POST /versements.json
   def create
     if current_admin
-      @versement = current_admin.versements.new(eversement_params)
+      @versement = current_admin.versements.new(montant: params[:versement][:montant], admin_id: current_admin, ecole_id: session[:ecole_id], annee_id: annee_active.id, etudiant_id: params[:versement][:etudiant_id])
     elsif current_user
-      @versement = current_user.versements.new(versement_params)
+      @versement = current_user.versements.new(montant: params[:versement][:montant], user_id: current_user, ecole_id: session[:ecole_id], annee_id: annee_active.id, etudiant_id: params[:versement][:etudiant_id])
     else
       redirect_to new_versement_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
     end
@@ -78,7 +80,9 @@ class VersementsController < ApplicationController
   # GET /etudiants/1/versements/
   # GET /etudiants/1/versements.json
   def etudiant_index
-    @versements = Versement.where(etudiant_id: params[:etudiant_id])
+    @etudiant = params[:etudiant_id]
+    @annee = annee_active.id if annee_active?
+    @versements = Versement.etudiant(@etudiant).annee(@annee)
   end
 
   # GET /etudiants/1/versements/1
@@ -88,6 +92,7 @@ class VersementsController < ApplicationController
 
   # GET /etudiants/1/versements/new
   def etudiant_new
+    puts annee_active
     @versement = @etudiant.versements.build
   end
 
@@ -103,7 +108,7 @@ class VersementsController < ApplicationController
     respond_to do |format|
       if @versement.save
 
-        puts @libelle = "Versement de l'etudiant #{@versement.etudiant.nom} #{@versement.etudiant.prenom} ( #{@versement.etudiant.num_inscription})"
+        @libelle = "Versement de l'etudiant #{@versement.etudiant.nom} #{@versement.etudiant.prenom} ( #{@versement.etudiant.num_inscription})"
         Caisse.create!(montant: @versement.montant, libelle: @libelle, operation: 'entrée', ecole_id: @versement.ecole_id, annee_id: @versement.annee_id, user_id: current_user.id)
         
         format.html { redirect_to @versement, notice: 'Versement was successfully created.' }
@@ -159,6 +164,8 @@ class VersementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def etudiant_versement_params
       params[:versement][:user_id] = current_user.id
+      params[:versement][:ecole_id] = ecole.id if ecole?
+      params[:versement][:annee_id] = annee_active if annee_active?
       params.require(:versement).permit(:montant, :user_id, :ecole_id, :annee_id, :etudiant_id)
     end
 end

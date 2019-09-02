@@ -5,7 +5,8 @@ class MatieresController < ApplicationController
   # GET /matieres
   # GET /matieres.json
   def index
-    @matieres = Matiere.all
+    @ecole = ecole.id if ecole?
+    @matieres = Matiere.ecole(@ecole).all
   end
 
   # GET /matieres/1
@@ -76,7 +77,7 @@ class MatieresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def matiere_params
-      params[:matiere][:ecole_id] = 1
+      params[:matiere][:ecole_id] = ecole.id if ecole?
       params.require(:matiere).permit(:libelle, :ecole_id, :user_id, :admin_id)
     end
 end

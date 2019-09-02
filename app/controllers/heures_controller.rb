@@ -77,6 +77,7 @@ class HeuresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def heure_params
+      params[:heure][:ecole_id] = ecole.id if ecole?
       params.require(:heure).permit(:libelle, :ecole_id, :user_id, :admin_id)
     end
 end

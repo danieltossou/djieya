@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   #authorize_resource :class => pages
+  skip_before_action :est_connecte?, on: :index
 
   def index
   end

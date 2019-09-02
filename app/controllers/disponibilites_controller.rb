@@ -4,7 +4,8 @@ class DisponibilitesController < ApplicationController
   # GET /disponibilites
   # GET /disponibilites.json
   def index
-    @disponibilites = Disponibilite.all
+    @ecole = ecole.id if ecole?
+    @disponibilites = Disponibilite.ecole(@ecole).all
   end
 
   # GET /disponibilites/1
@@ -25,27 +26,32 @@ class DisponibilitesController < ApplicationController
   # POST /disponibilites.json
   def create
 
-    if current_admin
+    if !params[:disponibilite][:creneau_ids].nil?
+      if current_admin
       # @disponibilite = current_admin.disponibilites.new(disponibilite_params)
-      params[:disponibilite][:ecole_id] = 1
+
+      Disponibilite.where(enseignant_id: params[:disponibilite][:enseignant_id]).where(jour_id: params[:disponibilite][:jour_id]).where(ecole_id: ecole.id).destroy_all
 
       params[:disponibilite][:creneau_ids].each do |creneau|
-        Disponibilite.create(enseignant_id: params[:disponibilite][:enseignant_id], jour_id: params[:disponibilite][:jour_id], admin_id: current_admin.id, ecole_id: params[:disponibilite][:ecole_id], creneau_id: creneau)
+        Disponibilite.create(enseignant_id: params[:disponibilite][:enseignant_id], jour_id: params[:disponibilite][:jour_id], admin_id: current_admin.id, ecole_id: ecole.id, creneau_id: creneau)
       end
       redirect_to disponibilites_url
 
     elsif current_user
-      params[:disponibilite][:ecole_id] = 1
-      Disponibilite.where(enseignant_id: params[:disponibilite][:enseignant_id]).where(jour_id: params[:disponibilite][:jour_id]).where(ecole_id: params[:disponibilite][:ecole_id]).destroy_all
+
+      Disponibilite.where(enseignant_id: params[:disponibilite][:enseignant_id]).where(jour_id: params[:disponibilite][:jour_id]).where(ecole_id: ecole.id).destroy_all
 
       params[:disponibilite][:creneau_ids].each do |creneau|
-        Disponibilite.create(enseignant_id: params[:disponibilite][:enseignant_id], jour_id: params[:disponibilite][:jour_id], user_id: current_user.id, ecole_id: params[:disponibilite][:ecole_id], creneau_id: creneau)
+        Disponibilite.create(enseignant_id: params[:disponibilite][:enseignant_id], jour_id: params[:disponibilite][:jour_id], user_id: current_user.id, ecole_id: ecole.id, creneau_id: creneau)
       end
       redirect_to disponibilites_url
       #@disponibilite = current_user.disponibilites.new(disponibilite_params)
     else
       redirect_to new_disponibilite_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
     end
+  else
+    redirect_to new_disponibilite_path, notice: "Veuillez choisir des heures pour la disponibilité du prof"
+  end
 
   end
 
@@ -81,7 +87,7 @@ class DisponibilitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def disponibilite_params
-      params[:disponibilite][:ecole_id] = 1
+      params[:disponibilite][:ecole_id] = ecole.id
       params.require(:disponibilite).permit(:enseignant_id, :jour_id, :admin_id, :user_id, :ecole_id, creneau_ids: [])
     end
 end

@@ -5,7 +5,8 @@ class EnseignantsController < ApplicationController
   # GET /enseignants
   # GET /enseignants.json
   def index
-    @enseignants = Enseignant.all
+    @ecole = ecole.id if ecole?
+    @enseignants = Enseignant.ecole(@ecole).all
   end
 
   # GET /enseignants/1
@@ -77,7 +78,7 @@ class EnseignantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def enseignant_params
-      params[:enseignant][:ecole_id] = 1
+      params[:enseignant][:ecole_id] = ecole.id if ecole?
       params.require(:enseignant).permit(:nom, :prenom, :sexe, :contact, :email, :adresse, :ecole_id, :user_id, :admin_id, matiere_ids: [])
     end
 end

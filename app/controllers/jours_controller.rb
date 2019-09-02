@@ -5,7 +5,8 @@ class JoursController < ApplicationController
   # GET /jours
   # GET /jours.json
   def index
-    @jours = Jour.all
+    @ecole = ecole.id if ecole?
+    @jours = Jour.ecole(@ecole).all
   end
 
   # GET /jours/1
@@ -77,7 +78,7 @@ class JoursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def jour_params
-      params[:jour][:ecole_id] = 1
+      params[:jour][:ecole_id] = ecole.id if ecole?
       params.require(:jour).permit(:libelle, :ecole_id, :user_id, :admin_id)
     end
 end
