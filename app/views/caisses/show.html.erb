@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Montant:</strong>
+  <%= @caiss.montant %>
+</p>
+
+<p>
+  <strong>Libelle:</strong>
+  <%= @caiss.libelle %>
+</p>
+
+<p>
+  <strong>Operation:</strong>
+  <%= @caiss.operation %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @caiss.user_id %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @caiss.ecole_id %>
+</p>
+
+<p>
+  <strong>Annee:</strong>
+  <%= @caiss.annee_id %>
+</p>
+
+<%= link_to 'Edit', edit_caiss_path(@caiss) %> |
+<%= link_to 'Back', caisses_path %>

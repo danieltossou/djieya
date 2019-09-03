@@ -1,0 +1,17 @@
+<%= form_with(model: ecole, local: true) do |form| %>
+ 
+
+  <div class="field">
+    <%= form.label :libelle %>
+    <%= form.text_field :libelle, :class => 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :etat %>
+    <%= form.check_box :etat %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
+  </div>
+<% end %>

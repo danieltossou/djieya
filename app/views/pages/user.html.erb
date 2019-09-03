@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>nom:</strong>
+  <%= @user.nom %>
+</p>
+
+<p>
+  <strong>contact:</strong>
+  <%= @user.contact %>
+</p>
+Etat: <%= @user.etat %> <br>
+<%= link_to 'Activer', activer_path(@user), method: :put unless @user.etat %> 
+<%= link_to 'Desactiver', desactiver_path(@user), method: :patch, data: { confirm: 'Voulez-vous desactiver l\'user?' } if @user.etat %> 

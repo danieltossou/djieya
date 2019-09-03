@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Libelle:</strong>
+  <%= @dossier.libelle %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @dossier.ecole_id %>
+</p>
+
+<%= link_to 'Edit', edit_dossier_path(@dossier) %> |
+<%= link_to 'Back', dossiers_path %>

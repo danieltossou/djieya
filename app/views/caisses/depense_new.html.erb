@@ -1,0 +1,27 @@
+<h1>Enregistrer une depense</h1>
+<%= form_for(@caisse, :url  => depense_create_caisses_path(@caisse), method: :post) do |form| %>
+
+  <div class="field">
+    <%= form.label :montant %>
+    <%= form.number_field :montant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :libelle %>
+    <%= form.text_field :libelle %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ecole_id %>
+    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :annee_id %>
+    <%= form.select :annee_id, Annee.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

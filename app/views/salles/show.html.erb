@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Libelle:</strong>
+  <%= @salle.libelle %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @salle.ecole_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @salle.user_id %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @salle.admin_id %>
+</p>
+
+<%= link_to 'Edit', edit_salle_path(@salle) %> |
+<%= link_to 'Back', salles_path %>

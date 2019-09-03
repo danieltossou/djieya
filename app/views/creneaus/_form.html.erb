@@ -1,0 +1,20 @@
+<%= form_with(model: creneau, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :debut %>
+    <%= form.text_field :debut, :class => 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fin %>
+    <%= form.text_field :fin, :class => 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :ecole_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
+  </div>
+<% end %>

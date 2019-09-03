@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="row justify-content-md-center">
+      <div class="card">
+          <div class="card-header">
+          <h2 class="text-center">NOUVEAU CRENEAU</h2>
+          </div>
+          <div class="card-body">
+              <%= render 'form', creneau: @creneau %>
+          </div>
+          <div class="card-footer">
+              <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %> 
+          </div>
+      </div>
+  </div>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+      <div class="card">
+        <div class="card-header">
+        <h2 class="text-center">LISTE DES CRENEAUX</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Debut</th>
+                    <th>Fin</th>
+                    <th>Admin</th>
+                    <th>User</th>
+                    <th>Ecole</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </thead>
+              
+                <tbody>
+                  <% @creneaus.each do |creneau| %>
+                    <tr>
+                      <td><%= creneau.debut %></td>
+                      <td><%= creneau.fin %></td>
+                      <td><%= creneau.admin_id %></td>
+                      <td><%= creneau.user_id %></td>
+                      <td><%= creneau.ecole_id %></td>
+                      <td><%= link_to 'Show', creneau %></td>
+                      <td><%= link_to 'Edit', edit_creneau_path(creneau) %></td>
+                      <td><%= link_to 'Destroy', creneau, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+        </div>
+        <div class="card-footer">
+            <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+        </div>
+      </div>
+    </div>
+  </div>

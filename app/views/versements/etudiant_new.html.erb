@@ -1,0 +1,32 @@
+<%= form_for [@etudiant, @versement] do |form| %>
+  <% if @versement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@versement.errors.count, "error") %> prohibited this versement from being saved:</h2>
+
+      <ul>
+        <% @versement.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :montant %>
+    <%= form.number_field :montant, :class => 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ecole_id %>
+    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :annee_id %>
+    <%= form.select :annee_id, Annee.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
+  </div>
+<% end %>

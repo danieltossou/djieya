@@ -14,9 +14,17 @@
  *= require_self
  */
 
+ * {
+    margin: 0;
+    padding: 0;
+ }
+
  body, html {
     font-family: 'Poppins', sans-serif;
     height: 100%;
+    width: 100%;
+    /*position: fixed;
+    overflow: hidden;*/
     }
     
     #left {
@@ -40,4 +48,12 @@
     
     .aside-top {
     margin-top: 3vh;
+    }
+
+    .genre {
+       display: inline;
+    }
+
+    .commencer-top {
+       display: inline-block;
     }

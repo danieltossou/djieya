@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Libelle:</strong>
+  <%= @semestre.libelle %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @semestre.admin_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @semestre.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_semestre_path(@semestre) %> |
+<%= link_to 'Back', semestres_path %>

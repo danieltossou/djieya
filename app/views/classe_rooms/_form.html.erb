@@ -1,0 +1,36 @@
+<%= form_with(model: classe_room, local: true) do |form| %>
+
+  <div class="row">
+    <div class="col">
+      <div class="field">
+        <%= form.label :Libelle %>
+        <%= form.text_field :libelle, :class => 'form-control' %>
+    
+        <%= form.label :Montant %>
+        <%= form.number_field :montant, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="field">
+          <%= form.label :Etat %>
+          <%= form.check_box :etat %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :ecole_id %>
+          <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+        </div>
+    </div>
+    <div class="col">
+      <div class="field">
+          <%= form.label 'Les matières à enseigner dans cette classe' %>
+          <%= form.collection_check_boxes(:matiere_ids, Matiere.all, :id, :libelle) %>
+        </div><br>
+      
+        <div class="actions">
+          <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
+        </div>
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  montant: 1
+  user: one
+  ecole: one
+  annee: one
+  etudiant: one
+
+two:
+  montant: 1
+  user: two
+  ecole: two
+  annee: two
+  etudiant: two

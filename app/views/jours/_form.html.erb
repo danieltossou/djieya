@@ -1,0 +1,26 @@
+<%= form_with(model: jour, local: true) do |form| %>
+  <% if jour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(jour.errors.count, "error") %> prohibited this jour from being saved:</h2>
+
+      <ul>
+        <% jour.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :libelle %>
+    <%= form.text_field :libelle %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :ecole_id %>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
