@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
     # Recuperation de l'ecole
     def ecole
-      Ecole.find_by_id(session[:ecole_id]) ? Ecole.find(session[:ecole_id]) : nil
+      Ecole.find_by_id(session[:ecole_id]) ? Ecole.find_by_id(session[:ecole_id]) : nil
     end
   
     def ecole?
