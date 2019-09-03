@@ -94,12 +94,45 @@ class CoursController < ApplicationController
   end
 
   # Request ajax pour les matieres par rapport a une classe
-  def matieres()
-    @matieres = Matiere.all;
-    puts string = "Pisco Pa";
-    # puts "++++++++++++++++++++#{id}"
-    return string;
+  def matieres
+    @classe = ClasseRoom.find(params[:id_classe])
+    @matieres = @classe.matieres.all
+    if request.xhr?
+      render :partial => 'matieres', locals: {:matieres => @matieres}
+    end
+
   end
+
+  #Requète ajax pour recuperer les enseignants par rapport à une matière
+  def enseignants
+
+    @matiere = Matiere.find_by_id(params[:id_matiere])
+    @creneau_debut = Creneau.find_by_id(params[:id_creneau_debut])
+    @creneau_fin = Creneau.find_by_id(params[:id_creneau_fin])
+    @jour = Jour.find_by_id(params[:id_jour])
+    @enseignants = @matiere.enseignants
+    
+    if request.xhr?
+      render :partial => 'enseignants', locals: {:enseignants => @enseignants}
+    end
+
+  end
+
+    #Requète ajax pour remplir la liste des salles 
+    def salles
+
+      @matiere = Matiere.find_by_id(params[:id_matiere])
+      @creneau_debut = Creneau.find_by_id(params[:id_creneau_debut])
+      @creneau_fin = Creneau.find_by_id(params[:id_creneau_fin])
+      @jour = Jour.find_by_id(params[:id_jour])
+      @enseignants = @matiere.enseignants
+      
+      if request.xhr?
+        render :partial => 'salles', locals: {:salles => @salles}
+      end
+
+    end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
