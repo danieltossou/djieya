@@ -15,15 +15,28 @@ class Ability
     if admin.present?
       can :manage, :all
     elsif user.present?
-      can :read, [Annee, Ecole]
-      can [:read, :create], [ClasseRoom, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, User, Versement]
-      # can [:update, :destroy], [Caisse, ClasseRoom, Dossier, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, User, Versement], user_id = user.id
-      can [:index, :users], :pages
-      can [:read, :depenses, :depense_new, :depense_create], Caisse
-      can [:etudiant_index, :etudiant_show, :etudiant_new, :etudiant_create], Versement
+      if user.categorie == "Directeur"
+        can :read, [Annee, Ecole]
+        can [:read, :create], [ClasseRoom, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, User, Versement, Dossier]
+        # can [:update, :destroy], [Caisse, ClasseRoom, Dossier, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, User, Versement], user_id = user.id
+        can [:index, :users], :pages
+        can [:read, :depenses, :depense_new, :depense_create, :create], Caisse
+        can [:etudiant_index, :etudiant_show, :etudiant_new, :etudiant_create], Versement
+
+      else
+
+        can [:read], [ClasseRoom, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, User, Versement]
+        can [:create], [Etudiant, Heure, Inscription, Jour, Versement, User]
+        can [:index, :users], :pages
+        can [:read, :depenses, :depense_new, :depense_create, :create], Caisse
+        can [:etudiant_index, :etudiant_show, :etudiant_new, :etudiant_create], Versement
+        
+      end
+
     else
+
       can :index, :pages
-      can :create, :dossiers
+    
     end
     # The first argument to `can` is the action you are giving the user
     # permission to do.
