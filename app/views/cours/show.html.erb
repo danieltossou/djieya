@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Enseignant:</strong>
+  <%= @cour.enseignant_id %>
+</p>
+
+<p>
+  <strong>Matiere:</strong>
+  <%= @cour.matiere_id %>
+</p>
+
+<p>
+  <strong>Classe room:</strong>
+  <%= @cour.classe_room_id %>
+</p>
+
+<p>
+  <strong>Salle:</strong>
+  <%= @cour.salle_id %>
+</p>
+
+<p>
+  <strong>Creneau:</strong>
+  <%= @cour.creneau_id %>
+</p>
+
+<p>
+  <strong>Jour:</strong>
+  <%= @cour.jour_id %>
+</p>
+
+<p>
+  <strong>Nombre heure:</strong>
+  <%= @cour.nombre_heure %>
+</p>
+
+<p>
+  <strong>Numero cours:</strong>
+  <%= @cour.numero_cours %>
+</p>
+
+<p>
+  <strong>Numero cours g:</strong>
+  <%= @cour.numero_cours_g %>
+</p>
+
+<p>
+  <strong>Annee:</strong>
+  <%= @cour.annee_id %>
+</p>
+
+<p>
+  <strong>Ecole:</strong>
+  <%= @cour.ecole_id %>
+</p>
+
+<p>
+  <strong>Semestre:</strong>
+  <%= @cour.semestre_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @cour.user_id %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @cour.admin_id %>
+</p>
+
+<%= link_to 'Edit', edit_cour_path(@cour) %> |
+<%= link_to 'Back', cours_path %>

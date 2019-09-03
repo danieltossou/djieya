@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_09_02_193908) do
+=======
+ActiveRecord::Schema.define(version: 2019_08_29_130425) do
+>>>>>>> edit_time_table
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"

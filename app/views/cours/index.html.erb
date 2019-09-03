@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Time Tables</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Enseignant</th>
+      <th>Matiere</th>
+      <th>Classe room</th>
+      <th>Salle</th>
+      <th>Creneau</th>
+      <th>Jour</th>
+      <th>Nombre heure</th>
+      <th>Numero cours</th>
+      <th>Numero cours g</th>
+      <th>Annee</th>
+      <th>Ecole</th>
+      <th>Semestre</th>
+      <th>User</th>
+      <th>Admin</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cours.each do |cour| %>
+      <tr>
+        <td><%= cour.enseignant_id %></td>
+        <td><%= cour.matiere_id %></td>
+        <td><%= cour.classe_room_id %></td>
+        <td><%= cour.salle_id %></td>
+        <td><%= cour.creneau_id %></td>
+        <td><%= cour.jour_id %></td>
+        <td><%= cour.nombre_heure %></td>
+        <td><%= cour.numero_cours %></td>
+        <td><%= cour.numero_cours_g %></td>
+        <td><%= cour.annee_id %></td>
+        <td><%= cour.ecole_id %></td>
+        <td><%= cour.semestre_id %></td>
+        <td><%= cour.user_id %></td>
+        <td><%= cour.admin_id %></td>
+        <td><%= link_to 'Show', cour %></td>
+        <td><%= link_to 'Edit', edit_cour_path(cour) %></td>
+        <td><%= link_to 'Destroy', cour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cours', new_cour_path %>

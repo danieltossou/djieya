@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :creneaus
   has_many :disponibilites
   has_many :semestres
+  has_many :cours
   # belongs_to :admin
 
   default_scope { order(nom: :asc) }
