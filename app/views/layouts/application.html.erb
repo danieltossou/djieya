@@ -30,13 +30,14 @@
 <body>
 <div class="container-fluid">
 <div class="row">
+<% if current_user || current_admin %>
 <aside class="col-2 px-0 position-fixed bg-dark" id="left">
 <div class="w-100 aside-margin aside-top">
 <div>
   <h6><%= current_user.email if user_signed_in? %><%= current_admin.email if admin_signed_in? %></h6>
 <p>Année: <%= annee_active.libelle if annee_active? %></p>
 </div><br>
-<h6><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Tableau de bord</h6>
+<h6><i class="fas fa-chart-line"></i>&nbsp;&nbsp;<%= link_to 'Tableau de bord', root_path %></h6>
 <hr>
 <!-- <h6><i class="far fa-calendar"></i>&nbsp;&nbsp;<%= link_to 'Année scolaire', annees_path %></h6><br> -->
 <h6><i class="fas fa-users"></i>&nbsp;&nbsp;<%= link_to 'Utilisateurs', users_path %></h6><br>
@@ -56,6 +57,7 @@
 <% end %>
 </div>
 </aside>
+<% end %>
 <main class="col-10 invisible">
 <!--hidden spacer-->
 </main>
