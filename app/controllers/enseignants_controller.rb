@@ -1,6 +1,6 @@
 class EnseignantsController < ApplicationController
   before_action :set_enseignant, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  #load_and_authorize_resource
   
   # GET /enseignants
   # GET /enseignants.json

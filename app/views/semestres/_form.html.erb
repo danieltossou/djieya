@@ -1,22 +1,11 @@
 <%= form_with(model: semestre, local: true) do |form| %>
-  <% if semestre.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(semestre.errors.count, "error") %> prohibited this semestre from being saved:</h2>
-
-      <ul>
-        <% semestre.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+   
   <div class="field">
     <%= form.label :libelle %>
-    <%= form.text_field :libelle %>
+    <%= form.text_field :libelle, :class => 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
   </div>
 <% end %>

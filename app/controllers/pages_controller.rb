@@ -55,4 +55,8 @@ class PagesController < ApplicationController
     
   end
 
+  def configuration
+    
+  end
+
 end

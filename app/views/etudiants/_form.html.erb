@@ -11,105 +11,113 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :nom %>
-    <%= form.text_field :nom %>
-  </div>
+  <div class="row">
+    <div class="col">
+      <div class="field">
+          <%= form.label :nom %>
+          <%= form.text_field :nom, :class => 'form-control' %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :prenom %>
+          <%= form.text_field :prenom, :class => 'form-control' %>
+        </div>
+      
+        <div class="field">
+            <%= form.label :sexe %><br />
+            Homme <%= form.radio_button :sexe, "Homme"%>
+            Femme <%= form.radio_button :sexe, "Femme"%>
+        </div>
+      
+        <div class="field">
+          <%= form.label :date_naissance %>
+          <%= form.datetime_select :date_naissance, :class => 'form-control' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :prenom %>
-    <%= form.text_field :prenom %>
-  </div>
+        <div class="field">
+            <%= form.label :matricule %>
+            <%= form.text_field :matricule, :class => 'form-control' %>
+          </div>
+    </div>
+    <div class="col">
+        <div class="field">
+          <%= form.label :classe_room_id %>
+          <%= form.select :classe_room_id, ClasseRoom.pluck(:libelle, :id) %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :oriente %>
+          <%= form.check_box :oriente %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :nationnalite %>
+          <%= form.text_field :nationnalite, :class => 'form-control' %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :email %>
+          <%= form.text_field :email, :class => 'form-control' %>
+        </div>
+        
+        <div class="field">
+            <%= form.label :adresse %>
+            <%= form.text_area :adresse, :class => 'form-control' %>
+          </div>
+    </div>
+    <div class="col">
+        <div class="field">
+          <%= form.label :contact %>
+          <%= form.number_field :contact, :class => 'form-control' %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :maladie %>
+          <%= form.text_field :maladie, :class => 'form-control' %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :nom_parent %>
+          <%= form.text_field :nom_parent, :class => 'form-control' %>
+        </div>
 
-  <div class="field">
-      <%= form.label :sexe %><br />
-      <%= form.radio_button :sexe, "Homme"%>
-      <%= form.radio_button :sexe, "Femme"%>
-  </div>
+        <div class="field">
+            <%= form.label :contact_parent %>
+            <%= form.number_field :contact_parent, :class => 'form-control' %>
+          </div>
+    </div>
+    <div class="col">
+      <div class="field">
+        <%= form.label :lien_parente %>
+        <%= form.text_field :lien_parente, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :date_naissance %>
-    <%= form.datetime_select :date_naissance %>
-  </div>
-
-  <div class="field">
-    <%= form.label :matricule %>
-    <%= form.text_field :matricule %>
-  </div>
-
-  <div class="field">
-    <%= form.label :classe_room_id %>
-    <%= form.select :classe_room_id, ClasseRoom.pluck(:libelle, :id) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :oriente %>
-    <%= form.check_box :oriente %>
-  </div>
-
-  <div class="field">
-    <%= form.label :nationnalite %>
-    <%= form.text_field :nationnalite %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :adresse %>
-    <%= form.text_area :adresse %>
-  </div>
-
-  <div class="field">
-    <%= form.label :contact %>
-    <%= form.number_field :contact %>
-  </div>
-
-  <div class="field">
-    <%= form.label :maladie %>
-    <%= form.text_field :maladie %>
-  </div>
-
-  <div class="field">
-    <%= form.label :nom_parent %>
-    <%= form.text_field :nom_parent %>
-  </div>
-
-  <div class="field">
-    <%= form.label :contact_parent %>
-    <%= form.number_field :contact_parent %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lien_parente %>
-    <%= form.text_field :lien_parente %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email_parent %>
-    <%= form.text_field :email_parent %>
-  </div>
-
-  <div class="field">
-    <%= form.label :photo %>
-    <%= form.file_field :photo %>
-  </div>
-
-  <div class="field">
-    <%= form.label :autre %>
-    <%= form.text_field :autre %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :ecole_id %>
-  </div>
-
-  <div class="field">
-      <%= form.collection_check_boxes(:dossier_ids, Dossier.all, :id, :libelle) %>
-  </div><br>
+      <div class="field">
+          <%= form.label :email_parent %>
+          <%= form.text_field :email_parent, :class => 'form-control' %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :photo %>
+          <%= form.file_field :photo %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :autre %>
+          <%= form.text_field :autre, :class => 'form-control' %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :ecole_id %>
+          <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+        </div>
+      
+        <div class="field">
+            <%= form.collection_check_boxes(:dossier_ids, Dossier.all, :id, :libelle) %>
+        </div><br>
+    </div>
+  </div>  
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "ENREGISTRER", :class => 'btn btn-primary' %>
   </div>
 <% end %>
