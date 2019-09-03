@@ -1,0 +1,189 @@
+<%= form_with(model: @cour, local: true) do |form| %>
+  <% if @cour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cour.errors.count, "error") %> prohibited this cour from being saved:</h2>
+
+      <ul>
+        <% @cour.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :semestre_id %>
+    <%= form.select :semestre_id, Semestre.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :classe_room_id %>
+    <%= form.select :classe_room_id, ClasseRoom.pluck(:libelle, :id) %>
+  </div>
+
+  <div id="test"></div>
+
+  <div class="field">
+    <%= form.label 'Gouper avec ...' %>
+    <%= form.select :classe_room_id, ClasseRoom.all.collect { |x| [x.libelle, x.id]}, {:include_hidden => false}, :multiple => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :jour_id %>
+    <%= form.select :jour_id, Jour.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :matiere_id %>
+    <%= form.select :matiere_id, Matiere.where(id: 0) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enseignant_id %>
+    <%= form.select :enseignant_id, Enseignant.where(id: 0) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salle_id %>
+    <%= form.select :salle_id, Salle.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Horaire %>
+    <%= form.label :Debut %>
+    <%= form.select :creneau_debut, Creneau.pluck(:debut, :id) %>
+    <%= form.label :Fin %>
+    <%= form.select :creneau_fin, Creneau.pluck(:fin, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nombre_heure %>
+    <%= form.number_field :nombre_heure %>
+  </div>
+
+  <div class="field">
+    <%= form.label :numero_cours %>
+    <%= form.text_field :numero_cours %>
+  </div>
+
+  <div class="field">
+    <%= form.label :numero_cours_g %>
+    <%= form.text_field :numero_cours_g %>
+  </div>
+
+  <div class="field">
+    <%= form.label :annee_id %>
+    <%= form.select :annee_id , Annee.pluck(:libelle, :id)%>
+  </div>
+
+  <div class="field">
+    <%= form.label :ecole_id %>
+    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<script>
+
+  
+  $('#cour_classe_room_id').change(function (event) {
+        $('#cour_jour_id').change();
+    //var libclas = $('#cour_classe_room_id option:selected').text();
+    //alert(libclas);
+    //$('#sp_libClass').text(libclas);
+    // fillEmp();
+  });
+
+  //Affiche les matieres enseignés en fonction de la classe selectionné
+  $('#cour_classe_room_id').change( () => {
+    //$('#info-Ed').css('visibility', 'hidden');
+    let cour_classe_room_id = $('#cour_classe_room_id option:selected').val();
+    if (cour_classe_room_id) {
+      // $('#info-Ed').css('visibility', 'visible');
+      $.get("/cours/matieres", {id_classe: cour_classe_room_id}, (data) => {
+        //$('#info-Ed').css('visibility', 'hidden');
+        $('#cour_matiere_id').html(data);
+        $('#cour_matiere_id').change();
+      })
+    }
+  });
+
+  //afficher les enseignants qui dispensent les matieres
+  $('#cour_matiere_id').change( () => { 
+    //$('#info-Ed').css('visibility', 'hidden');
+    let cour_matiere_id = $('#cour_matiere_id option:selected').val();
+    let cour_creneau_debut_id = $('#cour_creneau_debut_id').val();
+    let cour_creneau_fin_id = $('#cour_creneau_fin_id').val();
+    let cour_jour_id = $('#cour_jour_id').val();
+
+    if (cour_matiere_id) {
+        //$('#info-Ed').css('visibility', 'visible');
+        $.get('/cours/enseignants', { id_matiere: cour_matiere_id, id_creneau_debut: cour_creneau_debut_id, id_creneau_fin: cour_creneau_fin_id, id_jour: cour_jour_id },
+          function (data) {
+              //$('#info-Ed').css('visibility', 'hidden');
+              $('#cour_enseignant_id').html(data);
+              //alert(d);
+          });
+    }
+});
+  
+//afficher les disponibilités de chaque salle lorqu'un jour est selectionné sur la semaine
+$('#cour_jour_id').change( (event) => {
+  event.preventDefault();
+  /*$('#myTabContent1 tbody').html(" ");
+  $('#myTabContent2 tbody').html(" ");*/
+
+  /*action pour afficher les dispo de chaque salle
+  var jour = $('#cour_jour_id').val();
+  if (jour) {
+      fillSalDisp(jour);
+      fillEnsDisp(jour);
+  }
+  */
+
+  //fin traitement pour les dispo
+  $('#cour_creneau_debut_id').empty();
+  $('#cour_creneau_fin_id').empty();
+  refreshSalle();
+  $('#cour_matiere_id').change();
+});
+
+
+function fillEmp() {
+  var cour_classe_room_id = $('#cour_classe_room_id').val();
+  if (cour_classe_room_id) {
+      var data = "tm=tab&idClas=" + clas;
+      $.get('php/emp1.php', data, function (d) {
+          $('#tabEmp tbody').html(d);
+      });
+      fillNbre();
+  }
+}
+
+function fillNbre() {
+  var cour_classe_room_id = $('#cour_classe_room_id').val();
+  var data = "tm=nbre&idClas=" + clas;
+  //alert(data);
+  $.get('php/emp1.php', data, function (dat) {
+      //alert(dat);
+      $('#sp_nbreh').html(dat + " h");
+  });
+}
+
+
+function refreshSalle() {
+  var cour_jour_id = $('#cour_jour_id').val();
+  var cour_creneau_debut_id = $('#cour_creneau_debut_id').val();
+  var cour_creneau_fin_id = $('#cour_creneau_fin_id').val();
+
+  $.get('/cour/salles', { id_jour: cour_jour_id, id_creneau_debut: cour_creneau_debut_id, id_creneau_fin: cour_creneau_fin_id }, (data) => {
+      $('#cour_salle_id option').remove();
+      $('#cour_salle_id').append('<option value=""></option>');
+      $('#cour_salle_id').append(data);
+  });
+}
+
+</script>
