@@ -6,7 +6,13 @@ class PagesController < ApplicationController
   end
 
   def users
-    @users = User.all
+    @ecole = ecole.id if ecole?
+
+    if admin_signed_in?
+      @users = User.ecole(@ecole)
+    elsif user_signed_in?
+      @users = User.ecole(@ecole).where.not(categorie: 'Directeur')
+    end
   end
 
   def user 
