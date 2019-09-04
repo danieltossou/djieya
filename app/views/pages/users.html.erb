@@ -45,7 +45,12 @@
             </table>
       </div>
       <div class="card-footer">
+        <% if admin_signed_in? %>
           <%= link_to 'AJOUTER', new_user_registration_path, :class => 'btn btn-primary' %>
+        <% end %>
+        <% if user_signed_in? %>
+          <%= link_to 'AJOUTER', new_user_path, :class => 'btn btn-primary' %>
+        <% end %>
           <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
       </div>
     </div>

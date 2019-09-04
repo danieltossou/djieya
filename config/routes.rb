@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   resources :annees
   devise_for :users, path: 'users', controllers: { registrations: 'users/registrations', sessions:'users/sessions' }
   #root to: 'pages#index'
+  get 'new_user', to: 'pages#new_user', as: 'new_user'
+  post 'create_user', to: 'pages#create_user', as: 'create_user'
   get 'users', to: 'pages#users', as: 'users'
   get 'users/:id', to: 'pages#user', as: 'user'
   put 'users/:id', to: 'pages#activer', as: 'activer'
@@ -54,7 +56,6 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'pages#dashboard'
   get '/matiere_enseigne', to: 'pages#matiere_enseigne', as: 'matiere_enseigne'
   post '/matiere_enseigne', to: 'pages#create_matiere_enseigne', as: 'create_matiere_enseigne'
-  post '/create_user', to: 'pages#create_user', as: 'create_user'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #Snotify_to :users, with_devise: :users, devise_default_routes: true
     
