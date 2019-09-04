@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
 
     # Recuperation de l'année active
   def annee_active
-    Annee.where(etat: true).first ? Annee.where(etat: true).first : nil
+    return @annee if @annee
+    Annee.where(etat: true).first ? @annee = Annee.where(etat: true).first : nil
   end
 
   def annee_active?
@@ -17,7 +18,8 @@ class ApplicationController < ActionController::Base
 
     # Recuperation de l'ecole
     def ecole
-      Ecole.find_by_id(session[:ecole_id]) ? Ecole.find(session[:ecole_id]) : nil
+      return @ecole if @ecole
+      Ecole.find_by_id(session[:ecole_id]) ? @ecole = Ecole.find_by_id(session[:ecole_id]) : nil
     end
   
     def ecole?
@@ -26,8 +28,8 @@ class ApplicationController < ActionController::Base
 
   #Verification si quelqu'un n'est pas connecté
   def est_connecte?
-    if !current_user && !current_admin 
-      redirect_to root_path, danger: "Vous n'avez pas le droit d'accéder à cette page"
+    if !user_signed_in? && !admin_signed_in? 
+      redirect_to root_path, notice: "Vous n'avez pas le droit d'accéder à cette page"
     end
   end
 
