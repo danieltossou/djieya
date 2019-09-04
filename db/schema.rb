@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
     t.string "nom"
     t.string "prenom"
     t.string "sexe"
-    t.datetime "date_naissance"
+    t.date "date_naissance"
     t.string "matricule"
     t.string "num_inscription"
     t.bigint "classe_room_id", null: false
