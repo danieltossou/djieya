@@ -38,7 +38,7 @@
                   <% @dossiers.each do |dossier| %>
                     <tr>
                       <td><%= dossier.libelle %></td>
-                      <td><%= dossier.ecole_id %></td>
+                      <td><%= dossier.ecole.libelle %></td>
                       <td><%= link_to 'Show', dossier %></td>
                       <td><%= link_to 'Edit', edit_dossier_path(dossier) %></td>
                       <td><%= link_to 'Destroy', dossier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
