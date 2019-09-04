@@ -7,6 +7,7 @@ class JoursController < ApplicationController
   def index
     @ecole = ecole.id if ecole?
     @jours = Jour.ecole(@ecole).all
+    @jour = Jour.new
   end
 
   # GET /jours/1

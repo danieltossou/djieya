@@ -6,6 +6,7 @@ class AnneesController < ApplicationController
   # GET /annees.json
   def index
     @annees = Annee.all
+    @annee = Annee.new
   end
 
   # GET /annees/1

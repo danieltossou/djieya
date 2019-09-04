@@ -7,6 +7,7 @@ class ClasseRoomsController < ApplicationController
   def index
     @ecole = ecole.id if ecole?
     @classe_rooms = ClasseRoom.ecole(@ecole).all
+    @classe_room = ClasseRoom.new
   end
 
   # GET /classe_rooms/1
@@ -77,7 +78,7 @@ class ClasseRoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classe_room_params
-      params[:classe_room][:ecole_id] = ecole.id
+      params[:classe_room][:ecole_id] = ecole.id if ecole?
       params.require(:classe_room).permit(:libelle, :etat, :user_id, :admin_id, :montant, :ecole_id, matiere_ids: [])
     end
 end

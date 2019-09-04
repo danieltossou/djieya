@@ -7,6 +7,7 @@ class SallesController < ApplicationController
   def index
     @ecole = ecole.id if ecole?
     @salles = Salle.ecole(@ecole).all
+    @salle = Salle.new
   end
 
   # GET /salles/1

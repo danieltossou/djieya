@@ -6,6 +6,7 @@ class SemestresController < ApplicationController
   def index
     @ecole = ecole.id if ecole?
     @semestres = Semestre.ecole(@ecole).all
+    @semestre = Semestre.new
   end
 
   # GET /semestres/1

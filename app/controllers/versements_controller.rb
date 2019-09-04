@@ -9,6 +9,7 @@ class VersementsController < ApplicationController
     @annee = annee_active.id if annee_active?
     @ecole = ecole.id if ecole?
     @versements = Versement.ecole(@ecole).annee(@annee).all
+    @versement = Versement.new
   end
 
   # GET /versements/1

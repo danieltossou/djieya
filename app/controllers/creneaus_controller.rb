@@ -5,6 +5,7 @@ class CreneausController < ApplicationController
   # GET /creneaus.json
   def index
     @creneaus = Creneau.all
+    @creneau = Creneau.new
   end
 
   # GET /creneaus/1

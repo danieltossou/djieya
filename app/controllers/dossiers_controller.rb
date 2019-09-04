@@ -8,6 +8,7 @@ class DossiersController < ApplicationController
   def index
     @ecole = ecole.id if ecole?
     @dossiers = Dossier.ecole(@ecole).all
+    @dossier = Dossier.new
   end
 
   # GET /dossiers/1
@@ -17,7 +18,6 @@ class DossiersController < ApplicationController
 
   # GET /dossiers/new
   def new
-    puts ecole.libelle
     @dossier = Dossier.new
   end
 

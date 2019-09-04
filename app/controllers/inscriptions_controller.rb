@@ -6,6 +6,7 @@ class InscriptionsController < ApplicationController
   # GET /inscriptions.json
   def index
     @inscriptions = Inscription.all
+    @inscription = Inscription.new
   end
 
   # GET /inscriptions/1

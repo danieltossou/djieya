@@ -6,6 +6,7 @@ class EcolesController < ApplicationController
   # GET /ecoles.json
   def index
     @ecoles = Ecole.all
+    @ecole = Ecole.new
   end
 
   # GET /ecoles/1

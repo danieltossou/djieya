@@ -7,6 +7,7 @@ class MatieresController < ApplicationController
   def index
     @ecole = ecole.id if ecole?
     @matieres = Matiere.ecole(@ecole).all
+    @matiere = Matiere.new
   end
 
   # GET /matieres/1
