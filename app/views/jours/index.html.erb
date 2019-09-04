@@ -18,8 +18,8 @@
       <tr>
         <td><%= jour.libelle %></td>
         <td><%= jour.ecole_id %></td>
-        <td><%= jour.user_id %></td>
-        <td><%= jour.admin_id %></td>
+        <td><%= Admin.find_by_id(jour.admin_id).email if jour.admin_id %></td>
+        <td><%= User.find_by_id(jour.user_id).email if jour.user_id %></td>
         <td><%= link_to 'Show', jour %></td>
         <td><%= link_to 'Edit', edit_jour_path(jour) %></td>
         <td><%= link_to 'Destroy', jour, method: :delete, data: { confirm: 'Are you sure?' } %></td>

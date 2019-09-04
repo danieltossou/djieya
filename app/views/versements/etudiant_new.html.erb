@@ -16,16 +16,6 @@
     <%= form.number_field :montant, :class => 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :ecole_id %>
-    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :annee_id %>
-    <%= form.select :annee_id, Annee.pluck(:libelle, :id) %>
-  </div>
-
   <div class="actions">
     <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
   </div>

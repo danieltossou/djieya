@@ -8,8 +8,9 @@ class VersementsController < ApplicationController
   def index
     @annee = annee_active.id if annee_active?
     @ecole = ecole.id if ecole?
+    @etudiants = Etudiant.ecole(@ecole).all
     @versements = Versement.ecole(@ecole).annee(@annee).all
-    @versement = Versement.new
+    #@versement = Versement.new
   end
 
   # GET /versements/1
@@ -81,9 +82,20 @@ class VersementsController < ApplicationController
   # GET /etudiants/1/versements/
   # GET /etudiants/1/versements.json
   def etudiant_index
-    @etudiant = params[:etudiant_id]
+    @ecole = ecole.id 
+    @etudiant = Etudiant.find_by_id(params[:etudiant_id])
     @annee = annee_active.id if annee_active?
     @versements = Versement.etudiant(@etudiant).annee(@annee)
+
+  # Generation du reste à payer
+    @montant_a_paye = @etudiant.inscription.montant
+    @versement_etudiant = @etudiant.versements
+    @montant_paye = 0
+    @versement_etudiant.each do |versement|
+      @montant_paye += versement.montant
+    end
+    @reste = @montant_a_paye - @montant_paye
+    
   end
 
   # GET /etudiants/1/versements/1
@@ -93,7 +105,6 @@ class VersementsController < ApplicationController
 
   # GET /etudiants/1/versements/new
   def etudiant_new
-    puts annee_active
     @versement = @etudiant.versements.build
   end
 
@@ -109,9 +120,13 @@ class VersementsController < ApplicationController
     respond_to do |format|
       if @versement.save
 
-        @libelle = "Versement de l'etudiant #{@versement.etudiant.nom} #{@versement.etudiant.prenom} ( #{@versement.etudiant.num_inscription})"
-        Caisse.create!(montant: @versement.montant, libelle: @libelle, operation: 'entrée', ecole_id: @versement.ecole_id, annee_id: @versement.annee_id, user_id: current_user.id)
-        
+        @libelle = "Versement de l'etudiant #{@versement.etudiant.nom} #{@versement.etudiant.prenom} (#{@versement.etudiant.num_inscription})"
+        if user_signed_in?
+          Caisse.create!(montant: @versement.montant, libelle: @libelle, operation: 'entrée', ecole_id: @versement.ecole_id, annee_id: @versement.annee_id, user_id: current_user.id)
+        elsif admin_signed_in?
+          Caisse.create!(montant: @versement.montant, libelle: @libelle, operation: 'entrée', ecole_id: @versement.ecole_id, annee_id: @versement.annee_id, admin_id: current_admin.id)
+        end
+
         format.html { redirect_to @versement, notice: 'Versement was successfully created.' }
         format.json { render :show, status: :created, location: @versement }
       else
@@ -164,9 +179,13 @@ class VersementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def etudiant_versement_params
-      params[:versement][:user_id] = current_user.id
-      params[:versement][:ecole_id] = ecole.id if ecole?
-      params[:versement][:annee_id] = annee_active if annee_active?
-      params.require(:versement).permit(:montant, :user_id, :ecole_id, :annee_id, :etudiant_id)
+      if user_signed_in?
+        params[:versement][:user_id] = current_user.id
+      elsif admin_signed_in?
+        params[:versement][:admin_id] = current_admin.id
+      end
+        params[:versement][:ecole_id] = ecole.id if ecole?
+      params[:versement][:annee_id] = annee_active.id 
+      params.require(:versement).permit(:montant, :user_id, :ecole_id, :annee_id, :admin_id, :etudiant_id)
     end
 end

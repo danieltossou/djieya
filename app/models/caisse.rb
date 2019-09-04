@@ -1,5 +1,4 @@
 class Caisse < ApplicationRecord
-  belongs_to :user
   belongs_to :ecole
   belongs_to :annee
 

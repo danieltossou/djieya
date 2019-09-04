@@ -1,17 +1,18 @@
 class PagesController < ApplicationController
   #authorize_resource :class => pages
   skip_before_action :est_connecte?, on: :index
-  before_action :user_params, only: [:create_user] 
 
   def index
   end
 
   def new_user
+    authorize! :new_user, :pages
     @user = User.new
   end
 
   def create_user
-    puts user_params.inspect
+    authorize! :crea_user, :pages
+
     if admin_signed_in?
       @user = current_admin.users.new(user_params)
     elsif user_signed_in?
@@ -32,6 +33,9 @@ class PagesController < ApplicationController
   end
 
   def users
+    
+    authorize! :users, :pages
+
     @ecole = ecole.id if ecole?
 
     if admin_signed_in?
@@ -42,10 +46,16 @@ class PagesController < ApplicationController
   end
 
   def user 
+    
+    authorize! :user, :pages
+
     @user = User.find(params[:id])
   end
 
   def activer
+
+    authorize! :activer, :pages
+
     @user = User.find(params[:id])
     @user.update(etat: true)
 
@@ -55,6 +65,9 @@ class PagesController < ApplicationController
   end
 
   def desactiver
+
+    authorize! :desactiver, :pages
+
     @user = User.find(params[:id])
     @user.update(etat: false)
 
@@ -75,12 +88,20 @@ class PagesController < ApplicationController
   end
   
   def matiere_enseigne
+
+    authorize! :matiere_enseigne, :pages
+
     @matieres = Matiere.all
     @enseignants = Enseignant.all
+
   end
   
   def create_matiere_enseigne
+
+    authorize! :create_matiere_enseigne, :pages
+
     params[:enseignant].inspect
+
   end
 
   def commencer
@@ -93,6 +114,38 @@ class PagesController < ApplicationController
 
   def dashboard
     
+    authorize! :dashboard, :pages
+
+    @annee = annee_active.id if annee_active?
+    @ecole = ecole.id if ecole?
+    @inscrits = Inscription.annee(@annee).ecole(@ecole).all
+
+    # Montant qui doit etre perçus en rapport avec les inscrit
+    @avoir = 0
+    @inscrits.each do |inscris|
+      @avoir +=  inscris.montant
+    end
+
+    # Montant déjà perçu
+    @versements = Versement.annee(@annee).ecole(@ecole).all
+    @deja_perçu = 0
+    @versements.each do |versement|
+      @deja_perçu += versement.montant
+    end
+
+    # Montant qui reste a percevoir
+    @reste = @avoir - @deja_perçu
+
+    # Total des depenses
+    @depense = 0
+    @sorties = Caisse.annee(@annee).ecole(@ecole).sortie.all
+    @sorties.each do |sortie|
+      @depense += sortie.montant
+    end
+
+    # Solde 
+    @solde = @deja_perçu - @depense
+
   end
   
   def user_params
