@@ -21,8 +21,6 @@
     <%= form.select :classe_room_id, ClasseRoom.pluck(:libelle, :id) %>
   </div>
 
-  <div id="test"></div>
-
   <div class="field">
     <%= form.label 'Gouper avec ...' %>
     <%= form.select :classe_room_id, ClasseRoom.all.collect { |x| [x.libelle, x.id]}, {:include_hidden => false}, :multiple => true %>
@@ -45,40 +43,35 @@
 
   <div class="field">
     <%= form.label :salle_id %>
-    <%= form.select :salle_id, Salle.pluck(:libelle, :id) %>
+    <%= form.select :salle_id, Salle.where(id: 0) %>
   </div>
 
   <div class="field">
     <%= form.label :Horaire %>
     <%= form.label :Debut %>
-    <%= form.select :creneau_debut, Creneau.pluck(:debut, :id) %>
+    <%= form.select :creneau_debut, Creneau.where(id: 0) %>
     <%= form.label :Fin %>
-    <%= form.select :creneau_fin, Creneau.pluck(:fin, :id) %>
+    <%= form.select :creneau_fin, Creneau.where(id: 0) %>
   </div>
 
   <div class="field">
-    <%= form.label :nombre_heure %>
-    <%= form.number_field :nombre_heure %>
+    <%= form.hidden_field :nombre_heure %>
   </div>
 
   <div class="field">
-    <%= form.label :numero_cours %>
-    <%= form.text_field :numero_cours %>
+    <%= form.hidden_field :numero_cours %>
   </div>
 
   <div class="field">
-    <%= form.label :numero_cours_g %>
-    <%= form.text_field :numero_cours_g %>
+    <%= form.hidden_field :numero_cours_g %>
   </div>
 
   <div class="field">
-    <%= form.label :annee_id %>
-    <%= form.select :annee_id , Annee.pluck(:libelle, :id)%>
+    <%= form.hidden_field :annee_id %>
   </div>
 
   <div class="field">
-    <%= form.label :ecole_id %>
-    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+    <%= form.hidden_field :ecole_id %>
   </div>
 
 
@@ -178,10 +171,11 @@ function refreshSalle() {
   var cour_jour_id = $('#cour_jour_id').val();
   var cour_creneau_debut_id = $('#cour_creneau_debut_id').val();
   var cour_creneau_fin_id = $('#cour_creneau_fin_id').val();
+  var cour_semestre_id = $('#cour_semestre_id').val();
 
-  $.get('/cour/salles', { id_jour: cour_jour_id, id_creneau_debut: cour_creneau_debut_id, id_creneau_fin: cour_creneau_fin_id }, (data) => {
+  $.get('/cours/salles', { id_jour: cour_jour_id, id_creneau_debut: cour_creneau_debut_id, id_creneau_fin: cour_creneau_fin_id, id_semestre: cour_semestre_id }, (data) => {
       $('#cour_salle_id option').remove();
-      $('#cour_salle_id').append('<option value=""></option>');
+      //$('#cour_salle_id').append('<option value=""></option>');
       $('#cour_salle_id').append(data);
   });
 }
