@@ -1,57 +1,56 @@
-<div class="container">
-    <div class="row justify-content-md-center">
-        <div class="card">
-            <div class="card-header">
-            <h2 class="text-center">NOUVELLE MATIÈRE</h2>
-            </div>
-            <div class="card-body">
-                <%= render 'form', matiere: @matiere %>
-            </div>
-            <div class="card-footer">
-                <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %> 
-            </div>
-        </div>
-    </div>
-</div>
-
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="card">
-        <div class="card-header">
-        <h2 class="text-center">LISTE DES MATIÈRES</h2>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Libelle</th>
-                    <th>Ecole</th>
-                    <th>User</th>
-                    <th>Admin</th>
-                    <th colspan="3"></th>
-                  </tr>
-                </thead>
-              
-                <tbody>
-                  <% @matieres.each do |matiere| %>
-                    <tr>
-                      <td><%= matiere.libelle %></td>
-                      <td><%= matiere.ecole_id %></td>
-                      <td><%= matiere.user_id %></td>
-                      <td><%= matiere.admin_id %></td>
-                      <td><%= link_to 'Show', matiere %></td>
-                      <td><%= link_to 'Edit', edit_matiere_path(matiere) %></td>
-                      <td><%= link_to 'Destroy', matiere, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-        </div>
-        <div class="card-footer">
-            <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
-        </div>
+  <div class="row">
+    <h4>Liste des matières</h4>
+    <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
+      Ajouter une matière
+    </button>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Libelle</th>
+            <th>Ecole</th>
+            <th>User</th>
+            <th>Admin</th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @matieres.each do |matiere| %>
+            <tr>
+              <td><%= matiere.libelle %></td>
+              <td><%= matiere.ecole_id %></td>
+              <td><%= matiere.user_id %></td>
+              <td><%= matiere.admin_id %></td>
+              <td><%= link_to 'Show', matiere %></td>
+              <td><%= link_to 'Edit', edit_matiere_path(matiere) %></td>
+              <td><%= link_to 'Destroy', matiere, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+    <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">NOUVELLE MATIERE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <%= render 'form', matiere: @matiere %>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
     </div>
   </div>
+</div>
