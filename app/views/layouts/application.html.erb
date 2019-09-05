@@ -40,16 +40,19 @@
   <h6><%= current_user.email if user_signed_in? %><%= current_admin.email if admin_signed_in? %></h6>
 <p>Année: <%= annee_active.libelle if annee_active? %></p>
 </div><br>
-<a href="<%= dashboard_path %>"><h6><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Tableau de bord</h6></a>
+<ul class="list-group"></ul>
+<a href="<%= dashboard_path %>"><li class="list-group-item"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;TABLEAU DE BORD</li></a>
 <hr>
+
 <!-- <h6><i class="far fa-calendar"></i>&nbsp;&nbsp;<%= link_to 'Année scolaire', annees_path %></h6><br> -->
-<h6><i class="fas fa-users"></i>&nbsp;&nbsp;<%= link_to 'Utilisateurs', users_path %></h6><br>
-<h6><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;<%= link_to 'Etudiants', etudiants_path %></h6><br>
-<!-- <h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', classe_rooms_path %></h6><br> -->
-<h6><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;Emploi du temps</h6><br>
-<h6><i class="fas fa-credit-card"></i>&nbsp;&nbsp;<%= link_to 'Versements', versements_path %></h6><br>
-<h6><i class="fas fa-coins"></i>&nbsp;&nbsp;<%= link_to 'Caisse', caisses_path %></h6><br>
-<h6><i class="fas fa-cogs"></i>&nbsp;&nbsp;<%= link_to 'Configuration', configuration_path %></h6>
+  <a href="<%= users_path %>"><li class="list-group-item"><i class="fas fa-users"></i>&nbsp;&nbsp;UTILISATEURS</li></a><br>
+  <a href="<%= etudiants_path %>"><li class="list-group-item"><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;ETUDIANTS</li></a><br>
+  <!-- <h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', classe_rooms_path %></h6><br> -->
+  <a href="#"><li class="list-group-item"><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;EMPLOI DU TEMPS</li></a><br>
+  <a href="<%= versements_path %>"><li class="list-group-item"><i class="fas fa-credit-card"></i>&nbsp;&nbsp;VERSEMENTS</li></a><br>
+  <a href="<%= caisses_path %>"><li class="list-group-item"><i class="fas fa-coins"></i>&nbsp;&nbsp;CAISSE</li></a><br>
+  <a href="<%= configuration_path %>"><li class="list-group-item"><i class="fas fa-cogs"></i>&nbsp;&nbsp;CONFIGURATION</a></li>
+</ul>
 </div>
 <div class="aside-bottom aside-margin">
   <% if user_signed_in? %>
@@ -67,8 +70,6 @@
 <main class="col offset-2 h-100">
 <div class="row">
   <div class="col-12 py-2">
-    <%= notice if notice %>
-    
       <%= yield %>
   </div> 
   </body>
