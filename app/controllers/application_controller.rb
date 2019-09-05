@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
 
     # Recuperation de l'année active
   def annee_active
-    return @annee if @annee
-    Annee.where(etat: true).first ? @annee = Annee.where(etat: true).first : nil
+    Annee.where(etat: true).first ? Annee.where(etat: true).first : nil
   end
 
   def annee_active?
@@ -18,8 +17,7 @@ class ApplicationController < ActionController::Base
 
     # Recuperation de l'ecole
     def ecole
-      return @ecole if @ecole
-      Ecole.find_by_id(session[:ecole_id]) ? @ecole = Ecole.find_by_id(session[:ecole_id]) : nil
+      Ecole.find_by_id(session[:ecole_id]) ? Ecole.find_by_id(session[:ecole_id]) : nil
     end
   
     def ecole?

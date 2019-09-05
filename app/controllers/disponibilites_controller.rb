@@ -5,7 +5,8 @@ class DisponibilitesController < ApplicationController
   # GET /disponibilites.json
   def index
     @ecole = ecole.id if ecole?
-    @disponibilites = Disponibilite.ecole(@ecole).all
+    @disponibilites = Disponibilite.ecole(@ecole).all.page(params[:page])
+    @disponibilite = Disponibilite.new
   end
 
   # GET /disponibilites/1
@@ -87,7 +88,7 @@ class DisponibilitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def disponibilite_params
-      params[:disponibilite][:ecole_id] = ecole.id
+      params[:disponibilite][:ecole_id] = ecole.id if ecole?
       params.require(:disponibilite).permit(:enseignant_id, :jour_id, :admin_id, :user_id, :ecole_id, creneau_ids: [])
     end
 end

@@ -6,6 +6,10 @@
     <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
       Nouvel Etudiant
     </button>
+    <div class="form-group">
+      <label for=""></label>
+      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+    </div>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
@@ -25,9 +29,9 @@
               <td><%= etudiant.nom %></td>
               <td><%= etudiant.matricule %></td>
               <td><%= etudiant.num_inscription %></td>
-              <td><%= etudiant.classe_room_id %></td>
+              <td><%= etudiant.classe_room.libelle %></td>
               <td><%= etudiant.oriente %></td>
-              <td><%= etudiant.ecole_id %></td>
+              <td><%= etudiant.ecole.libelle %></td>
               <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
               <td><%= link_to 'Show', etudiant %></td>
               <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
@@ -37,6 +41,8 @@
         </tbody>
     </table>
     <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
+    <%= link_to_previous_page @etudiants, '< Précedent' %>
+    <%= link_to_next_page @etudiants, 'Suivant >' %>
   </div>
 </div>
 
@@ -53,10 +59,6 @@
       <div class="modal-body">
           <%= render 'form', etudiant: @etudiant %>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
     </div>
   </div>
 </div>

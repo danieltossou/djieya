@@ -1,36 +1,43 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-    <div class="row">
-      <h4>Liste des semestres</h4>
-      <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
-        Nouveau semestre
-      </button>
-      <table class="table table-bordered table-striped">
-          <thead class="thead-dark">
-            <tr>
-              <th>Libelle</th>
-              <th>Admin</th>
-              <th>User</th>
-            </tr>
-          </thead>
-        
-          <tbody>
-            <% @semestres.each do |semestre| %>
-              <tr>
-                <td><%= semestre.libelle %></td>
-                <td><%= semestre.admin_id %></td>
-                <td><%= semestre.user_id %></td>
-                <td><%= link_to 'Show', semestre %></td>
-                <td><%= link_to 'Edit', edit_semestre_path(semestre) %></td>
-                <td><%= link_to 'Destroy', semestre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              </tr>
-            <% end %>
-          </tbody>
-      </table>
-      <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+  <div class="row">
+    <h4>Liste des semestres</h4>
+    <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
+      Nouveau semestre
+    </button>
+    <div class="form-group">
+      <label for=""></label>
+      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
     </div>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Libelle</th>
+            <th>Admin</th>
+            <th>User</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @semestres.each do |semestre| %>
+            <tr>
+              <td><%= semestre.libelle %></td>
+              <td><%= Admin.find_by_id(semestre.admin_id).email if semestre.admin_id %></td>
+              <td><%= User.find_by_id(semestre.user_id).email if semestre.user_id %></td>
+              <td><%= link_to 'Show', semestre %></td>
+              <td><%= link_to 'Edit', edit_semestre_path(semestre) %></td>
+              <td><%= link_to 'Destroy', semestre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+    <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+    <%= link_to_previous_page @semestres, '< Précedent' %>
+    <%= link_to_next_page @semestres, 'Suivant >' %>
   </div>
+</div>
 
   <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -45,10 +52,6 @@
       <div class="modal-body">
         <%= render 'form', semestre: @semestre %>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
     </div>
   </div>
 </div>

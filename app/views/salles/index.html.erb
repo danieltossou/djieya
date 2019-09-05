@@ -6,6 +6,10 @@
     <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
       Ajouter une salle
     </button>
+    <div class="form-group">
+      <label for=""></label>
+      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+    </div>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
@@ -13,6 +17,7 @@
             <th>Ecole</th>
             <th>User</th>
             <th>Admin</th>
+            <th colspan="3"></th>
           </tr>
         </thead>
       
@@ -20,9 +25,9 @@
           <% @salles.each do |salle| %>
             <tr>
               <td><%= salle.libelle %></td>
-              <td><%= salle.ecole_id %></td>
-              <td><%= salle.user_id %></td>
-              <td><%= salle.admin_id %></td>
+              <td><%= salle.ecole.libelle %></td>
+              <td><%= Admin.find_by_id(salle.admin_id).email if salle.admin_id %></td>
+              <td><%= User.find_by_id(salle.user_id).email if salle.user_id %></td>
               <td><%= link_to 'Show', salle %></td>
               <td><%= link_to 'Edit', edit_salle_path(salle) %></td>
               <td><%= link_to 'Destroy', salle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,6 +36,8 @@
         </tbody>
     </table>
     <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+    <%= link_to_previous_page @salles, '< Précedent' %>
+    <%= link_to_next_page @salles, 'Suivant >' %>
   </div>
 </div>
 
@@ -47,10 +54,6 @@
         <div class="modal-body">
           <%= render 'form', salle: @salle %>
         </div>
-        <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div> -->
       </div>
     </div>
-  </div>
+</div>

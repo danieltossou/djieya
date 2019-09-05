@@ -6,11 +6,16 @@
     <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
       Nouveau dossier
     </button>
+    <div class="form-group">
+      <label for=""></label>
+      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+    </div>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
             <th>Libelle</th>
             <th>Ecole</th>
+            <th colspan="3"></th>
           </tr>
         </thead>
       
@@ -18,7 +23,7 @@
           <% @dossiers.each do |dossier| %>
             <tr>
               <td><%= dossier.libelle %></td>
-              <td><%= dossier.ecole_id %></td>
+              <td><%= dossier.ecole.libelle %></td>
               <td><%= link_to 'Show', dossier %></td>
               <td><%= link_to 'Edit', edit_dossier_path(dossier) %></td>
               <td><%= link_to 'Destroy', dossier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,6 +33,8 @@
       
     </table>
     <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+    <%= link_to_previous_page @dossiers, '< Précedent' %>
+    <%= link_to_next_page @dossiers, 'Suivant >' %>
   </div>
 </div>
 
@@ -44,10 +51,6 @@
       <div class="modal-body">
         <%= render 'form', dossier: @dossier %>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
     </div>
   </div>
 </div>

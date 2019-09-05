@@ -6,7 +6,8 @@ class SallesController < ApplicationController
   # GET /salles.json
   def index
     @ecole = ecole.id if ecole?
-    @salles = Salle.ecole(@ecole).all
+    @salles = Salle.ecole(@ecole).all.page(params[:page])
+    @salle = Salle.new
   end
 
   # GET /salles/1

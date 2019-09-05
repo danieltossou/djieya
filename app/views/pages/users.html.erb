@@ -3,7 +3,16 @@
 <div class="container">
   <div class="row">
     <h4>Liste des utilisateurs</h4>
-    <%= link_to 'Nouvel Utilisateur', new_user_registration_path, :class => 'btn btn-success table-modal-btn' %>
+    <% if admin_signed_in? %>
+      <%= link_to 'AJOUTER', new_user_registration_path, :class => 'btn btn-success table-modal-btn' %>
+    <% end %>
+    <% if user_signed_in? %>
+      <%= link_to 'AJOUTER', new_user_path, :class => 'btn btn-success table-modal-btn' %>
+    <% end %>
+    <div class="form-group">
+      <label for=""></label>
+      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+    </div>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
@@ -41,5 +50,9 @@
         </tbody>
     </table>
     <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
+    <%= link_to_previous_page @users, '< Précedent' %>
+    <%= link_to_next_page @users, 'Suivant >' %>
   </div>
 </div>
+
+  

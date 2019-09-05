@@ -12,13 +12,11 @@
   </div>
 
   <div class="field">
-    <%= form.label :ecole_id %>
-    <%= form.select :ecole_id, Ecole.pluck(:libelle, :id) %>
+    <%= form.hidden_field :ecole_id %>
   </div>
 
   <div class="field">
-    <%= form.label :annee_id %>
-    <%= form.select :annee_id, Annee.pluck(:libelle, :id) %>
+    <%= form.hidden_field :annee_id%>
   </div>
 
   <div class="actions">

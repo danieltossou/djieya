@@ -35,4 +35,5 @@ class User < ApplicationRecord
   #  @user.update(matricule: @matricule)
   #end
   
+
 end

@@ -16,7 +16,7 @@
       <tr>
         <td><%= depense.libelle %></td>
         <td><%= depense.montant %></td>
-        <td><%= depense.user.nom %> <%=  depense.user.prenom %></td></tr>
+        <td><%= User.find_by_id(depense.user_id).email if depense.user_id %></td>
     <% end %>
   </tbody>
 </table>
@@ -24,3 +24,6 @@
 <br>
 
 <%= link_to 'Retour', caisses_path %>
+
+<%= link_to_previous_page @depenses, '< Précedent' %>
+<%= link_to_next_page @depenses, 'Suivant >' %>
