@@ -1,47 +1,62 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="card">
-        <div class="card-header">
-        <h2 class="text-center">LISTE DES ETUDIANTS</h2>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Nom</th>
-                    <th>Matricule</th>
-                    <th>Num inscription</th>
-                    <th>Classe room</th>
-                    <th>Oriente</th>
-                    <th>Ecole</th>
-                    <th colspan="4"></th>
-                  </tr>
-                </thead>
-              
-                <tbody>
-                  <% @etudiants.each do |etudiant| %>
-                    <tr>
-                      <td><%= etudiant.nom %></td>
-                      <td><%= etudiant.matricule %></td>
-                      <td><%= etudiant.num_inscription %></td>
-                      <td><%= etudiant.classe_room_id %></td>
-                      <td><%= etudiant.oriente %></td>
-                      <td><%= etudiant.ecole_id %></td>
-                      <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
-                      <td><%= link_to 'Show', etudiant %></td>
-                      <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
-                      <td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-        </div>
-        <div class="card-footer">
-            <%= link_to 'Ajouter nouvel étudiant', new_etudiant_path, :class => 'btn btn-primary' %>
-            <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
-        </div>
+  <div class="row">
+    <h4>Liste des étudiants</h4>
+    <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
+      Nouvel Etudiant
+    </button>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nom</th>
+            <th>Matricule</th>
+            <th>Num inscription</th>
+            <th>Classe room</th>
+            <th>Oriente</th>
+            <th>Ecole</th>
+            <th colspan="4"></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @etudiants.each do |etudiant| %>
+            <tr>
+              <td><%= etudiant.nom %></td>
+              <td><%= etudiant.matricule %></td>
+              <td><%= etudiant.num_inscription %></td>
+              <td><%= etudiant.classe_room_id %></td>
+              <td><%= etudiant.oriente %></td>
+              <td><%= etudiant.ecole_id %></td>
+              <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
+              <td><%= link_to 'Show', etudiant %></td>
+              <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
+              <td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+    <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">NOUVEL ETUDIANT</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+          <%= render 'form', etudiant: @etudiant %>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
     </div>
   </div>
+</div>
