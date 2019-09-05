@@ -7,33 +7,23 @@ class CaissesController < ApplicationController
     authorize! :index, Caisse
     @annee = annee_active.id if annee_active?
     @ecole = ecole.id if ecole?
-    @inscrits = Inscription.annee(@annee).ecole(@ecole).all
 
-    # Montant qui doit etre perçus en rapport avec les inscrit
-    @avoir = 0
-    @inscrits.each do |inscris|
-      @avoir +=  inscris.montant
+    #Somme des entrées
+    @entrées = Caisse.entrée
+    @entrée = 0
+    @entrées.each do |entrée|
+      @entrée =+ entrée.montant
     end
-
-    # Montant déjà perçu
-    @versements = Versement.annee(@annee).ecole(@ecole).all
-    @deja_perçu = 0
-    @versements.each do |versement|
-      @deja_perçu += versement.montant
-    end
-
-    # Montant qui reste a percevoir
-    @reste = @avoir - @deja_perçu
-
-    # Total des depenses
-    @depense = 0
-    @sorties = Caisse.annee(@annee).ecole(@ecole).sortie.all
+    
+    #Somme des sorties
+    @sorties = Caisse.sortie
+    @sortie = 0
     @sorties.each do |sortie|
-      @depense += sortie.montant
+      @sortie =+ sortie.montant
     end
-
+    
     # Solde 
-    @solde = @deja_perçu - @depense
+    @solde = @entrée - @sortie
 
 
   end
@@ -106,7 +96,7 @@ class CaissesController < ApplicationController
 
   def depenses
     authorize! :depenses, Caisse
-    @depenses = Caisse.sortie.all
+    @depenses = Caisse.sortie.all.page(params[:page])
   end
 
   def depense_new
@@ -115,10 +105,30 @@ class CaissesController < ApplicationController
   end
 
   def depense_create
+
     authorize! :depense_create, Caisse
-    params[:caisse][:operation] = 'depense'
-    Caisse.create(montant: params[:caisse][:montant], libelle: params[:caisse][:libelle], operation: 'depense', user_id: current_user.id, ecole_id: params[:caisse][:ecole_id], annee_id: params[:caisse][:annee_id])
-    # current_user.caisses.create(params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :ecole_id, :annee_id))
+
+    params[:caisse][:operation] = "sortie"
+    params[:caisse][:ecole_id] = ecole.id if ecole?
+    params[:caisse][:annee_id] = annee_active.id if annee_active?
+
+    if admin_signed_in?
+      @caisse = Caisse.new(montant: params[:caisse][:montant], libelle: params[:caisse][:libelle], operation: params[:caisse][:operation], admin_id: current_admin.id, ecole_id: params[:caisse][:ecole_id], annee_id: params[:caisse][:annee_id])
+    elsif user_signed_in?
+      @caisse = Caisse.new(montant: params[:caisse][:montant], libelle: params[:caisse][:libelle], operation: params[:caisse][:operation], user_id: current_user.id, ecole_id: params[:caisse][:ecole_id], annee_id: params[:caisse][:annee_id])
+    else
+      redirect_to new_caisse_path, notice: 'Vous devez etre connecté pour effectuer cette operation.'
+    end
+
+    respond_to do |format|
+      if @caisse.save
+        format.html { redirect_to @caisse, notice: 'Caisse was successfully created.' }
+        format.json { render :show, status: :created, location: @caisse }
+      else
+        format.html { render :new }
+        format.json { render json: @caisse.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
@@ -129,7 +139,15 @@ class CaissesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def caisse_params
-      params[:caiss][:ecole_id] = ecole.id if ecole?
-      params.require(:caiss).permit(:montant, :libelle, :operation, :user_id, :ecole_id, :annee_id)
+      params[:caisse][:ecole_id] = ecole.id if ecole?
+      params[:caisse][:annee_id] = annee_active.id if annee_active?
+      params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :admin_id, :ecole_id, :annee_id)
+    end
+
+    def depense_params
+      params[:caisse][:operation] = "soritie"
+      params[:caisse][:ecole_id] = ecole.id if ecole?
+      params[:caisse][:annee_id] = annee_active.id if annee_active?
+      params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :admin_id, :ecole_id, :annee_id)
     end
 end

@@ -4,7 +4,7 @@ class CreateEtudiants < ActiveRecord::Migration[6.0]
       t.string :nom
       t.string :prenom
       t.string :sexe
-      t.datetime :date_naissance
+      t.date :date_naissance
       t.string :matricule
       t.string :num_inscription
       t.references :classe_room, null: false, foreign_key: true

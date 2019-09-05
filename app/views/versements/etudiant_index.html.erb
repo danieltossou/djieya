@@ -3,7 +3,7 @@
 <h3>
 <%= "#{@etudiant.nom} #{@etudiant.prenom}" %>
 </h3>
-
+<%= "Reste à payer: #{@reste}" %>
 <div class="container">
     <div class="row justify-content-md-center">
       <div class="card">
@@ -15,6 +15,7 @@
                 <thead>
                   <tr>
                     <th>Montant</th>
+                    <th>Admin</th>
                     <th>User</th>
                     <th>Ecole</th>
                     <th>Annee</th>
@@ -26,9 +27,10 @@
                   <% @versements.each do |versement| %>
                     <tr>
                       <td><%= versement.montant %></td>
-                      <td><%= versement.user_id %></td>
-                      <td><%= versement.ecole_id %></td>
-                      <td><%= versement.annee_id %></td>
+                      <td><%= Admin.find_by_id(versement.admin_id).email if versement.admin_id %></td>
+                      <td><%= User.find_by_id(versement.user_id).email if versement.user_id %></td>
+                      <td><%= versement.ecole.libelle %></td>
+                      <td><%= versement.annee.libelle %></td>
                       <td><%= link_to 'Show', versement %></td>
                       <td><%= link_to 'Edit', edit_etudiant_versement_path(@etudiant, versement) %></td>
                       <td><%= link_to 'Destroy', versement, method: :delete, data: { confirm: 'Are you sure?' } %></td>

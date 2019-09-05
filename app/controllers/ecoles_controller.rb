@@ -5,7 +5,8 @@ class EcolesController < ApplicationController
   # GET /ecoles
   # GET /ecoles.json
   def index
-    @ecoles = Ecole.all
+    @ecoles = Ecole.all.page(params[:page])
+    @ecole = Ecole.new
   end
 
   # GET /ecoles/1

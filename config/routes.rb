@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   resources :annees
   devise_for :users, path: 'users', controllers: { registrations: 'users/registrations', sessions:'users/sessions' }
   #root to: 'pages#index'
+  get 'new_user', to: 'pages#new_user', as: 'new_user'
+  post 'create_user', to: 'pages#create_user', as: 'create_user'
   get 'users', to: 'pages#users', as: 'users'
   get 'users/:id', to: 'pages#user', as: 'user'
   put 'users/:id', to: 'pages#activer', as: 'activer'

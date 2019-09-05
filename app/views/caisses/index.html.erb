@@ -1,9 +1,19 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Caisses</h1>
-<p>Montant qui doit être perçus en fonction des inscrits: <%= @avoir %></p>
-<p>Montant perçus: <%= @deja_perçu %></p>
-<p>Montant qui reste à precevoir en fonction des inscrits: <%= @reste %></p>
-<p>Montant des depenses: <%= @depense %></p>
-<p>Solde actuelle: <%= @solde %></p>
-<button><%= link_to  "Depenses", depenses_caisses_path %></button>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            Entrée <input type="text" value="<%= @entrée %>" disabled>
+        </div>
+        <div class="col">
+            Sortie <input type="text" value="<%= @sortie %>" disabled>
+        </div>
+        <div class="col">
+        Solde <input type="text" value="<%= @solde %>" disabled>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"><%= link_to  "Nouvelle depense", depense_new_caisses_path %></div>
+    </div>
+</div>

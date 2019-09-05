@@ -5,13 +5,15 @@ class Etudiant < ApplicationRecord
   has_many :versements
   has_and_belongs_to_many :dossiers
 
+  paginates_per 5
+
   default_scope { order(nom: :asc) }
   scope :ecole, -> (ecole) { where(ecole_id: ecole) }
 
   mount_uploader :photo, PhotoUploader
 
   after_create do
-    @etudiant = Etudiant.last
+    @etudiant = Etudiant.unscoped.last
     @montant = @etudiant.classe_room.montant
     @a = Annee.where(etat: true).first
     @annee = @a.id

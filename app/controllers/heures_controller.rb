@@ -5,6 +5,7 @@ class HeuresController < ApplicationController
   # GET /heures
   # GET /heures.json
   def index
+    @heure = Heure.new
     @heures = Heure.all
   end
 

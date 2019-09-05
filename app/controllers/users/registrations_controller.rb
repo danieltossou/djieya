@@ -69,7 +69,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if current_user
       params[:user][:crea_user] = current_user.id
     end
-
+    params[:user][:ecole_id] = ecole.id if ecole?
     params.require(:user).permit(:nom, :prenom, :adresse, :contact, :sexe, :matricule, :etat, :categorie, :ecole_id, :admin_id, :crea_user, :email, :password, :password_confirmation)
   end
 

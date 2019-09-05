@@ -6,7 +6,8 @@ class EnseignantsController < ApplicationController
   # GET /enseignants.json
   def index
     @ecole = ecole.id if ecole?
-    @enseignants = Enseignant.ecole(@ecole).all
+    @enseignants = Enseignant.ecole(@ecole).all.page(params[:page])
+    @enseignant = Enseignant.new
   end
 
   # GET /enseignants/1
