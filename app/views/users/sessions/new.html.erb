@@ -1,48 +1,28 @@
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLabel">CONNEXION</h5>
+<div class="container">
+  <div class="row">
+    <div class="col login-position">
+      <div class="form-group resize-form">
+      <div class="hr-sect">
+          <h4>AUTHENTIFICATION</h4>
       </div>
-      <div class="modal-body">
-        <div class="container">
-          <div class="row justify-content-md-center">
-            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="field">
-                <%= f.label :Email %><br />
-                <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control' %>
-              </div>
-    
-              <div class="field">
-                <%= f.label :'Mot de passe' %><br />
-                <%= f.password_field :password, autocomplete: "current-password", :class => 'form-control' %>
-              </div>
-    
-              <% if devise_mapping.rememberable? %>
-                <div class="field">
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :'Rester connecter' %>
-                </div>
-              <% end %>
-    
-              <div class="actions">
-                <%= f.submit "ENTRER", :class => 'btn btn-primary' %>
-              </div>
-            <% end %>
-          </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :Email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control' %>
         </div>
+
+        <div class="field">
+          <%= f.label :'Mot de passe' %><br />
+          <%= f.password_field :password, autocomplete: "current-password", :class => 'form-control' %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "CONNEXION", :class => 'btn btn-success' %>
+        </div>
+      <% end %>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
     </div>
-  </div>
+  </div>  
 </div>
 
-<script type="text/javascript">
-  $(document).ready(
-    $('#exampleModal').modal('toggle')
-  );
-</script>
+  
