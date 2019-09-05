@@ -17,7 +17,7 @@
                   <th>Presence</th>
                   <th>Connexion</th>
                   <th>Deconnexion</th>
-                  <th colspan="4"></th>
+                  <th colspan="3"></th>
                 </tr>
               </thead>
             
@@ -37,8 +37,10 @@
             
                     </td>
                     <td><%= link_to 'Show', user %></td>
-                    <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
-                    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <% if admin_signed_in? %>
+                      <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
+                    <% end %>
+                    <!--<td><%= link_to 'Destroy', method: :DELETE, data: { confirm: 'Are you sure?' } %></td>-->
                   </tr>
                 <% end %>
               </tbody>

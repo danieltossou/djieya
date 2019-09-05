@@ -29,7 +29,7 @@
               <th>Libelle</th>
               <th>Etat</th>
               <th>User</th>
-              <th colspan="3"></th>
+              <th colspan="2"></th>
             </tr>
           </thead>
         
@@ -40,8 +40,10 @@
                 <td><%= "Active " if annee.etat %><%= "Non active " if !annee.etat %></td>
                 <td><%= annee.admin.email %></td>
                 <td><%= link_to 'Show', annee %></td>
-                <td><%= link_to 'Edit', edit_annee_path(annee) %></td>
-                <td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% if admin_signed_in? %>
+                  <td><%= link_to 'Edit', edit_annee_path(annee) %></td>
+                <% end %>
+                <!--<td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
               </tr>
             <% end %>
           </tbody>

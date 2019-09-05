@@ -16,7 +16,7 @@
                     <th>Classe room</th>
                     <th>Oriente</th>
                     <th>Ecole</th>
-                    <th colspan="4"></th>
+                    <th colspan="3"></th>
                   </tr>
                 </thead>
                 
@@ -31,8 +31,10 @@
                       <td><%= etudiant.ecole.libelle %></td>
                       <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
                       <td><%= link_to 'Show', etudiant %></td>
-                      <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
-                      <td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                      <% if admin_signed_in? %>
+                        <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
+                      <% end %>
+                      <!--<td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
                     </tr>
                   <% end %>
                 </tbody>

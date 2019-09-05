@@ -14,6 +14,7 @@ class Ability
     
     if admin.present?
       can :manage, :all
+      cannot :create, Ecole
     elsif user.present?
       if user.categorie == "Directeur"
         can :read, [Annee, Ecole]
