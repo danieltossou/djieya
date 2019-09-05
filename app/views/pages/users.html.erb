@@ -1,53 +1,45 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-  <div class="row justify-content-md-center">
-    <div class="card">
-      <div class="card-header">
-      <h2 class="text-center">LISTE DES UTILISATEURS</h2>
-      </div>
-      <div class="card-body">
-          <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Email</th>
-                  <th>Nom </th>
-                  <th>Prénom </th>
-                  <th>Contact</th>
-                  <th>Presence</th>
-                  <th>Connexion</th>
-                  <th>Deconnexion</th>
-                  <th colspan="4"></th>
-                </tr>
-              </thead>
-            
-              <tbody>
-                <% @users.each do |user| %>
-                  <tr>
-                    <td><%= user.email %></td>
-                    <td><%= user.nom %></td>
-                    <td><%= user.prenom %></td>
-                    <td><%= user.contact %></td>
-                    <td><%= 'Connecter' if user.presence %><%= 'Non connecter' if !user.presence %></td>
-                    <td><%= user.date_derniere_connexion %></td>
-                    <td><%= user.date_derniere_deconnexion %></td>
-                    <td>
-                      <%= link_to 'Activer', activer_path(user), method: :put unless user.etat %> 
-                      <%= link_to 'Desactiver', desactiver_path(user), method: :patch, data: { confirm: 'Voulez-vous desactiver l\'user?' } if user.etat %> 
-            
-                    </td>
-                    <td><%= link_to 'Show', user %></td>
-                    <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
-                    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-      </div>
-      <div class="card-footer">
-          <%= link_to 'AJOUTER', new_user_registration_path, :class => 'btn btn-primary' %>
-          <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
-      </div>
-    </div>
+  <div class="row">
+    <h4>Liste des utilisateurs</h4>
+    <%= link_to 'Nouvel Utilisateur', new_user_registration_path, :class => 'btn btn-success table-modal-btn' %>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Email</th>
+            <th>Nom </th>
+            <th>Prénom </th>
+            <th>Contact</th>
+            <th>Presence</th>
+            <th>Connexion</th>
+            <th>Deconnexion</th>
+            <th colspan="4"></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.email %></td>
+              <td><%= user.nom %></td>
+              <td><%= user.prenom %></td>
+              <td><%= user.contact %></td>
+              <td><%= 'Connecter' if user.presence %><%= 'Non connecter' if !user.presence %></td>
+              <td><%= user.date_derniere_connexion %></td>
+              <td><%= user.date_derniere_deconnexion %></td>
+              <td>
+                <%= link_to 'Activer', activer_path(user), method: :put unless user.etat %> 
+                <%= link_to 'Desactiver', desactiver_path(user), method: :patch, data: { confirm: 'Voulez-vous desactiver l\'user?' } if user.etat %> 
+      
+              </td>
+              <td><%= link_to 'Show', user %></td>
+              <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
+              <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+    <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
   </div>
 </div>

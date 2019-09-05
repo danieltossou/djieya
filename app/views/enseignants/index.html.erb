@@ -1,67 +1,64 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-    <div class="row justify-content-md-center">
-        <div class="card">
-            <div class="card-header">
-            <h2 class="text-center">NOUVEL ENSEIGNANT</h2>
-            </div>
-            <div class="card-body">
-                <%= render 'form', enseignant: @enseignant %>
-            </div>
-            <div class="card-footer">
-                <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %> 
-            </div>
-        </div>
-    </div>
+  <div class="row">
+    <h4>Liste des enseignants</h4>
+    <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
+      Nouvel Enseignant
+    </button>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Adresse</th>
+            <th>Ecole</th>
+            <th>User</th>
+            <th>Admin</th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @enseignants.each do |enseignant| %>
+            <tr>
+              <td><%= enseignant.nom %></td>
+              <td><%= enseignant.prenom %></td>
+              <td><%= enseignant.contact %></td>
+              <td><%= enseignant.email %></td>
+              <td><%= enseignant.adresse %></td>
+              <td><%= enseignant.ecole_id %></td>
+              <td><%= enseignant.user_id %></td>
+              <td><%= enseignant.admin_id %></td>
+              <td><%= link_to 'Show', enseignant %></td>
+              <td><%= link_to 'Edit', edit_enseignant_path(enseignant) %></td>
+              <td><%= link_to 'Destroy', enseignant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+    <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+  </div>
 </div>
 
-<br>
-
-<div class="container">
-    <div class="row justify-content-md-center">
-      <div class="card">
-        <div class="card-header">
-        <h2 class="text-center">LISTE DES ENSEIGNANTS</h2>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Contact</th>
-                    <th>Email</th>
-                    <th>Adresse</th>
-                    <th>Ecole</th>
-                    <th>User</th>
-                    <th>Admin</th>
-                    <th colspan="3"></th>
-                  </tr>
-                </thead>
-              
-                <tbody>
-                  <% @enseignants.each do |enseignant| %>
-                    <tr>
-                      <td><%= enseignant.nom %></td>
-                      <td><%= enseignant.prenom %></td>
-                      <td><%= enseignant.contact %></td>
-                      <td><%= enseignant.email %></td>
-                      <td><%= enseignant.adresse %></td>
-                      <td><%= enseignant.ecole_id %></td>
-                      <td><%= enseignant.user_id %></td>
-                      <td><%= enseignant.admin_id %></td>
-                      <td><%= link_to 'Show', enseignant %></td>
-                      <td><%= link_to 'Edit', edit_enseignant_path(enseignant) %></td>
-                      <td><%= link_to 'Destroy', enseignant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-        </div>
-        <div class="card-footer">
-            <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">NOUVEL ENSEIGNANT</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+          <%= render 'form', enseignant: @enseignant %>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
     </div>
   </div>
+</div>
