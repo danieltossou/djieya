@@ -5,7 +5,7 @@ class InscriptionsController < ApplicationController
   # GET /inscriptions
   # GET /inscriptions.json
   def index
-    @inscriptions = Inscription.all.all.page(params[:page])
+    @inscriptions = Inscription.all.page(params[:page])
     @inscription = Inscription.new
   end
 

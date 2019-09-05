@@ -41,10 +41,12 @@ Rails.application.routes.draw do
   resources :ecoles
   resources :annees
   devise_for :users, path: 'users', controllers: { registrations: 'users/registrations', sessions:'users/sessions' }
+
   #root to: 'pages#index'
   get 'new_user', to: 'pages#new_user', as: 'new_user'
   post 'create_user', to: 'pages#create_user', as: 'create_user'
   get 'users', to: 'pages#users', as: 'users'
+  get 'users/:id/edit', to: 'pages#edit_user', as: 'edit_user'
   get 'users/:id', to: 'pages#user', as: 'user'
   put 'users/:id', to: 'pages#activer', as: 'activer'
   patch 'users/:id', to: 'pages#desactiver', as: 'desactiver'
@@ -59,7 +61,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #Snotify_to :users, with_devise: :users, devise_default_routes: true
     
-  devise_scope :user do
+  devise_scope :user do    
       authenticated :user do
         root :to => 'pages#index'
         #delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_all_session

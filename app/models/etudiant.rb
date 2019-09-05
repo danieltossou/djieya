@@ -13,7 +13,7 @@ class Etudiant < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
   after_create do
-    @etudiant = Etudiant.unscoped.last
+    @etudiant = Etudiant.unscope(:order).last
     @montant = @etudiant.classe_room.montant
     @a = Annee.where(etat: true).first
     @annee = @a.id

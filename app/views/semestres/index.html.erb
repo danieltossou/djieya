@@ -22,14 +22,16 @@
       
         <tbody>
           <% @semestres.each do |semestre| %>
-            <tr>
-              <td><%= semestre.libelle %></td>
-              <td><%= Admin.find_by_id(semestre.admin_id).email if semestre.admin_id %></td>
-              <td><%= User.find_by_id(semestre.user_id).email if semestre.user_id %></td>
-              <td><%= link_to 'Show', semestre %></td>
+          <tr>
+            <td><%= semestre.libelle %></td>
+            <td><%= Admin.find_by_id(semestre.admin_id).email if semestre.admin_id %></td>
+            <td><%= User.find_by_id(semestre.user_id).email if semestre.user_id %></td>
+            <td><%= link_to 'Show', semestre %></td>
+            <% if admin_signed_in? %>
               <td><%= link_to 'Edit', edit_semestre_path(semestre) %></td>
-              <td><%= link_to 'Destroy', semestre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
+            <% end %>
+            <!--<td><%= link_to 'Destroy', semestre, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+          </tr>
           <% end %>
         </tbody>
     </table>

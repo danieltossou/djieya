@@ -52,6 +52,13 @@ class PagesController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def edit_user
+    authorize! :edit_user, :pages
+    
+      @user = User.find_by_id(params[:id])
+  end
+
+      
   def activer
 
     authorize! :activer, :pages

@@ -121,12 +121,27 @@ class CoursController < ApplicationController
     #Requète ajax pour remplir la liste des salles 
     def salles
 
-      @matiere = Matiere.find_by_id(params[:id_matiere])
-      @creneau_debut = Creneau.find_by_id(params[:id_creneau_debut])
-      @creneau_fin = Creneau.find_by_id(params[:id_creneau_fin])
-      @jour = Jour.find_by_id(params[:id_jour])
-      @enseignants = @matiere.enseignants
-      
+      @ecole = ecole.id if ecole?
+
+      puts @creneau_debut = Creneau.find_by_debut(params[:id_creneau_debut])
+      puts @creneau_fin = Creneau.find_by_fin(params[:id_creneau_fin])
+      puts @jour = Jour.find_by_id(params[:id_jour])
+
+      @annee = annee_active.id if annee_active?
+      @semestre = 1
+
+
+      if @creneau_debut.nil? || @creneau_fin.nil?
+        puts "Est nil"
+              #Sous requette pour recupérer l'id cour ou (entre creneau_debut et creneau) et annee = annee et jour = jour 
+        puts Cour.select(:id).where(jour_id: @jour.id).where(annee_id: @annee)
+        @salles = Salle.ecole(@ecole).where.not(id: [Cour.select(:id).where(jour_id: @jour.id).where(annee_id: @annee)])
+      else
+        puts Cour.select(:id).where(@creneau_debut.id..@creneau_fin.id).where(jour_id: @jour).where(annee_id: @annee)
+        @salles = Salle.ecole(@ecole).where.not(id: [Cour.select(:id).where(@creneau_debut.id..@creneau_fin.id).where(jour_id: @jour).where(annee_id: @annee)])
+      end
+
+
       if request.xhr?
         render :partial => 'salles', locals: {:salles => @salles}
       end

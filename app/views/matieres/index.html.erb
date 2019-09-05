@@ -17,21 +17,23 @@
             <th>Ecole</th>
             <th>User</th>
             <th>Admin</th>
-            <th colspan="3"></th>
+            <th colspan="2"></th>
           </tr>
         </thead>
       
         <tbody>
           <% @matieres.each do |matiere| %>
-            <tr>
-              <td><%= matiere.libelle %></td>
-              <td><%= matiere.ecole.libelle %></td>
-              <td><%= Admin.find_by_id(matiere.admin_id).email if matiere.admin_id %></td>
-              <td><%= User.find_by_id(matiere.user_id).email if matiere.user_id %></td>
-              <td><%= link_to 'Show', matiere %></td>
+          <tr>
+            <td><%= matiere.libelle %></td>
+            <td><%= matiere.ecole.libelle %></td>
+            <td><%= Admin.find_by_id(matiere.admin_id).email if matiere.admin_id %></td>
+            <td><%= User.find_by_id(matiere.user_id).email if matiere.user_id %></td>
+            <td><%= link_to 'Show', matiere %></td>
+            <% if admin_signed_in? %>
               <td><%= link_to 'Edit', edit_matiere_path(matiere) %></td>
-              <td><%= link_to 'Destroy', matiere, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
+            <% end %>
+            <!--<td><%= link_to 'Destroy', matiere, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+          </tr>
           <% end %>
         </tbody>
     </table>
