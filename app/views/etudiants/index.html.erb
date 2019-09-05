@@ -16,27 +16,29 @@
             <th>Nom</th>
             <th>Matricule</th>
             <th>Num inscription</th>
-            <th>Classe room</th>
+            <th>Classe</th>
             <th>Oriente</th>
             <th>Ecole</th>
-            <th colspan="4"></th>
+            <th colspan="3"></th>
           </tr>
         </thead>
       
         <tbody>
           <% @etudiants.each do |etudiant| %>
-            <tr>
-              <td><%= etudiant.nom %></td>
-              <td><%= etudiant.matricule %></td>
-              <td><%= etudiant.num_inscription %></td>
-              <td><%= etudiant.classe_room.libelle %></td>
-              <td><%= etudiant.oriente %></td>
-              <td><%= etudiant.ecole.libelle %></td>
-              <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
-              <td><%= link_to 'Show', etudiant %></td>
+          <tr>
+            <td><%= etudiant.nom %></td>
+            <td><%= etudiant.matricule %></td>
+            <td><%= etudiant.num_inscription %></td>
+            <td><%= etudiant.classe_room.libelle %></td>
+            <td><%= etudiant.oriente %></td>
+            <td><%= etudiant.ecole.libelle %></td>
+            <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
+            <td><%= link_to 'Show', etudiant %></td>
+            <% if admin_signed_in? %>
               <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
-              <td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
+            <% end %>
+            <!--<td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+          </tr>
           <% end %>
         </tbody>
     </table>

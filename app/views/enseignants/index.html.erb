@@ -49,6 +49,58 @@
   </div>
 </div>
 
+<br>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+      <div class="card">
+        <div class="card-header">
+        <h2 class="text-center">LISTE DES ENSEIGNANTS</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Adresse</th>
+                    <th>Ecole</th>
+                    <th>Admin</th>
+                    <th>User</th>
+                    <th colspan="2"></th>
+                  </tr>
+                </thead>
+              
+                <tbody>
+                  <% @enseignants.each do |enseignant| %>
+                    <tr>
+                      <td><%= enseignant.nom %></td>
+                      <td><%= enseignant.prenom %></td>
+                      <td><%= enseignant.contact %></td>
+                      <td><%= enseignant.email %></td>
+                      <td><%= enseignant.adresse %></td>
+                      <td><%= enseignant.ecole.libelle %></td>
+                      <td><%= Admin.find_by_id(enseignant.admin_id).email if enseignant.admin_id %></td>
+                      <td><%= User.find_by_id(enseignant.user_id).email if enseignant.user_id %></td>
+                      <td><%= link_to 'Show', enseignant %></td>
+                      <% if admin_signed_in? %>
+                        <td><%= link_to 'Edit', edit_enseignant_path(enseignant) %></td>
+                      <% end %>  
+                      <!--<td><%= link_to 'Destroy', enseignant, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+        </div>
+        <div class="card-footer">
+            <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+
+          <%= link_to_previous_page @enseignants, '< Précedent' %>
+          <%= link_to_next_page @enseignants, 'Suivant >' %>
+
+        </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">

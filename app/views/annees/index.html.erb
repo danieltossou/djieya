@@ -23,13 +23,34 @@
         <tbody>
           <% @annees.each do |annee| %>
             <tr>
-              <td><%= annee.libelle %></td>
-              <td><%= "Active " if annee.etat %><%= "Non active " if !annee.etat %></td>
-              <td><%= annee.admin.email %></td>
-              <td><%= link_to 'Show', annee %></td>
-              <td><%= link_to 'Edit', edit_annee_path(annee) %></td>
-              <td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <th>Libelle</th>
+              <th>Etat</th>
+              <th>User</th>
+              <th colspan="2"></th>
             </tr>
+          </thead>
+        
+          <tbody>
+            <% @annees.each do |annee| %>
+              <tr>
+                <td><%= annee.libelle %></td>
+                <td><%= "Active " if annee.etat %><%= "Non active " if !annee.etat %></td>
+                <td><%= annee.admin.email %></td>
+                <td><%= link_to 'Show', annee %></td>
+                <% if admin_signed_in? %>
+                  <td><%= link_to 'Edit', edit_annee_path(annee) %></td>
+                <% end %>
+                <!--<td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer">
+
+          <%= link_to_previous_page @annees, '< Précedent' %>
+          <%= link_to_next_page @annees, 'Suivant >' %>
+         </tr>
           <% end %>
         </tbody>
     </table>

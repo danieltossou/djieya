@@ -1,19 +1,46 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
-    <div class="row">
-        <div class="col">
-            Entrée <input type="text" value="<%= @entrée %>" disabled>
+    <h1>Caisse</h1>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+              Entrée <input type="text" value="<%= @entrée %>" disabled class="form-control">
+          </div>
+          <div class="col">
+              Sortie <input type="text" value="<%= @sortie %>" disabled class="form-control">
+          </div>
+          <div class="col">
+          Solde <input type="text" value="<%= @solde %>" disabled class="form-control">
+          </div>
         </div>
-        <div class="col">
-            Sortie <input type="text" value="<%= @sortie %>" disabled>
-        </div>
-        <div class="col">
-        Solde <input type="text" value="<%= @solde %>" disabled>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col"><%= link_to  "Nouvelle depense", depense_new_caisses_path %></div>
-    </div>
+      </div>
+    </div><br><br>
+    
+<div class="row">
+  <h4>Liste des dépenses</h4>
+  <button class="btn btn-success table-modal-btn"><%= link_to  "Nouvelle Dépense", depense_new_caisses_path %></button>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Date</th>
+        <th>Libelle</th>
+        <th>Auteur</th>
+        <th>Montant</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @sorties.each do |sortie| %>
+        <tr>
+          <td><%= sortie.created_at %></td>
+          <td><%= sortie.libelle %></td>
+          <td>
+            <%= User.find_by_id(sortie.user_id).email if sortie.user_id %>
+            <%= Admin.find_by_id(sortie.admin_id).email if sortie.admin_id %>
+          </td>
+          <td><%= sortie.montant %></td> </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

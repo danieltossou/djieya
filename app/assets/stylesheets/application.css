@@ -107,3 +107,11 @@
      margin-left: 20%;
      margin-top: 5%;
   }
+
+  .list-group-item {
+     background-color: #343a3f;
+  }
+
+  .list-group-item:hover {
+   background-color: #4fa845;
+}
