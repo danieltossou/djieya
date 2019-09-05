@@ -96,7 +96,7 @@ class CaissesController < ApplicationController
 
   def depenses
     authorize! :depenses, Caisse
-    @depenses = Caisse.sortie.all
+    @depenses = Caisse.sortie.all.page(params[:page])
   end
 
   def depense_new

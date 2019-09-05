@@ -6,7 +6,7 @@ class EtudiantsController < ApplicationController
   # GET /etudiants.json
   def index
     @ecole = ecole.id if ecole?
-    @etudiants = Etudiant.ecole(@ecole).all
+    @etudiants = Etudiant.ecole(@ecole).all.page(params[:page])
     @etudiant = Etudiant.new
   end
 

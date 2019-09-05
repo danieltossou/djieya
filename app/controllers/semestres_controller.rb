@@ -5,7 +5,7 @@ class SemestresController < ApplicationController
   # GET /semestres.json
   def index
     @ecole = ecole.id if ecole?
-    @semestres = Semestre.ecole(@ecole).all
+    @semestres = Semestre.ecole(@ecole).all.page(params[:page])
     @semestre = Semestre.new
   end
 

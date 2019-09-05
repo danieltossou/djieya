@@ -51,6 +51,10 @@
         </div>
         <div class="card-footer">
             <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+
+          <%= link_to_previous_page @salles, '< Précedent' %>
+          <%= link_to_next_page @salles, 'Suivant >' %>
+
         </div>
       </div>
     </div>

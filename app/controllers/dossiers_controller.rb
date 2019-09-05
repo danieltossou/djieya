@@ -7,7 +7,7 @@ class DossiersController < ApplicationController
   # GET /dossiers.json
   def index
     @ecole = ecole.id if ecole?
-    @dossiers = Dossier.ecole(@ecole).all
+    @dossiers = Dossier.ecole(@ecole).all.page(params[:page])
     @dossier = Dossier.new
   end
 

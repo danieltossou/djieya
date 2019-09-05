@@ -9,7 +9,7 @@ class VersementsController < ApplicationController
     @annee = annee_active.id if annee_active?
     @ecole = ecole.id if ecole?
     @etudiants = Etudiant.ecole(@ecole).all
-    @versements = Versement.ecole(@ecole).annee(@annee).all
+    @versements = Versement.ecole(@ecole).annee(@annee).all.page(params[:page])
     #@versement = Versement.new
   end
 
@@ -85,7 +85,7 @@ class VersementsController < ApplicationController
     @ecole = ecole.id 
     @etudiant = Etudiant.find_by_id(params[:etudiant_id])
     @annee = annee_active.id if annee_active?
-    @versements = Versement.etudiant(@etudiant).annee(@annee)
+    @versements = Versement.etudiant(@etudiant).annee(@annee).all.page(params[:page])
 
   # Generation du reste à payer
     @montant_a_paye = @etudiant.inscription.montant

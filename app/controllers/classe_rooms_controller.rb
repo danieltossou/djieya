@@ -6,7 +6,7 @@ class ClasseRoomsController < ApplicationController
   # GET /classe_rooms.json
   def index
     @ecole = ecole.id if ecole?
-    @classe_rooms = ClasseRoom.ecole(@ecole).all
+    @classe_rooms = ClasseRoom.ecole(@ecole).all.page(params[:page])
     @classe_room = ClasseRoom.new
   end
 

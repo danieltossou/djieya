@@ -39,9 +39,9 @@ class PagesController < ApplicationController
     @ecole = ecole.id if ecole?
 
     if admin_signed_in?
-      @users = User.ecole(@ecole)
+      @users = User.ecole(@ecole).all.page(params[:page])
     elsif user_signed_in?
-      @users = User.ecole(@ecole).where.not(categorie: 'Directeur')
+      @users = User.ecole(@ecole).where.not(categorie: 'Directeur').all.page(params[:page])
     end
   end
 

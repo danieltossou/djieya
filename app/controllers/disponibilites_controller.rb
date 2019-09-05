@@ -5,7 +5,7 @@ class DisponibilitesController < ApplicationController
   # GET /disponibilites.json
   def index
     @ecole = ecole.id if ecole?
-    @disponibilites = Disponibilite.ecole(@ecole).all
+    @disponibilites = Disponibilite.ecole(@ecole).all.page(params[:page])
     @disponibilite = Disponibilite.new
   end
 

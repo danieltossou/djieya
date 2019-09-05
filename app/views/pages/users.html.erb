@@ -52,6 +52,10 @@
           <%= link_to 'AJOUTER', new_user_path, :class => 'btn btn-primary' %>
         <% end %>
           <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
+
+          <%= link_to_previous_page @users, '< Précedent' %>
+          <%= link_to_next_page @users, 'Suivant >' %>
+
       </div>
     </div>
   </div>

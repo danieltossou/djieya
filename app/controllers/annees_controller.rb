@@ -5,7 +5,7 @@ class AnneesController < ApplicationController
   # GET /annees
   # GET /annees.json
   def index
-    @annees = Annee.all
+    @annees = Annee.all.page(params[:page])
     @annee = Annee.new
   end
 

@@ -19,7 +19,7 @@
                     <th colspan="4"></th>
                   </tr>
                 </thead>
-              
+                
                 <tbody>
                   <% @etudiants.each do |etudiant| %>
                     <tr>
@@ -39,8 +39,13 @@
               </table>
         </div>
         <div class="card-footer">
+          
             <%= link_to 'Ajouter nouvel étudiant', new_etudiant_path, :class => 'btn btn-primary' %>
             <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
+
+              <%= link_to_previous_page @etudiants, '< Précedent' %>
+              <%= link_to_next_page @etudiants, 'Suivant >' %>
+              
         </div>
       </div>
     </div>

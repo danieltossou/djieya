@@ -6,7 +6,7 @@ class JoursController < ApplicationController
   # GET /jours.json
   def index
     @ecole = ecole.id if ecole?
-    @jours = Jour.ecole(@ecole).all
+    @jours = Jour.ecole(@ecole).all.page(params[:page])
     @jour = Jour.new
   end
 

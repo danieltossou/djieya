@@ -5,6 +5,8 @@ class Etudiant < ApplicationRecord
   has_many :versements
   has_and_belongs_to_many :dossiers
 
+  paginates_per 5
+
   default_scope { order(nom: :asc) }
   scope :ecole, -> (ecole) { where(ecole_id: ecole) }
 
