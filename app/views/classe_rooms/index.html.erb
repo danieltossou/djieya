@@ -1,19 +1,48 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-    <div class="row justify-content-md-center">
-        <div class="card">
-            <div class="card-header">
-            <h2 class="text-center">NOUVELLE CLASSE</h2>
-            </div>
-            <div class="card-body">
-                <%= render 'form', classe_room: @classe_room %>
-            </div>
-            <div class="card-footer">
-                <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %> 
-            </div>
-        </div>
+  <div class="row">
+      <h4>Liste des classes</h4>
+      <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
+        Ajouter une classe
+      </button>
+      <div class="form-group">
+        <label for=""></label>
+        <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+      </div>
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Libelle</th>
+            <th>Etat</th>
+            <th>User</th>
+            <th>Montant</th>
+            <th>Ecole</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @classe_rooms.each do |classe_room| %>
+            <tr>
+              <td><%= classe_room.libelle %></td>
+              <td><%= "Active " if classe_room.etat %><%= "Non active " if !classe_room.etat %></td>
+              <td><%= User.find_by_id(classe_room.user_id).email if classe_room.user_id %></td>
+              <td><%= Admin.find_by_id(classe_room.admin_id).email if classe_room.admin_id %></td>
+              <td><%= classe_room.montant %></td>
+              <td><%= classe_room.ecole.libelle %></td>
+              <td><%= link_to 'Show', classe_room %></td>
+              <td><%= link_to 'Edit', edit_classe_room_path(classe_room) %></td>
+              <td><%= link_to 'Destroy', classe_room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+      <%= link_to_previous_page @classe_rooms, '< Précedent' %>
+      <%= link_to_next_page @classe_rooms, 'Suivant >' %>
     </div>
+  </div>
 </div>
 
 <div class="container">
@@ -61,7 +90,19 @@
           <%= link_to_previous_page @classe_rooms, '< Précedent' %>
           <%= link_to_next_page @classe_rooms, 'Suivant >' %>
 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">NOUVELLE CLASSE</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= render 'form', classe_room: @classe_room %>
+        </div>
       </div>
     </div>
-  </div>
 </div>
