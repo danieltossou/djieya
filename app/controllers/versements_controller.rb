@@ -8,7 +8,7 @@ class VersementsController < ApplicationController
   def index
     @annee = annee_active.id if annee_active?
     @ecole = ecole.id if ecole?
-    @etudiants = Etudiant.ecole(@ecole).all
+    @etudiants = Etudiant.ecole(@ecole).all.page(params[:page])
     @versements = Versement.ecole(@ecole).annee(@annee).all.page(params[:page])
     #@versement = Versement.new
   end
