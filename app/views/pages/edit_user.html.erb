@@ -1,0 +1,102 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+          <div class="card">
+            <div class="card-header">
+              <h2 class="text-center">NOUVEL UTILISATEUR</h2>
+            </div>
+            <div class="card-body">
+              <%= form_for(@user, url: edit_user_path(@user), html: { method: :put }) do |f| %>
+
+              <div class="row">
+                <div class="col-4">
+                  <div class="field">
+                    <%= f.label :Email %><br />
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control' %>
+                  </div>
+              
+                <div class="col-4">
+                  <div class="field">
+                    <%= f.label :Nom %><br />
+                    <%= f.text_field :nom, autocomplete: "nom", :class => 'form-control' %>
+                  </div>
+      
+                  <div class="field">
+                      <%= f.label :Prenom %><br />
+                      <%= f.text_field :prenom, autocomplete: "prenom", :class => 'form-control' %>
+                  </div>
+      
+                  <div class="field">
+                      <%= f.label :Adresse %><br />
+                      <%= f.text_field :adresse, autocomplete: "adresse", :class => 'form-control' %>
+                  </div>
+                </div>
+      
+                <div class="col-4">
+                  <div class="field">
+                      <%= f.label :Contact %><br />
+                      <%= f.number_field :contact, autocomplete: "contact", :class => 'form-control' %>
+                  </div>
+      
+                  <div class="field">
+                    <%= f.label :Genre %><br />
+                    <div class="genre">
+                      Homme <%= f.radio_button :sexe, "Homme"%>
+                      Femme <%= f.radio_button :sexe, "Femme"%>
+                    </div>
+                  </div>
+      
+                  <div class="field">
+                      <%= f.label 'Activer l\'utilisateur' %>
+                      <%= f.check_box :etat, autocomplete: "etat" %>
+                  </div>
+      
+                  <div class="field">
+                      <%= f.hidden_field :ecole_id %>
+                  </div>  
+                </div>
+              </div>
+      
+              <% if current_admin %>
+                <div class="field">
+                  <%= f.label :Categorie %>
+                  <%= f.select :categorie, ['Directeur'], :class => 'form-control' %>
+                  
+              </div> 
+            <% end %>
+             
+            <div class="field">
+              <%# f.hidden_field :admin_id, :value => current_admin.id %>
+              <%# f.hidden_field :categorie, :value => 'directeur' %>
+            </div>
+      
+            <div class="actions">
+              <%= f.submit "VALIDER", :class => 'btn btn-primary' %>
+              <%= link_to "RETOUR", :back, :class => 'btn btn-default' %>
+            </div>
+          <% end %>
+          </div>
+        </div>
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <script type="text/javascript">
+        $(document).ready(
+          $('#exampleModal').modal('toggle')
+        );
+      </script>
