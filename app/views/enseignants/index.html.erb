@@ -8,44 +8,8 @@
     </button>
     <div class="form-group">
       <label for=""></label>
-      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+      <input type="text" class="form-control" name="" id="search" placeholder="@recherche">
     </div>
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Contact</th>
-            <th>Email</th>
-            <th>Adresse</th>
-            <th>Ecole</th>
-            <th>User</th>
-            <th>Admin</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-      
-        <tbody>
-          <% @enseignants.each do |enseignant| %>
-            <tr>
-              <td><%= enseignant.nom %></td>
-              <td><%= enseignant.prenom %></td>
-              <td><%= enseignant.contact %></td>
-              <td><%= enseignant.email %></td>
-              <td><%= enseignant.adresse %></td>
-              <td><%= enseignant.ecole.libelle %></td>
-              <td><%= Admin.find_by_id(enseignant.admin_id).email if enseignant.admin_id %></td>
-              <td><%= User.find_by_id(enseignant.user_id).email if enseignant.user_id %></td>
-              <td><%= link_to 'Show', enseignant %></td>
-              <td><%= link_to 'Edit', edit_enseignant_path(enseignant) %></td>
-              <td><%= link_to 'Destroy', enseignant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-          <% end %>
-        </tbody>
-    </table>
-    <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
-    <%= link_to_previous_page @enseignants, '< Précedent' %>
-    <%= link_to_next_page @enseignants, 'Suivant >' %>
   </div>
 </div>
 
@@ -73,7 +37,7 @@
                   </tr>
                 </thead>
               
-                <tbody>
+                <tbody id="tbody">
                   <% @enseignants.each do |enseignant| %>
                     <tr>
                       <td><%= enseignant.nom %></td>
@@ -117,3 +81,14 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  $('#search').change(function (event) {
+      let search = $('#search').val();
+      $.get('/enseignants/search', { id_search: search }, (data) =>{
+        $('#tbody').empty()
+        $('#tbody').append(data);
+      })
+  });
+  </script>

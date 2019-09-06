@@ -70,6 +70,16 @@ class MatieresController < ApplicationController
     end
   end
 
+  def search
+    @ecole = ecole.id if ecole?
+    @search = params[:id_search]
+    @matieres = Matiere.where('libelle LIKE ?', "%#{@search}%").ecole(@ecole).all
+
+    if request.xhr?
+      render :partial => 'matieres', locals: {:matieres => @matieres}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_matiere

@@ -1,0 +1,12 @@
+
+<% dossiers.each do |dossier| %>
+    <tr>
+    <td><%= dossier.libelle %></td>
+    <td><%= dossier.ecole.libelle %></td>
+    <td><%= link_to 'Show', dossier %></td>
+    <% if admin_signed_in? %>
+        <td><%= link_to 'Edit', edit_dossier_path(dossier) %></td>
+    <% end %>
+    <!--<td><%= link_to 'Destroy', dossier, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    </tr>
+<% end %>

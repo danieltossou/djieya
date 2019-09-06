@@ -1,0 +1,17 @@
+<% enseignants.each do |enseignant| %>
+    <tr>
+        <td><%= enseignant.nom %></td>
+        <td><%= enseignant.prenom %></td>
+        <td><%= enseignant.contact %></td>
+        <td><%= enseignant.email %></td>
+        <td><%= enseignant.adresse %></td>
+        <td><%= enseignant.ecole.libelle %></td>
+        <td><%= Admin.find_by_id(enseignant.admin_id).email if enseignant.admin_id %></td>
+        <td><%= User.find_by_id(enseignant.user_id).email if enseignant.user_id %></td>
+        <td><%= link_to 'Show', enseignant %></td>
+        <% if admin_signed_in? %>
+        <td><%= link_to 'Edit', edit_enseignant_path(enseignant) %></td>
+        <% end %>  
+        <!--<td><%= link_to 'Destroy', enseignant, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    </tr>
+<% end %>

@@ -1,0 +1,13 @@
+<% salles.each do |salle| %>
+    <tr>
+    <td><%= salle.libelle %></td>
+    <td><%= salle.ecole.libelle %></td>
+    <td><%= Admin.find_by_id(salle.admin_id).email if salle.admin_id %></td>
+    <td><%= User.find_by_id(salle.user_id).email if salle.user_id %></td>
+    <td><%= link_to 'Show', salle %></td>
+    <% if admin_signed_in? %>
+        <td><%= link_to 'Edit', edit_salle_path(salle) %></td>
+    <%  end %>
+    <!--<td><%= link_to 'Destroy', salle, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    </tr>
+    <% end %>
