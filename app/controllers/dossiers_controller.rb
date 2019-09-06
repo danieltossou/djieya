@@ -38,7 +38,7 @@ class DossiersController < ApplicationController
 
     respond_to do |format|
       if @dossier.save
-        format.html { redirect_to @dossier, notice: 'Dossier was successfully created.' }
+        format.html { redirect_to @dossiers, notice: 'Dossier was successfully created.' }
         format.json { render :show, status: :created, location: @dossier }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class DossiersController < ApplicationController
   def update
     respond_to do |format|
       if @dossier.update(dossier_params)
-        format.html { redirect_to @dossier, notice: 'Dossier was successfully updated.' }
+        format.html { redirect_to @dossiers, notice: 'Dossier was successfully updated.' }
         format.json { render :show, status: :ok, location: @dossier }
       else
         format.html { render :edit }

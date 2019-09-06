@@ -1,82 +1,82 @@
 <div class="container">
     <div class="row">
-        <div class="col">
-            <div class="card bg-success">
+        <div class="col-md-3">
+            <div class="card">
                 <div class="card-body">
                     <a href="<%= annees_path %>" class="newEmploye">
-                        <h5 class="text-center">ANNEES</h5>
+                        <%= image_tag("annee.png", class: "img-responsive")%>
+                        <h6 class="text-center action-link-color">ANNEES</h6>
                     </a>
                 </div>
             </div>  
         </div>
-        <div class="col">
-            <div class="card bg-success">
+        <div class="col-md-3">
+            <div class="card">
                 <div class="card-body">
                     <a href="<%= classe_rooms_path %>" class="newEmploye">
-                        <h5 class="text-center">CLASSES</h5>
+                        <%= image_tag("classe.png", class: "img-responsive")%>
+                        <h6 class="text-center action-link-color">CLASSES</h6>
                     </a>
                 </div>
             </div>  
         </div>
-    </div><br>
-
-    <div class="row">
-        <div class="col">
-            <div class="card bg-success">
+        <div class="col-md-3">
+            <div class="card">
                 <div class="card-body">
                     <a href="<%= matieres_path %>" class="newEmploye">
-                        <h5 class="text-center">MATIÈRES</h5>
+                        <%= image_tag("matiere.png", class: "img-responsive")%>
+                        <h6 class="text-center action-link-color">MATIÈRES</h6>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card bg-success">
+        <div class="col-md-3">
+            <div class="card">
                 <div class="card-body">
                     <a href="<%= salles_path %>" class="newEmploye">
-                        <h5 class="text-center">SALLES</h5>
-                    </a>
-                </div>
-            </div>  
-        </div>
-        <div class="col">
-            <div class="card bg-success">
-                <div class="card-body">
-                    <a href="<%= semestres_path %>" class="newEmploye">
-                        <h5 class="text-center">SEMESTRES</h5>
+                        <%= image_tag("salle.png", class: "img-responsive")%>
+                        <h6 class="action-link-color text-center">SALLES</h6>
                     </a>
                 </div>
             </div>  
         </div>
     </div><br>
-
     <div class="row">
-        <div class="col">
-            <div class="card bg-success">
+        <div class="col-md-3">
+            <div class="card">
                 <div class="card-body">
-                    <a href="<%= creneaus_path %>" class="newEmploye">
-                        <h5 class="text-center">CRÉNEAU</h5>
+                    <a href="<%= semestres_path %>" class="newEmploye">
+                        <%= image_tag("semestre.png", class: "img-responsive")%>
+                        <h6 class="action-link-color text-center">SEMESTRES</h6>
                     </a>
                 </div>
+            </div>  
             </div>
-        </div>
-        <div class="col">
-            <div class="card bg-success">
+        <div class="col-md-3">
+            <div class="card">
                 <div class="card-body">
                     <a href="<%= dossiers_path %>" class="newEmploye">
-                        <h5 class="text-center">DOSSIERS</h5>
+                        <%= image_tag("dossier.png", class: "img-responsive")%>
+                        <h6 class="action-link-color text-center">DOSSIERS</h6>
                     </a>
                 </div>
             </div>  
         </div>
-        <div class="col">
-            <div class="card bg-success">
+        <div class="col-md-3">
+            <div class="card">
                 <div class="card-body">
                     <a href="<%= enseignants_path %>" class="newEmploye">
-                        <h5 class="text-center">ENSEIGNANTS</h5>
+                        <%= image_tag("enseignant.png", class: "img-responsive")%>
+                        <h6 class="action-link-color text-center">ENSEIGNANTS</h6>
                     </a>
                 </div>
             </div>  
         </div>
+        <!-- <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                </div>
+            </div>  
+        </div> -->
     </div>
-</div> 
+</div>

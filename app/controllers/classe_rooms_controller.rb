@@ -37,7 +37,7 @@ class ClasseRoomsController < ApplicationController
 
     respond_to do |format|
       if @classe_room.save
-        format.html { redirect_to @classe_room, notice: 'Classe room was successfully created.' }
+        format.html { redirect_to @classe_rooms, notice: 'Classe room was successfully created.' }
         format.json { render :show, status: :created, location: @classe_room }
       else
         format.html { render :new }
@@ -51,7 +51,7 @@ class ClasseRoomsController < ApplicationController
   def update
     respond_to do |format|
       if @classe_room.update(classe_room_params)
-        format.html { redirect_to @classe_room, notice: 'Classe room was successfully updated.' }
+        format.html { redirect_to @classe_rooms, notice: 'Classe room was successfully updated.' }
         format.json { render :show, status: :ok, location: @classe_room }
       else
         format.html { render :edit }

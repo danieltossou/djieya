@@ -1,22 +1,24 @@
-<%= form_for [@etudiant, @versement] do |form| %>
-  <% if @versement.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@versement.errors.count, "error") %> prohibited this versement from being saved:</h2>
-
-      <ul>
-        <% @versement.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="resize-form">
+    <%= form_for [@etudiant, @versement] do |form| %>
+    <% if @versement.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@versement.errors.count, "error") %> prohibited this versement from being saved:</h2>
+  
+        <ul>
+          <% @versement.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= form.label :montant %>
+      <%= form.number_field :montant, :class => 'form-control' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :montant %>
-    <%= form.number_field :montant, :class => 'form-control' %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
-  </div>
-<% end %>
+  
+    <div class="actions">
+      <%= form.submit "VALIDER", :class => 'btn btn-primary' %>
+    </div>
+  <% end %>  
+</div>

@@ -153,6 +153,15 @@ class PagesController < ApplicationController
     # Solde 
     @solde = @deja_perçu - @depense
 
+    # Total des inscrits
+    @total_inscrits = Inscription.all.count
+
+    # Total des salles
+    @total_salles = Salle.all.count
+
+    # Total des classes
+    @total_classes = ClasseRoom.all.count
+
   end
   
   def user_params
