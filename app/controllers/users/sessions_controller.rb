@@ -6,7 +6,7 @@ class Users::SessionsController < Devise::SessionsController
   skip_before_action :est_connecte?, only: [:new, :create]
 
   # Mise à jour de la presence
-  after_action :update_presence_true, only: [:create] 
+  
   before_action :update_presence_false, only: [:destroy]
   
   # GET /resource/sign_in
@@ -21,23 +21,21 @@ class Users::SessionsController < Devise::SessionsController
       self.resource.etat
     end
 
+    # Si le user n'est pâs activer il est 
     if is_active?
-      puts "Activer"
-      set_flash_message!(:notice, :signed_in)
-      sign_in(resource_name, resource)
-      yield resource if block_given?
-      respond_with resource, location: after_sign_in_path_for(resource)
+      current_user.update(presence: true, date_derniere_connexion: Time.now.utc)
+      redirect_to root_path, notice: 'Connexion effectuée'
     else
-      puts "Desactiver"
-      sign_out
+      session.clear
       redirect_to user_session_path, notice: "Désolé votre compte à été desactiver"
+      return
     end
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #  super
-  # end
+  def destroy
+   super
+  end
 
   # Enregistremenyt de la session
   def save_session
@@ -51,9 +49,6 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
-  def update_presence_true
-    current_user.update(presence: true, date_derniere_connexion: Time.now.utc)
-  end
 
   def update_presence_false
     current_user.update(presence: false, date_derniere_deconnexion: Time.now.utc)
