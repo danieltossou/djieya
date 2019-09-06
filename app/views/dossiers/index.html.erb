@@ -58,7 +58,7 @@
 
 <script>
 
-  $('#search').change(function (event) {
+    $('#search').on('input', () => {
       let search = $('#search').val();
       $.get('/dossiers/search', { id_search: search }, (data) =>{
         $('#tbody').empty()

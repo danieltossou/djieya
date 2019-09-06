@@ -66,7 +66,7 @@
 </div>
 <script>
 
-$('#search').change(function (event) {
+$('#search').on('input', () => {
     let search = $('#search').val();
     $.get('/etudiants/search', { id_search: search }, (data) =>{
       $('#tbody').empty()
