@@ -15,10 +15,13 @@
           <tr>
             <th>Libelle</th>
             <th>Etat</th>
-            <th>User</th>
+            <th>Utilisateur</th>
+            <th>Admin</th>
             <th>Montant</th>
             <th>Ecole</th>
+            <% if admin_signed_in? %>
             <th colspan="1">Action</th>
+            <% end %>
           </tr>
         </thead>
       
