@@ -1,6 +1,16 @@
-<h1>Editing Creneau</h1>
-
-<%= render 'form', creneau: @creneau %>
-
-<%= link_to 'Show', @creneau %> |
-<%= link_to 'Back', creneaus_path %>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="card">
+            <div class="card-header">
+            <h2 class="text-center">MODIFIER CRENEAU</h2>
+            </div>
+            <div class="card-body">
+                <%= render 'form', creneau: @creneau %>
+            </div>
+            <div class="card-footer">
+                <%# link_to 'Show', @annee, :class => 'btn btn-default' %> |
+                <%= link_to 'RETOUR', creneaus_path, :class => 'btn btn-default' %> 
+            </div>
+        </div>
+    </div>
+</div>
