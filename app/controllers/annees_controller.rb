@@ -69,6 +69,16 @@ class AnneesController < ApplicationController
     end
   end
 
+  def search
+    @ecole = ecole.id if ecole?
+    @search = params[:id_search]
+    @annees = Annee.where('libelle LIKE ?', "%#{@search}%").ecole(@ecole).all
+
+    if request.xhr?
+      render :partial => 'annees', locals: {:annees => @annees}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_annee

@@ -1,0 +1,15 @@
+<% classe_rooms.each do |classe_room| %>
+    <tr>
+    <td><%= classe_room.libelle %></td>
+    <td><%= "Active " if classe_room.etat %><%= "Non active " if !classe_room.etat %></td>
+    <td><%= User.find_by_id(classe_room.user_id).email if classe_room.user_id %></td>
+    <td><%= Admin.find_by_id(classe_room.admin_id).email if classe_room.admin_id %></td>
+    <td><%= classe_room.montant %></td>
+    <td><%= classe_room.ecole.libelle %></td>
+    <% if admin_signed_in? %>
+        <td><%= link_to 'Show', classe_room %></td>
+    <% end %>
+    <td><%= link_to 'Edit', edit_classe_room_path(classe_room) %></td>
+    <!--<td><%= link_to 'Destroy', classe_room, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    </tr>
+<% end %>

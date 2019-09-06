@@ -1,0 +1,13 @@
+<% matieres.each do |matiere| %>
+          <tr>
+            <td><%= matiere.libelle %></td>
+            <td><%= matiere.ecole.libelle %></td>
+            <td><%= Admin.find_by_id(matiere.admin_id).email if matiere.admin_id %></td>
+            <td><%= User.find_by_id(matiere.user_id).email if matiere.user_id %></td>
+            <td><%= link_to 'Show', matiere %></td>
+            <% if admin_signed_in? %>
+              <td><%= link_to 'Edit', edit_matiere_path(matiere) %></td>
+            <% end %>
+            <!--<td><%= link_to 'Destroy', matiere, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+          </tr>
+          <% end %>

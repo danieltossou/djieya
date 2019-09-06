@@ -70,6 +70,16 @@ class ClasseRoomsController < ApplicationController
     end
   end
 
+  def search
+    @ecole = ecole.id if ecole?
+    @search = params[:id_search]
+    @classe_rooms = Classe_room.where('libelle LIKE ?', "%#{@search}%").ecole(@ecole).all
+
+    if request.xhr?
+      render :partial => 'classe_rooms', locals: {:classe_rooms => @classe_rooms}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_classe_room

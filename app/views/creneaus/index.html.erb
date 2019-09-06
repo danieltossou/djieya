@@ -8,7 +8,7 @@
       </button>
       <div class="form-group">
         <label for=""></label>
-        <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+        <input type="text" class="form-control" name="" id="search" placeholder="@recherche">
       </div>
       <table class="table table-bordered table-striped"">
           <thead class="thead-dark">
@@ -65,7 +65,7 @@
                   </tr>
                 </thead>
               
-                <tbody>
+                <tbody id="tbody">
                   <% @creneaus.each do |creneau| %>
                     <tr>
                       <td><%= creneau.debut %></td>
@@ -102,3 +102,14 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  $('#search').change(function (event) {
+      let search = $('#search').val();
+      $.get('/creneaus/search', { id_search: search }, (data) =>{
+        $('#tbody').empty()
+        $('#tbody').append(data);
+      })
+  });
+  </script>
