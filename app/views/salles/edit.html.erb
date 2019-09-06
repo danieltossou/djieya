@@ -1,6 +1,16 @@
-<h1>Editing Salle</h1>
-
-<%= render 'form', salle: @salle %>
-
-<%= link_to 'Show', @salle %> |
-<%= link_to 'Back', salles_path %>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="card">
+            <div class="card-header">
+            <h2 class="text-center">MODIFIER SALLE</h2>
+            </div>
+            <div class="card-body">
+                <%= render 'form', salle: @salle %>
+            </div>
+            <div class="card-footer">
+                <%# link_to 'Show', @annee, :class => 'btn btn-default' %> |
+                <%= link_to 'RETOUR', salles_path, :class => 'btn btn-default' %> 
+            </div>
+        </div>
+    </div>
+</div>

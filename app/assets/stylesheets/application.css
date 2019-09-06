@@ -110,8 +110,17 @@
 
   .list-group-item {
      background-color: #343a3f;
+     border: 0px;
   }
 
   .list-group-item:hover {
    background-color: #4fa845;
+}
+
+.action-link-color {
+   color: #000;
+}
+
+.action-link-color:hover {
+   color: #000;
 }

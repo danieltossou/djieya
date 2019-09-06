@@ -1,6 +1,16 @@
-<h1>Editing Enseignant</h1>
-
-<%= render 'form', enseignant: @enseignant %>
-
-<%= link_to 'Show', @enseignant %> |
-<%= link_to 'Back', enseignants_path %>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="card">
+            <div class="card-header">
+            <h2 class="text-center">MODIFIER ENSEIGNANT</h2>
+            </div>
+            <div class="card-body">
+                <%= render 'form', enseignant: @enseignant %>
+            </div>
+            <div class="card-footer">
+                <%# link_to 'Show', @annee, :class => 'btn btn-default' %> |
+                <%= link_to 'RETOUR', enseignants_path, :class => 'btn btn-default' %> 
+            </div>
+        </div>
+    </div>
+</div>
