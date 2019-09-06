@@ -15,8 +15,10 @@
           <tr>
             <th>Libelle</th>
             <th>Etat</th>
-            <th>User</th>
+            <th>Admin</th>
+            <% if admin_signed_in? %>
             <th colspan="1">Action</th>
+            <% end %>
           </tr>
         </thead>
         
