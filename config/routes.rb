@@ -104,7 +104,7 @@ Rails.application.routes.draw do
     
   devise_scope :user do    
       authenticated :user do
-        root :to => 'pages#index'
+        root :to => 'pages#dashboard'
         #delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_all_session
       end
       unauthenticated :user do

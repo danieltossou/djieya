@@ -1,25 +1,28 @@
 <h1>Enregistrer une depense</h1>
-<%= form_for(@caisse, :url  => depense_create_caisses_path(@caisse), method: :post) do |form| %>
+<div class="resize-form">
+    <%= form_for(@caisse, :url  => depense_create_caisses_path(@caisse), method: :post) do |form| %>
 
-  <div class="field">
-    <%= form.label :montant %>
-    <%= form.number_field :montant %>
-  </div>
-
-  <div class="field">
-    <%= form.label :libelle %>
-    <%= form.text_field :libelle %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :ecole_id %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :annee_id%>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= form.label :montant %>
+      <%= form.number_field :montant, :class => 'form-control' %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :libelle %>
+      <%= form.text_field :libelle, :class => 'form-control' %>
+    </div>
+  
+    <div class="field">
+      <%= form.hidden_field :ecole_id %>
+    </div>
+  
+    <div class="field">
+      <%= form.hidden_field :annee_id%>
+    </div>
+  
+    <div class="actions">
+      <%= form.submit "ENREGISTRER", :class => 'btn btn-success' %>
+      <%= link_to "RETOUR", caisses_path, :class => 'btn btn-default' %>
+    </div>
+  <% end %>
+</div>
