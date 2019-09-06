@@ -1,0 +1,12 @@
+<% annees.each do |annee| %>
+    <tr>
+    <td><%= annee.libelle %></td>
+    <td><%= "Active " if annee.etat %><%= "Non active " if !annee.etat %></td>
+    <td><%= annee.admin.email %></td>
+    <td><%= link_to 'Show', annee %></td>
+    <% if admin_signed_in? %>
+        <td><%= link_to 'Edit', edit_annee_path(annee) %></td>
+    <% end %>
+    <!--<td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    </tr>
+<% end %>

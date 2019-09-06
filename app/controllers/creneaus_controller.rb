@@ -69,6 +69,16 @@ class CreneausController < ApplicationController
     end
   end
 
+  def search
+    @ecole = ecole.id if ecole?
+    @search = params[:id_search]
+    @creneaus = Creneau.where('debut LIKE ?', "%#{@search}%").or(Creneau.where('fin LIKE ?', "%#{@search}%")).ecole(@ecole).all
+
+    if request.xhr?
+      render :partial => 'creneaus', locals: {:creneaus => @creneaus}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_creneau

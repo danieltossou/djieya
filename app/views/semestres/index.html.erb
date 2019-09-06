@@ -8,19 +8,21 @@
     </button>
     <div class="form-group">
       <label for=""></label>
-      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+      <input type="text" class="form-control" name="" id="search" placeholder="@recherche">
     </div>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
             <th>Libelle</th>
             <th>Admin</th>
-            <th>User</th>
+            <th>Utilisateur</th>
+            <% if admin_signed_in? %>
             <th colspan="1">Action</th>
+            <% end %>
           </tr>
         </thead>
       
-        <tbody>
+        <tbody id="tbody">
           <% @semestres.each do |semestre| %>
           <tr>
             <td><%= semestre.libelle %></td>
@@ -57,3 +59,14 @@
     </div>
   </div>
 </div>
+
+<script>
+
+    $('#search').on('input', () => {
+      let search = $('#search').val();
+      $.get('/semestres/search', { id_search: search }, (data) =>{
+        $('#tbody').empty()
+        $('#tbody').append(data);
+      })
+  });
+  </script>

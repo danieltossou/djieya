@@ -11,7 +11,7 @@
     <% end %>
     <div class="form-group">
       <label for=""></label>
-      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+      <input type="text" class="form-control" name="" id="search" placeholder="@recherche">
     </div>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
@@ -27,7 +27,7 @@
           </tr>
         </thead>
       
-        <tbody>
+        <tbody id="tbody">
           <% @users.each do |user| %>
             <tr>
               <td><%= user.email %></td>
@@ -38,12 +38,14 @@
               <td><%= user.date_derniere_connexion %></td>
               <td><%= user.date_derniere_deconnexion %></td>
               <td>
-                <%= link_to 'Activer', activer_path(user), method: :put unless user.etat %> 
-                <%= link_to 'Desactiver', desactiver_path(user), method: :patch, data: { confirm: 'Voulez-vous desactiver l\'user?' } if user.etat %> 
+                <%= link_to 'Activer', activer_path(user), method: :put unless user.etat, :class => 'action-link-color' %> 
+                <%= link_to 'Desactiver', desactiver_path(user), method: :patch, data: { confirm: 'Voulez-vous desactiver l\'user?' } if user.etat, :class => 'action-link-color' %> 
       
               </td>
               <!-- <td><%= link_to 'Afficher', user, :class => 'action-link-color' %></td> -->
-              <td><%= link_to 'Modifier', edit_user_registration_path(user), :class => 'action-link-color' %></td>
+              <% if admin_signed_in? %>
+                <td><%= link_to 'Modifier', edit_user_registration_path(user), :class => 'action-link-color' %></td>
+              <% end %>
               <!-- <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
             </tr>
           <% end %>
@@ -55,3 +57,13 @@
 </div>
 
   
+<script>
+
+    $('#search').on('input', () => {
+      let search = $('#search').val();
+      $.get('/pages/search', { id_search: search }, (data) =>{
+        $('#tbody').empty()
+        $('#tbody').append(data);
+      })
+  });
+  </script>

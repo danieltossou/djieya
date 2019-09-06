@@ -8,7 +8,7 @@
     </button>
     <div class="form-group">
       <label for=""></label>
-      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+      <input type="text" class="form-control" name="" id="search" placeholder="@recherche">
     </div>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
@@ -20,11 +20,11 @@
             <th>Classe</th>
             <th>Oriente</th>
             <th>Ecole</th>
-            <th colspan="3">Actions</th>
+            <th colspan="2">Actions</th>
           </tr>
         </thead>
       
-        <tbody>
+        <tbody id="tbody">
           <% @etudiants.each do |etudiant| %>
           <tr>
             <td><%= etudiant.nom %></td>
@@ -34,8 +34,8 @@
             <td><%= etudiant.classe_room.libelle %></td>
             <td><%= 'Oui' if etudiant.oriente %><%= 'Non' if !etudiant.oriente %></td>
             <td><%= etudiant.ecole.libelle %></td>
-            <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
-            <td><%= link_to 'Afficher', etudiant, :class => 'action-link-color' %></td>
+            <td><%= link_to 'Versement', etudiant_versements_path(etudiant), :class => 'action-link-color' %></td>
+            <!-- <td><%= link_to 'Afficher', etudiant, :class => 'action-link-color' %></td> -->
             <% if admin_signed_in? %>
               <td><%= link_to 'Modifier', edit_etudiant_path(etudiant), :class => 'action-link-color' %></td>
             <% end %>
@@ -65,3 +65,13 @@
     </div>
   </div>
 </div>
+<script>
+
+$('#search').on('input', () => {
+    let search = $('#search').val();
+    $.get('/etudiants/search', { id_search: search }, (data) =>{
+      $('#tbody').empty()
+      $('#tbody').append(data);
+    })
+});
+</script>
