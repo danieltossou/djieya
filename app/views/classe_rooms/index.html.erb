@@ -8,7 +8,7 @@
       </button>
       <div class="form-group">
         <label for=""></label>
-        <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+        <input type="text" class="form-control" name="" id="search" placeholder="@recherche">
       </div>
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
@@ -22,7 +22,7 @@
           </tr>
         </thead>
       
-        <tbody>
+        <tbody id="tbody">
           <% @classe_rooms.each do |classe_room| %>
             <tr>
               <td><%= classe_room.libelle %></td>
@@ -32,7 +32,9 @@
               <td><%= classe_room.montant %></td>
               <td><%= classe_room.ecole.libelle %></td>
               <!-- <td><%= link_to 'Show', classe_room %></td> -->
-              <td><%= link_to 'Modifier', edit_classe_room_path(classe_room), :class => 'action-link-color' %></td>
+              <% if admin_signed_in? %>
+                <td><%= link_to 'Modifier', edit_classe_room_path(classe_room), :class => 'action-link-color' %></td>
+              <% end %>
               <!-- <td><%= link_to 'Destroy', classe_room, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
             </tr>
           <% end %>
@@ -60,3 +62,15 @@
       </div>
     </div>
 </div>
+
+
+<script>
+
+    $('#search').on('input', () => {
+      let search = $('#search').val();
+      $.get('/classe_rooms/search', { id_search: search }, (data) =>{
+        $('#tbody').empty()
+        $('#tbody').append(data);
+      })
+  });
+  </script>

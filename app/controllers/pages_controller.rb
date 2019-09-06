@@ -163,6 +163,17 @@ class PagesController < ApplicationController
     @total_classes = ClasseRoom.all.count
 
   end
+
+
+  def search
+    @ecole = ecole.id if ecole?
+    @search = params[:id_search]
+    @users = User.where('nom LIKE ?', "%#{@search}%").or(User.where('prenom LIKE ?', "%#{@search}%")).or(User.where('matricule LIKE ?', "%#{@search}%")).or(User.where(contact: @search)).ecole(@ecole).all
+
+    if request.xhr?
+      render :partial => 'users', locals: {:users => @users}
+    end
+  end
   
   def user_params
 

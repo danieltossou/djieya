@@ -6,14 +6,38 @@ Rails.application.routes.draw do
       get 'salles', to: 'cours#salles'
     end
   end
-  resources :semestres
+  resources :semestres do
+    collection do
+      get 'search', to: 'semestres/search'
+    end
+  end
   resources :disponibilites
-  resources :creneaus
+  resources :creneaus do
+    collection do
+      get 'search', to: 'creneaus/search'
+    end
+  end
   resources :heures
-  resources :jours
-  resources :enseignants
-  resources :salles
-  resources :matieres
+  resources :jours do
+    collection do
+      get 'search', to: 'jours/search'
+    end
+  end
+  resources :enseignants do
+    collection do
+      get 'search', to: 'enseignants/search'
+    end
+  end
+  resources :salles do
+    collection do
+      get 'search', to: 'salles/search'
+    end
+  end
+  resources :matieres do
+    collection do
+      get 'search', to: 'matieres/search'
+    end
+  end
   resources :caisses do
     collection do
       get 'depense_new'
@@ -23,7 +47,11 @@ Rails.application.routes.draw do
   end
   resources :versements
   resources :inscriptions
-  resources :etudiants
+  resources :etudiants do
+    collection do
+      get 'search', to: 'etudiants/search'
+    end
+  end
   
   # Routes des versement d'un etudiant
     get 'etudiants/:etudiant_id/versements', to: 'versements#etudiant_index', as: 'etudiant_versements'
@@ -36,16 +64,29 @@ Rails.application.routes.draw do
     delete '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_destroy'
 
   devise_for :admins, path: 'admins', controllers: { sessions: 'admins/sessions' }
-  resources :dossiers
-  resources :classe_rooms
+  resources :dossiers do
+    collection do
+      get 'search', to: 'dossiers/search'
+    end
+  end
+  resources :classe_rooms do
+    collection do
+      get 'search', to: 'classe_rooms/search'
+    end
+  end
   resources :ecoles
-  resources :annees
+  resources :annees do
+    collection do
+      get 'search', to: 'annees/search'
+    end
+  end
   devise_for :users, path: 'users', controllers: { registrations: 'users/registrations', sessions:'users/sessions' }
 
   #root to: 'pages#index'
   get 'new_user', to: 'pages#new_user', as: 'new_user'
   post 'create_user', to: 'pages#create_user', as: 'create_user'
   get 'users', to: 'pages#users', as: 'users'
+  get 'pages/search', to: 'pages#search'
   get 'users/:id/edit', to: 'pages#edit_user', as: 'edit_user'
   get 'users/:id', to: 'pages#user', as: 'user'
   put 'users/:id', to: 'pages#activer', as: 'activer'

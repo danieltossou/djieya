@@ -47,6 +47,16 @@ class EtudiantsController < ApplicationController
     end
   end
 
+  def search
+    @ecole = ecole.id if ecole?
+    @search = params[:id_search]
+    @etudiants = Etudiant.where('nom LIKE ?', "%#{@search}%").or(Etudiant.where('prenom LIKE ?', "%#{@search}%")).or(Etudiant.where('num_inscription LIKE ?', "%#{@search}%")).or(Etudiant.where('matricule LIKE ?', "%#{@search}%")).ecole(@ecole).all
+
+    if request.xhr?
+      render :partial => 'etudiants', locals: {:etudiants => @etudiants}
+    end
+  end
+
   # PATCH/PUT /etudiants/1
   # PATCH/PUT /etudiants/1.json
   def update

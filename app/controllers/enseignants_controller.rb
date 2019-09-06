@@ -71,6 +71,16 @@ class EnseignantsController < ApplicationController
     end
   end
 
+  def search
+    @ecole = ecole.id if ecole?
+    @search = params[:id_search]
+    @enseignants = Enseignant.where('nom LIKE ?', "%#{@search}%").or(Enseignant.where('prenom LIKE ?', "%#{@search}%")).or(Enseignant.where(contact: @search)).or(Enseignant.where('email LIKE ?', "%#{@search}%")).ecole(@ecole).all
+
+    if request.xhr?
+      render :partial => 'enseignants', locals: {:enseignants => @enseignants}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_enseignant

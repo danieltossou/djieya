@@ -8,7 +8,7 @@
     </button>
     <div class="form-group">
       <label for=""></label>
-      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+      <input type="text" class="form-control" name="" id="search" placeholder="@recherche">
     </div>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
@@ -25,7 +25,7 @@
           </tr>
         </thead>
       
-        <tbody>
+        <tbody id="tbody">
           <% @enseignants.each do |enseignant| %>
             <tr>
               <td><%= enseignant.nom %></td>
@@ -37,7 +37,9 @@
               <td><%= Admin.find_by_id(enseignant.admin_id).email if enseignant.admin_id %></td>
               <td><%= User.find_by_id(enseignant.user_id).email if enseignant.user_id %></td>
               <!-- <td><%= link_to 'Show', enseignant %></td> -->
-              <td><%= link_to 'Modifier', edit_enseignant_path(enseignant), :class => 'action-link-color' %></td>
+              <% if admin_signed_in? %>
+                <td><%= link_to 'Modifier', edit_enseignant_path(enseignant), :class => 'action-link-color' %></td>
+              <% end %>
               <!-- <td><%= link_to 'Destroy', enseignant, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
             </tr>
           <% end %>
@@ -65,3 +67,14 @@
     </div>
   </div>
 </div>
+
+<script>
+
+    $('#search').on('input', () => {
+      let search = $('#search').val();
+      $.get('/enseignants/search', { id_search: search }, (data) =>{
+        $('#tbody').empty()
+        $('#tbody').append(data);
+      })
+  });
+  </script>
