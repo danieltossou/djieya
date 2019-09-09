@@ -21,7 +21,7 @@ class Ability
         can :read, [Annee, Ecole]
         can [:read, :create], [ClasseRoom, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, User, Versement, Dossier]
         # can [:update, :destroy], [Caisse, ClasseRoom, Dossier, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, User, Versement], user_id = user.id
-        can [:index, :users, :user, :user_new, :create_user, :activer, :desactiver, :matiere_enseigne, :create_matiere_enseigne, :dashboard], :pages
+        can [:index, :users, :user, :new_user, :create_user, :activer, :desactiver, :matiere_enseigne, :create_matiere_enseigne, :dashboard], :pages
         can [:read, :depenses, :depense_new, :depense_create, :create], Caisse
         can [:etudiant_index, :etudiant_show, :etudiant_new, :etudiant_create], Versement
 
