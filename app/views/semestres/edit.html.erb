@@ -1,6 +1,16 @@
-<h1>Editing Semestre</h1>
-
-<%= render 'form', semestre: @semestre %>
-
-<%= link_to 'Show', @semestre %> |
-<%= link_to 'Back', semestres_path %>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="card">
+            <div class="card-header">
+            <h2 class="text-center">MODIFIER SEMESTRE</h2>
+            </div>
+            <div class="card-body">
+                <%= render 'form', semestre: @semestre %>
+            </div>
+            <div class="card-footer">
+                <%# link_to 'Show', @annee, :class => 'btn btn-default' %> |
+                <%= link_to 'RETOUR', semestres_path, :class => 'btn btn-default' %> 
+            </div>
+        </div>
+    </div>
+</div>

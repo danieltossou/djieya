@@ -15,49 +15,30 @@
           <tr>
             <th>Libelle</th>
             <th>Etat</th>
-            <th>User</th>
-            <th colspan="3"></th>
+            <th>Admin</th>
+            <% if admin_signed_in? %>
+            <th colspan="1">Action</th>
+            <% end %>
           </tr>
         </thead>
-      
-        <tbody>
+        
+        <tbody id="tbody">
           <% @annees.each do |annee| %>
             <tr>
-              <th>Libelle</th>
-              <th>Etat</th>
-              <th>User</th>
-              <th colspan="2"></th>
+              <td><%= annee.libelle %></td>
+              <td><%= "Active " if annee.etat %><%= "Non active " if !annee.etat %></td>
+              <td><%= annee.admin.email %></td>
+              <% if admin_signed_in? %>
+                <td><%= link_to 'Modifier', edit_annee_path(annee), :class => 'action-link-color' %></td>
+              <% end %>
+              <!--<td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
             </tr>
-          </thead>
-        
-          <tbody id="tbody">
-            <% @annees.each do |annee| %>
-              <tr>
-                <td><%= annee.libelle %></td>
-                <td><%= "Active " if annee.etat %><%= "Non active " if !annee.etat %></td>
-                <td><%= annee.admin.email %></td>
-                <td><%= link_to 'Show', annee %></td>
-                <% if admin_signed_in? %>
-                  <td><%= link_to 'Edit', edit_annee_path(annee) %></td>
-                <% end %>
-                <!--<td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <div class="card-footer">
-
-          <%= link_to_previous_page @annees, '< Précedent' %>
-          <%= link_to_next_page @annees, 'Suivant >' %>
-         </tr>
           <% end %>
         </tbody>
-    </table>
+      </table>
     <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
     <%= link_to_previous_page @annees, '< Précedent' %>
     <%= link_to_next_page @annees, 'Suivant >' %>
-    </div>
   </div>
 </div>
 

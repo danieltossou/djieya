@@ -14,6 +14,7 @@
         <thead class="thead-dark">
           <tr>
             <th>Nom</th>
+            <th>Prénom</th>
             <th>Matricule</th>
             <th>Num inscription</th>
             <th>Classe</th>
@@ -23,25 +24,37 @@
           </tr>
         </thead>
       
-        <tbody>
+        <tbody id="tbody">
           <% @etudiants.each do |etudiant| %>
             <tr>
               <td><%= etudiant.nom %></td>
+              <td><%= etudiant.prenom %></td>
               <td><%= etudiant.matricule %></td>
               <td><%= etudiant.num_inscription %></td>
               <td><%= etudiant.classe_room.libelle %></td>
-              <td><%= etudiant.oriente %></td>
+              <td><%= 'Oui' if etudiant.oriente %><%= 'Non' if !etudiant.oriente %></td>
               <td><%= etudiant.ecole.libelle %></td>
-              <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
-              <td><%= link_to 'Show', etudiant %></td>
-              <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
-              <td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to 'Versement', etudiant_versements_path(etudiant), :class => 'action-link-color' %></td>
+              <!-- <td><%= link_to 'Show', etudiant, :class => 'action-link-color' %></td> -->
+              <% if admin_signed_in? %>
+                <td><%= link_to 'Modifier', edit_etudiant_path(etudiant), :class => 'action-link-color' %></td>
+              <% end %>
+                <!-- <td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
             </tr>
           <% end %>
         </tbody>
     </table>
-    <%= link_to 'RETOUR', :back, :class => 'btn btn-default' %>
     <%= link_to_previous_page @etudiants, '< Précedent' %>
     <%= link_to_next_page @etudiants, 'Suivant >' %>
   </div>
 </div>
+
+<script>
+  $('#search').on('input', () => {
+      let search = $('#search').val();
+      $.get('/etudiants/search', { id_search: search }, (data) =>{
+        $('#tbody').empty()
+        $('#tbody').append(data);
+      })
+  });
+  </script>

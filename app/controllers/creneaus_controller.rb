@@ -36,7 +36,7 @@ class CreneausController < ApplicationController
 
     respond_to do |format|
       if @creneau.save
-        format.html { redirect_to @creneau, notice: 'Creneau was successfully created.' }
+        format.html { redirect_to @creneaus, notice: 'Creneau was successfully created.' }
         format.json { render :show, status: :created, location: @creneau }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class CreneausController < ApplicationController
   def update
     respond_to do |format|
       if @creneau.update(creneau_params)
-        format.html { redirect_to @creneau, notice: 'Creneau was successfully updated.' }
+        format.html { redirect_to @creneaus, notice: 'Creneau was successfully updated.' }
         format.json { render :show, status: :ok, location: @creneau }
       else
         format.html { render :edit }

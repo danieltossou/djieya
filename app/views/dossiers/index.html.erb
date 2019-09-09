@@ -1,44 +1,47 @@
 <p id="notice"><%= notice %></p>
 
-
 <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="card">
-        <div class="card-header">
-        <h2 class="text-center">LISTE DES DOSSIERS</h2>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Libelle</th>
-                    <th>Ecole</th>
-                    <th colspan="2"></th>
-                  </tr>
-                </thead>
-              
-                <tbody id="tbody">
-                  <% @dossiers.each do |dossier| %>
-                    <tr>
-                      <td><%= dossier.libelle %></td>
-                      <td><%= dossier.ecole.libelle %></td>
-                      <td><%= link_to 'Show', dossier %></td>
-                      <% if admin_signed_in? %>
-                        <td><%= link_to 'Edit', edit_dossier_path(dossier) %></td>
-                      <% end %>
-                      <!--<td><%= link_to 'Destroy', dossier, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-        </div>
-        <div class="card-footer">
-            <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+  <div class="row">
+    <h4>Liste des dossiers</h4>
+    <button type="button" class="btn btn-success table-modal-btn" data-toggle="modal" data-target="#exampleModal">
+      Nouveau dossier
+    </button>
+    <div class="form-group">
+      <label for=""></label>
+      <input type="text" class="form-control" name="" id="" placeholder="@recherche">
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Libelle</th>
+            <th>Ecole</th>
+            <% if admin_signed_in? %>
+            <th colspan="1">Action</th>
+            <% end %>
+          </tr>
+        </thead>
+      
+        <tbody id="tbody">
+          <% @dossiers.each do |dossier| %>
+            <tr>
+              <td><%= dossier.libelle %></td>
+              <td><%= dossier.ecole.libelle %></td>
+              <!-- <td><%= link_to 'Show', dossier %></td> -->
+              <% if admin_signed_in? %>
+                <td><%= link_to 'Modifier', edit_dossier_path(dossier), :class => 'action-link-color' %></td>
+              <% end %>
+              <!-- <td><%= link_to 'Destroy', dossier, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+            </tr>
+          <% end %>
+        </tbody>
+      
+    </table>
+    <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
+    <%= link_to_previous_page @dossiers, '< Précedent' %>
+    <%= link_to_next_page @dossiers, 'Suivant >' %>
+  </div>
+</div>
 
-          <%= link_to_previous_page @dossiers, '< Précedent' %>
-          <%= link_to_next_page @dossiers, 'Suivant >' %>
-
-        </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

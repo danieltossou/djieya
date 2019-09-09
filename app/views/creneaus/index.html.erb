@@ -10,7 +10,7 @@
         <label for=""></label>
         <input type="text" class="form-control" name="" id="search" placeholder="@recherche">
       </div>
-      <table class="table table-bordered table-striped"">
+      <table class="table table-bordered table-striped">
           <thead class="thead-dark">
             <tr>
               <th>Debut</th>
@@ -18,11 +18,11 @@
               <th>Admin</th>
               <th>User</th>
               <th>Ecole</th>
-              <th colspan="3"></th>
+              <th colspan="1">Action</th>
             </tr>
           </thead>
         
-          <tbody>
+          <tbody id="tbody">
             <% @creneaus.each do |creneau| %>
               <tr>
                 <td><%= creneau.debut %></td>
@@ -30,9 +30,11 @@
                 <td><%= Admin.find_by_id(creneau.admin_id).email if creneau.admin_id %></td>
                 <td><%= User.find_by_id(creneau.user_id).email if creneau.user_id %></td>
                 <td><%= creneau.ecole.libelle %></td>
-                <td><%= link_to 'Show', creneau %></td>
-                <td><%= link_to 'Edit', edit_creneau_path(creneau) %></td>
-                <td><%= link_to 'Destroy', creneau, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+               <!--  <td><%= link_to 'Show', creneau %></td> -->
+               <% if admin_signed_in? %>
+                <td><%= link_to 'Modifier', edit_creneau_path(creneau), :class => 'action-link-color' %></td>
+               <% end %>
+                <!-- <td><%= link_to 'Destroy', creneau, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
               </tr>
             <% end %>
           </tbody>
@@ -43,48 +45,6 @@
     </div>
   </div>
 </div>
-
-<br>
-
-<div class="container">
-    <div class="row justify-content-md-center">
-      <div class="card">
-        <div class="card-header">
-        <h2 class="text-center">LISTE DES CRENEAUX</h2>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Debut</th>
-                    <th>Fin</th>
-                    <th>Admin</th>
-                    <th>User</th>
-                    <th>Ecole</th>
-                    <th colspan="2"></th>
-                  </tr>
-                </thead>
-              
-                <tbody id="tbody">
-                  <% @creneaus.each do |creneau| %>
-                    <tr>
-                      <td><%= creneau.debut %></td>
-                      <td><%= creneau.fin %></td>
-                      <td><%= Admin.find_by_id(creneau.admin_id).email if creneau.admin_id %></td>
-                      <td><%= User.find_by_id(creneau.user_id).email if creneau.user_id %></td>
-                      <td><%= creneau.ecole.libelle %></td>
-                      <td><%= link_to 'Show', creneau %></td>
-                      <% if admin_signed_in? %>
-                        <td><%= link_to 'Edit', edit_creneau_path(creneau) %></td>
-                      <% end %>
-                      <!--<td><%= link_to 'Destroy', creneau, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-        </div>
-        <div class="card-footer">
-            <%= link_to 'RETOUR', configuration_path, :class => 'btn btn-default' %>
 
   <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
