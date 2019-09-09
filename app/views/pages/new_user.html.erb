@@ -69,13 +69,14 @@
                 <div class="field">
                     <%= f.hidden_field :ecole_id %>
                 </div>  
-            </div>
-            </div>
-        
-            <div class="field">
-                <%= f.label :Categorie %>
-                <%= f.select :categorie, ['Comptable', 'Secretaire', 'Autre'], :class => 'form-control' %>
-            </div>
+            
+                </div>
+                </div>
+            
+                <div class="field">
+                    <%= f.label :Categorie %>
+                    <%= f.select :categorie, ['Comptable', 'Secretaire', 'Autre'], :class => 'form-control' %>
+                </div>
         
             <div class="actions">
             <%= f.submit "VALIDER", :class => 'btn btn-success' %>
@@ -88,6 +89,13 @@
         </div>
         
         </div>
+        </div>
+
+       
+
+    <div class="actions">
+    <%= f.submit "VALIDER", :class => 'btn btn-primary' %>
+    <%= link_to "RETOUR", :back, :class => 'btn btn-default' %>
     </div>
 </div>
     
