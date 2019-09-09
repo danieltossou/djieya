@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   #Verification si quelqu'un n'est pas connecté
   def est_connecte?
     if !user_signed_in? && !admin_signed_in? 
-      redirect_to root_path, notice: "Vous n'avez pas le droit d'accéder à cette page"
+      redirect_to root_path, notice: "Vous devez vous connectez pour effectuer cette action"
     end
   end
 

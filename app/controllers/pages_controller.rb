@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   end
 
   def create_user
-    authorize! :crea_user, :pages
+    authorize! :create_user, :pages
 
     if admin_signed_in?
       @user = current_admin.users.new(user_params)
@@ -26,7 +26,7 @@ class PagesController < ApplicationController
         format.html { redirect_to @user, notice: 'Utilisateur was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new }
+        format.html { render :new_user }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
