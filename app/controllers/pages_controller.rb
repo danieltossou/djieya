@@ -154,13 +154,13 @@ class PagesController < ApplicationController
     @solde = @deja_perçu - @depense
 
     # Total des inscrits
-    @total_inscrits = Inscription.all.count
+    @total_inscrits = Inscription.ecole(@ecole).annee(@annee).all.count
 
     # Total des salles
-    @total_salles = Salle.all.count
+    @total_salles = Salle.ecole(@ecole).all.count
 
     # Total des classes
-    @total_classes = ClasseRoom.all.count
+    @total_classes = ClasseRoom.ecole(@ecole).all.count
 
   end
 

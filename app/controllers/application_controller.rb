@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
       private
       
       def current_ability
-      @current_ability ||= Ability.new(current_user, current_admin)
+        @current_ability ||= Ability.new(current_user, current_admin)
       end
     
  
