@@ -29,7 +29,7 @@ class Ability
 
         can [:read], [ClasseRoom, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, Versement]
         can [:create], [Etudiant, Heure, Inscription, Jour, Versement]
-        can [:index, :users], :pages
+        can [:index, :users, :dashboard], :pages
         can [:read, :depenses, :depense_new, :depense_create, :create], Caisse
         can [:etudiant_index, :etudiant_show, :etudiant_new, :etudiant_create], Versement
         
@@ -37,7 +37,7 @@ class Ability
 
     else
 
-      can :index, :pages
+      can :dashboard, :pages
     
     end
     # The first argument to `can` is the action you are giving the user

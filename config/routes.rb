@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root :to => 'pages#dashboard'
+
   resources :cours do
     collection do
       get 'matieres', to: 'cours#matieres'
@@ -6,38 +9,47 @@ Rails.application.routes.draw do
       get 'salles', to: 'cours#salles'
     end
   end
+
   resources :semestres do
     collection do
       get 'search', to: 'semestres/search'
     end
   end
+
   resources :disponibilites
+
   resources :creneaus do
     collection do
       get 'search', to: 'creneaus/search'
     end
   end
+
   resources :heures
+
   resources :jours do
     collection do
       get 'search', to: 'jours/search'
     end
   end
+
   resources :enseignants do
     collection do
       get 'search', to: 'enseignants/search'
     end
   end
+
   resources :salles do
     collection do
       get 'search', to: 'salles/search'
     end
   end
+  
   resources :matieres do
     collection do
       get 'search', to: 'matieres/search'
     end
   end
+  
   resources :caisses do
     collection do
       get 'depense_new'
@@ -45,8 +57,11 @@ Rails.application.routes.draw do
       post 'depense_create'
     end
   end
+  
   resources :versements
+  
   resources :inscriptions
+  
   resources :etudiants do
     collection do
       get 'search', to: 'etudiants/search'
@@ -101,15 +116,6 @@ Rails.application.routes.draw do
   post '/matiere_enseigne', to: 'pages#create_matiere_enseigne', as: 'create_matiere_enseigne'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #Snotify_to :users, with_devise: :users, devise_default_routes: true
-    
-  devise_scope :user do    
-      authenticated :user do
-        root :to => 'pages#dashboard'
-        #delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_all_session
-      end
-      unauthenticated :user do
-        root :to => 'users/sessions#new', as: :unauthenticated_root
-      end
-  end
+
 
 end

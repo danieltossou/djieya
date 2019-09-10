@@ -24,7 +24,7 @@ class Users::SessionsController < Devise::SessionsController
     # Si le user n'est pâs activer il est 
     if is_active?
       current_user.update(presence: true, date_derniere_connexion: Time.now.utc)
-      redirect_to root_path, notice: 'Connexion effectuée'
+      redirect_to root_path, notice: 'Bienvenue !!!'
     else
       session.clear
       redirect_to user_session_path, notice: "Désolé votre compte à été desactiver"

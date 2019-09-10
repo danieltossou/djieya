@@ -25,7 +25,7 @@ class CoursController < ApplicationController
   # POST /cours.json
   def create
     
-    params[:cour][:ecole_id] = 1
+    params[:cour][:ecole_id] = ecole.id if ecole?
 
       #Ajout de la classe en groupe
       params[:cour][:classe_room_id].unshift(params[:cour][:first_classe_room_id])
@@ -128,7 +128,6 @@ class CoursController < ApplicationController
       puts @jour = Jour.find_by_id(params[:id_jour])
 
       @annee = annee_active.id if annee_active?
-      @semestre = 1
 
 
       if @creneau_debut.nil? || @creneau_fin.nil?
