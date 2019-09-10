@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="container">
   <div class="row">
     <h4>Liste des étudiants</h4>
@@ -20,7 +18,7 @@
             <th>Classe</th>
             <th>Oriente</th>
             <th>Ecole</th>
-            <th colspan="2">Actions</th>
+            <!-- <th colspan="2">Actions</th> -->
           </tr>
         </thead>
       
@@ -34,7 +32,7 @@
             <td><%= etudiant.classe_room.libelle %></td>
             <td><%= 'Oui' if etudiant.oriente %><%= 'Non' if !etudiant.oriente %></td>
             <td><%= etudiant.ecole.libelle %></td>
-            <td><%= link_to 'Versement', etudiant_versements_path(etudiant), :class => 'action-link-color' %></td>
+            <!-- <td><%= link_to 'Versement', etudiant_versements_path(etudiant), :class => 'action-link-color' %></td> -->
             <!-- <td><%= link_to 'Afficher', etudiant, :class => 'action-link-color' %></td> -->
             <% if admin_signed_in? %>
               <td><%= link_to 'Modifier', edit_etudiant_path(etudiant), :class => 'action-link-color' %></td>
