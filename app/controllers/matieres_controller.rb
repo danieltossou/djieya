@@ -37,7 +37,7 @@ class MatieresController < ApplicationController
     
     respond_to do |format|
       if @matiere.save
-        format.html { redirect_to @matieres, notice: 'Matiere was successfully created.' }
+        format.html { redirect_to matieres_url, notice: 'Matiere was successfully created.' }
         format.json { render :show, status: :created, location: @matiere }
       else
         format.html { render :new }
@@ -51,7 +51,7 @@ class MatieresController < ApplicationController
   def update
     respond_to do |format|
       if @matiere.update(matiere_params)
-        format.html { redirect_to @matieres, notice: 'Matiere was successfully updated.' }
+        format.html { redirect_to matieres_url, notice: 'Matiere was successfully updated.' }
         format.json { render :show, status: :ok, location: @matiere }
       else
         format.html { render :edit }

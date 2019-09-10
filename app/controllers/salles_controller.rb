@@ -38,7 +38,7 @@ class SallesController < ApplicationController
 
     respond_to do |format|
       if @salle.save
-        format.html { redirect_to @salles, notice: 'Salle was successfully created.' }
+        format.html { redirect_to salles_url, notice: 'Salle was successfully created.' }
         format.json { render :show, status: :created, location: @salle }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class SallesController < ApplicationController
   def update
     respond_to do |format|
       if @salle.update(salle_params)
-        format.html { redirect_to @salles, notice: 'Salle was successfully updated.' }
+        format.html { redirect_to salles_url, notice: 'Salle was successfully updated.' }
         format.json { render :show, status: :ok, location: @salle }
       else
         format.html { render :edit }

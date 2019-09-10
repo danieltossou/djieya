@@ -38,7 +38,7 @@ class JoursController < ApplicationController
 
     respond_to do |format|
       if @jour.save
-        format.html { redirect_to @jour, notice: 'Jour was successfully created.' }
+        format.html { redirect_to jours_url, notice: 'Jour was successfully created.' }
         format.json { render :show, status: :created, location: @jour }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class JoursController < ApplicationController
   def update
     respond_to do |format|
       if @jour.update(jour_params)
-        format.html { redirect_to @jour, notice: 'Jour was successfully updated.' }
+        format.html { redirect_to jours_url, notice: 'Jour was successfully updated.' }
         format.json { render :show, status: :ok, location: @jour }
       else
         format.html { render :edit }

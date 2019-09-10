@@ -36,7 +36,7 @@ class AnneesController < ApplicationController
 
     respond_to do |format|
       if @annee.save
-        format.html { redirect_to @annee, notice: 'Annee was successfully created.' }
+        format.html { redirect_to annees_url, notice: 'Annee was successfully created.' }
         format.json { render :show, status: :created, location: @annee }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class AnneesController < ApplicationController
   def update
     respond_to do |format|
       if @annee.update(annee_params)
-        format.html { redirect_to @annees, notice: 'Annee was successfully updated.' }
+        format.html { redirect_to annees_url, notice: 'Annee was successfully updated.' }
         format.json { render :show, status: :ok, location: @annee }
       else
         format.html { render :edit }

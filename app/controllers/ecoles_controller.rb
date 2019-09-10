@@ -30,7 +30,7 @@ class EcolesController < ApplicationController
       @ecole = current_admin.ecoles.new(ecole_params)
       respond_to do |format|
         if @ecole.save
-          format.html { redirect_to @ecoles, notice: 'Ecole was successfully created.' }
+          format.html { redirect_to ecoles_url, notice: 'Ecole was successfully created.' }
           format.json { render :show, status: :created, location: @ecole }
         else
           format.html { render :new }
@@ -47,7 +47,7 @@ class EcolesController < ApplicationController
   def update
     respond_to do |format|
       if @ecole.update(ecole_params)
-        format.html { redirect_to @ecoles, notice: 'Ecole was successfully updated.' }
+        format.html { redirect_to ecoles_url, notice: 'Ecole was successfully updated.' }
         format.json { render :show, status: :ok, location: @ecole }
       else
         format.html { render :edit }

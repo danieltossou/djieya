@@ -37,7 +37,7 @@ class SemestresController < ApplicationController
 
     respond_to do |format|
       if @semestre.save
-        format.html { redirect_to @semestres, notice: 'Semestre was successfully created.' }
+        format.html { redirect_to semestres_url, notice: 'Semestre was successfully created.' }
         format.json { render :show, status: :created, location: @semestre }
       else
         format.html { render :new }
@@ -51,7 +51,7 @@ class SemestresController < ApplicationController
   def update
     respond_to do |format|
       if @semestre.update(semestre_params)
-        format.html { redirect_to @semestres, notice: 'Semestre was successfully updated.' }
+        format.html { redirect_to semestres_url, notice: 'Semestre was successfully updated.' }
         format.json { render :show, status: :ok, location: @semestre }
       else
         format.html { render :edit }
