@@ -61,8 +61,8 @@
 <div class="aside-bottom aside-margin">
 
   <% if user_signed_in? %>
-<h6 class="text-center"><%= link_to 'Déconnexion', destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
-<% end %>
+    <h6 class="text-center"><%= link_to 'Déconnexion', destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
+  <% end %>
 
 <% if admin_signed_in? %>
 <h6 class="text-center"><%= link_to 'Déconnexion', destroy_admin_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>

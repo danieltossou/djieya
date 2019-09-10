@@ -1,4 +1,3 @@
-<h1>Enregistrer une depense</h1>
 <div class="resize-form">
     <%= form_for(@caisse, :url  => depense_create_caisses_path(@caisse), method: :post) do |form| %>
 
@@ -22,7 +21,6 @@
   
     <div class="actions">
       <%= form.submit "ENREGISTRER", :class => 'btn btn-success' %>
-      <%= link_to "RETOUR", caisses_path, :class => 'btn btn-default' %>
     </div>
   <% end %>
 </div>

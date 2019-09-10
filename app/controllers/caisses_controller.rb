@@ -8,6 +8,8 @@ class CaissesController < ApplicationController
     @annee = annee_active.id if annee_active?
     @ecole = ecole.id if ecole?
 
+    @caisse = Caisse.new
+
     #Somme des entrées
     @entrées = Caisse.entrée
     @entrée = 0
@@ -19,9 +21,9 @@ class CaissesController < ApplicationController
     @sorties = Caisse.sortie
     @sortie = 0
     @sorties.each do |sortie|
-      @sortie =+ sortie.montant
+      @sortie += sortie.montant
     end
-    
+
     # Solde 
     @solde = @entrée - @sortie
 
@@ -122,7 +124,7 @@ class CaissesController < ApplicationController
 
     respond_to do |format|
       if @caisse.save
-        format.html { redirect_to @caisse, notice: 'Caisse was successfully created.' }
+        format.html { redirect_to caisses_url, notice: 'Caisse was successfully created.' }
         format.json { render :show, status: :created, location: @caisse }
       else
         format.html { render :new }
@@ -145,7 +147,7 @@ class CaissesController < ApplicationController
     end
 
     def depense_params
-      params[:caisse][:operation] = "soritie"
+      params[:caisse][:operation] = "sortie"
       params[:caisse][:ecole_id] = ecole.id if ecole?
       params[:caisse][:annee_id] = annee_active.id if annee_active?
       params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :admin_id, :ecole_id, :annee_id)
