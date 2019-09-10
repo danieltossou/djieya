@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-
-  root :to => 'pages#dashboard'
+      
+  devise_scope :user do    
+    authenticated :user do
+      root :to => 'pages#dashboard'
+      #delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_all_session
+    end
+    unauthenticated :user do
+      root :to => 'users/sessions#new', as: :unauthenticated_root
+    end
+end
 
   resources :cours do
     collection do
@@ -9,47 +17,38 @@ Rails.application.routes.draw do
       get 'salles', to: 'cours#salles'
     end
   end
-
   resources :semestres do
     collection do
       get 'search', to: 'semestres/search'
     end
   end
-
   resources :disponibilites
-
   resources :creneaus do
     collection do
       get 'search', to: 'creneaus/search'
     end
   end
-
   resources :heures
-
   resources :jours do
     collection do
       get 'search', to: 'jours/search'
     end
   end
-
   resources :enseignants do
     collection do
       get 'search', to: 'enseignants/search'
     end
   end
-
   resources :salles do
     collection do
       get 'search', to: 'salles/search'
     end
   end
-  
   resources :matieres do
     collection do
       get 'search', to: 'matieres/search'
     end
   end
-  
   resources :caisses do
     collection do
       get 'depense_new'
@@ -57,11 +56,8 @@ Rails.application.routes.draw do
       post 'depense_create'
     end
   end
-  
   resources :versements
-  
   resources :inscriptions
-  
   resources :etudiants do
     collection do
       get 'search', to: 'etudiants/search'
