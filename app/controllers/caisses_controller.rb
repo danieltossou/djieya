@@ -14,7 +14,7 @@ class CaissesController < ApplicationController
     @entrées = Caisse.entrée
     @entrée = 0
     @entrées.each do |entrée|
-      @entrée =+ entrée.montant
+      @entrée += entrée.montant
     end
     
     #Somme des sorties
