@@ -14,7 +14,7 @@ class Ability
     
     if admin.present?
       can :manage, :all
-      cannot :create, Ecole
+      # cannot :create, Ecole
       cannot :edit_user, :pages
     elsif user.present?
       if user.categorie == "Directeur"
