@@ -50,16 +50,24 @@
   <a href="#!"><li class="list-group-item"><i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;EMPLOI DU TEMPS</li></a><br>
   <a href="<%= versements_path %>"><li class="list-group-item"><i class="fas fa-credit-card"></i>&nbsp;&nbsp;VERSEMENTS</li></a><br>
   <a href="<%= caisses_path %>"><li class="list-group-item"><i class="fas fa-coins"></i>&nbsp;&nbsp;CAISSE</li></a><br>
-  <a href="<%= configuration_path %>"><li class="list-group-item"><i class="fas fa-cogs"></i>&nbsp;&nbsp;CONFIGURATION</a></li>
+
+  <% if admin_signed_in? || current_user.categorie == "Directeur" %>
+    <a href="<%= configuration_path %>"><li class="list-group-item"><i class="fas fa-cogs"></i>&nbsp;&nbsp;CONFIGURATION</a></li>
+  <% end %>
+
 </ul>
 </div>
+
 <div class="aside-bottom aside-margin">
+
   <% if user_signed_in? %>
 <h6 class="text-center"><%= link_to 'Déconnexion', destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
 <% end %>
+
 <% if admin_signed_in? %>
 <h6 class="text-center"><%= link_to 'Déconnexion', destroy_admin_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
 <% end %>
+
 </div>
 </aside>
 <% end %>
