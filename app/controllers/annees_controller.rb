@@ -36,7 +36,7 @@ class AnneesController < ApplicationController
 
     respond_to do |format|
       if @annee.save
-        format.html { redirect_to @annees, notice: 'Annee was successfully created.' }
+        format.html { redirect_to @annee, notice: 'Annee was successfully created.' }
         format.json { render :show, status: :created, location: @annee }
       else
         format.html { render :new }
