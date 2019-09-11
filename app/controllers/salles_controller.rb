@@ -28,13 +28,7 @@ class SallesController < ApplicationController
   # POST /salles.json
   def create
 
-    if current_admin
-      @salle = current_admin.salles.new(salle_params)
-    elsif current_user
-      @salle = current_user.salles.new(salle_params)
-    else
-      redirect_to new_salle_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+    @salle = current_user.salles.new(salle_params)
 
     respond_to do |format|
       if @salle.save
@@ -90,6 +84,6 @@ class SallesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def salle_params
       params[:salle][:ecole_id] = ecole.id if ecole?
-      params.require(:salle).permit(:libelle, :ecole_id, :user_id, :admin_id)
+      params.require(:salle).permit(:libelle, :ecole_id, :user_id)
     end
 end

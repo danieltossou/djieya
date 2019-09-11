@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
 
-  def initialize(user, admin)
+  def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -12,12 +12,13 @@ class Ability
     #     can :read, :all
     #   end
     
-    if admin.present?
-      can :manage, :all
-      # cannot :create, Ecole
-      cannot :edit_user, :pages
-    elsif user.present?
-      if user.categorie == "Directeur"
+  
+    if user.present?
+      if user.categorie == "Admin"
+        can :manage, :all
+        # cannot :create, Ecole
+        cannot :edit_user, :pages 
+      elsif user.categorie == "Directeur"
         can :read, [Annee, Ecole]
         can [:read, :create], [ClasseRoom, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, User, Versement, Dossier]
         # can [:update, :destroy], [Caisse, ClasseRoom, Dossier, Enseignant, Etudiant, Heure, Inscription, Jour, Matiere, Salle, User, Versement], user_id = user.id
@@ -38,7 +39,7 @@ class Ability
     else
 
       #can :dashboard, :pages
-      can :sign_in, User
+      can [:create], :users_sessions
     end
     # The first argument to `can` is the action you are giving the user
     # permission to do.

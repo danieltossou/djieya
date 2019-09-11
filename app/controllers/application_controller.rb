@@ -1,10 +1,12 @@
 class ApplicationController < ActionController::Base
 
-  
-  before_action :est_connecte?
-  helper_method :annee_active, :annee_active?, :ecole, :ecole?
+  before_action :authenticate_user!
 
+  helper_method :annee_active, :annee_active?, :ecole, :ecole?, :Admin?
 
+  def Admin?
+    return true if current_user.categorie == "Admin"
+  end
 
     # Recuperation de l'année active
   def annee_active
@@ -24,12 +26,6 @@ class ApplicationController < ActionController::Base
       !ecole.nil?
     end
 
-  #Verification si quelqu'un n'est pas connecté
-  def est_connecte?
-    if !user_signed_in? && !admin_signed_in? 
-      redirect_to root_path, notice: "Vous devez vous connectez pour effectuer cette action"
-    end
-  end
 
   # Message d'erreur lorsqu'on accède aux interdits
     rescue_from CanCan::AccessDenied do |exception|
@@ -39,12 +35,6 @@ class ApplicationController < ActionController::Base
           format.js   { head :forbidden, content_type: 'text/html' }
         end
       end
-
-      private
-      
-      def current_ability
-        @current_ability ||= Ability.new(current_user, current_admin)
-      end
-    
+   
  
 end

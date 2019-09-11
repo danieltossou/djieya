@@ -46,7 +46,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.datetime :date_derniere_connexion
       t.datetime :date_derniere_deconnexion
       t.integer :crea_user, limit: 8
-      t.references :admin, null: true
       
 
       t.timestamps null: false

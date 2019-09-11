@@ -27,13 +27,7 @@ class MatieresController < ApplicationController
   # POST /matieres
   # POST /matieres.json
   def create
-    if current_admin
-      @matiere = current_admin.matieres.new(matiere_params)
-    elsif current_user
-      @matiere = current_user.matieres.new(matiere_params)
-    else
-      redirect_to new_matiere_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+    @matiere = current_user.matieres.new(matiere_params)
     
     respond_to do |format|
       if @matiere.save
@@ -89,6 +83,6 @@ class MatieresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def matiere_params
       params[:matiere][:ecole_id] = ecole.id if ecole?
-      params.require(:matiere).permit(:libelle, :ecole_id, :user_id, :admin_id)
+      params.require(:matiere).permit(:libelle, :ecole_id, :user_id)
     end
 end

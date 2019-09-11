@@ -3,7 +3,6 @@
 class Users::SessionsController < Devise::SessionsController
   #before_action :configure_sign_in_params, only: [:create]
   after_action :save_session, only: [:create]
-  skip_before_action :est_connecte?, only: [:new, :create]
 
   # Mise à jour de la presence
   

@@ -33,11 +33,11 @@
 <body>
 <div class="container-fluid">
 <div class="row">
-<% if current_user || current_admin %>
+<% if current_user %>
 <aside class="col-2 px-0 position-fixed bg-dark" id="left">
 <div class="w-100 aside-top">
 <div class="aside-margin">
-  <h6><%= current_user.email if user_signed_in? %><%= current_admin.email if admin_signed_in? %></h6>
+  <h6><%= current_user.email if user_signed_in? %></h6>
 <p>Année: <%= annee_active.libelle if annee_active? %></p>
 </div><br>
 <ul class="list-group">
@@ -51,7 +51,7 @@
   <a href="<%= versements_path %>"><li class="list-group-item"><i class="fas fa-credit-card"></i>&nbsp;&nbsp;VERSEMENTS</li></a><br>
   <a href="<%= caisses_path %>"><li class="list-group-item"><i class="fas fa-coins"></i>&nbsp;&nbsp;CAISSE</li></a><br>
 
-  <% if admin_signed_in? || current_user.categorie == "Directeur" %>
+  <% if Admin? || current_user.categorie == "Directeur" %>
     <a href="<%= configuration_path %>"><li class="list-group-item"><i class="fas fa-cogs"></i>&nbsp;&nbsp;CONFIGURATION</a></li>
   <% end %>
 
@@ -64,10 +64,6 @@
     <h6 class="text-center"><%= link_to 'Déconnexion', destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
   <% end %>
 
-<% if admin_signed_in? %>
-<h6 class="text-center"><%= link_to 'Déconnexion', destroy_admin_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' } %> &nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></h6>
-<% end %>
-
 </div>
 </aside>
 <% end %>
@@ -77,9 +73,34 @@
 <main class="col offset-2 h-100">
 <div class="row">
   <div class="col-12 py-2">
-      <p id="notice"><%= notice %></p>
-      <%= yield %>
+      <% if  user_signed_in? && Admin? %>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <% Ecole.all.each do |ecole| %>
+            <a class="nav-item nav-link" id="nav-<%= ecole.slug %>-tab" data-toggle="tab" href="#<%= ecole.slug %>" role="tab" aria-controls="<%= ecole.slug %>" aria-selected="true"><%= ecole.libelle %></a>
+          <% end %>
+       </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <% Ecole.all.each do |ecole| %>
+          <div class="tab-pane fade" id="<%= ecole.slug %>" role="tabpanel" aria-labelledby="<%= ecole.slug %>-tab">
+            <h1><%= ecole.libelle %></h1>
+            <%= yield %>
+          </div>
+        <% end %>
+      </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
   </div> 
   </body>
 </html>
-
+<script>
+  $('#search').on('input', () => {
+    let search = $('#search').val();
+    $.get('/matieres/search', { id_search: search }, (data) =>{
+      $('#tbody').empty()
+      $('#tbody').append(data);
+    })
+});
+</script>

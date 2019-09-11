@@ -15,26 +15,12 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admins", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
-  end
-
   create_table "annees", force: :cascade do |t|
     t.string "libelle"
     t.boolean "etat"
-    t.bigint "admin_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_annees_on_admin_id"
     t.index ["user_id"], name: "index_annees_on_user_id"
   end
 
@@ -42,13 +28,11 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
     t.bigint "montant"
     t.string "libelle"
     t.string "operation"
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
     t.bigint "ecole_id", null: false
     t.bigint "annee_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_caisses_on_admin_id"
     t.index ["annee_id"], name: "index_caisses_on_annee_id"
     t.index ["ecole_id"], name: "index_caisses_on_ecole_id"
     t.index ["user_id"], name: "index_caisses_on_user_id"
@@ -57,13 +41,12 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   create_table "classe_rooms", force: :cascade do |t|
     t.string "libelle"
     t.boolean "etat"
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
     t.bigint "montant"
     t.bigint "ecole_id", null: false
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_classe_rooms_on_admin_id"
     t.index ["ecole_id"], name: "index_classe_rooms_on_ecole_id"
     t.index ["user_id"], name: "index_classe_rooms_on_user_id"
   end
@@ -88,11 +71,9 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
     t.bigint "annee_id", null: false
     t.bigint "ecole_id", null: false
     t.bigint "semestre_id", null: false
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_cours_on_admin_id"
     t.index ["annee_id"], name: "index_cours_on_annee_id"
     t.index ["classe_room_id"], name: "index_cours_on_classe_room_id"
     t.index ["creneau_id"], name: "index_cours_on_creneau_id"
@@ -108,12 +89,10 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   create_table "creneaus", force: :cascade do |t|
     t.string "debut"
     t.string "fin"
-    t.bigint "admin_id"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.bigint "ecole_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_creneaus_on_admin_id"
     t.index ["ecole_id"], name: "index_creneaus_on_ecole_id"
     t.index ["user_id"], name: "index_creneaus_on_user_id"
   end
@@ -122,12 +101,10 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
     t.bigint "creneau_id", null: false
     t.bigint "enseignant_id", null: false
     t.bigint "jour_id", null: false
-    t.bigint "admin_id"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.bigint "ecole_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_disponibilites_on_admin_id"
     t.index ["creneau_id"], name: "index_disponibilites_on_creneau_id"
     t.index ["ecole_id"], name: "index_disponibilites_on_ecole_id"
     t.index ["enseignant_id"], name: "index_disponibilites_on_enseignant_id"
@@ -138,11 +115,10 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   create_table "dossiers", force: :cascade do |t|
     t.string "libelle"
     t.bigint "ecole_id", null: false
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_dossiers_on_admin_id"
     t.index ["ecole_id"], name: "index_dossiers_on_ecole_id"
     t.index ["user_id"], name: "index_dossiers_on_user_id"
   end
@@ -157,10 +133,11 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   create_table "ecoles", force: :cascade do |t|
     t.string "libelle"
     t.boolean "etat"
-    t.bigint "admin_id", null: false
+    t.string "slug"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_ecoles_on_admin_id"
+    t.index ["user_id"], name: "index_ecoles_on_user_id"
   end
 
   create_table "enseignants", force: :cascade do |t|
@@ -171,11 +148,9 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
     t.string "adresse"
     t.string "sexe"
     t.bigint "ecole_id", null: false
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_enseignants_on_admin_id"
     t.index ["ecole_id"], name: "index_enseignants_on_ecole_id"
     t.index ["user_id"], name: "index_enseignants_on_user_id"
   end
@@ -208,11 +183,9 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
     t.string "photo"
     t.string "autre"
     t.bigint "ecole_id", null: false
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_etudiants_on_admin_id"
     t.index ["classe_room_id"], name: "index_etudiants_on_classe_room_id"
     t.index ["ecole_id"], name: "index_etudiants_on_ecole_id"
     t.index ["user_id"], name: "index_etudiants_on_user_id"
@@ -221,26 +194,22 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   create_table "heures", force: :cascade do |t|
     t.string "libelle"
     t.bigint "ecole_id"
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_heures_on_admin_id"
     t.index ["ecole_id"], name: "index_heures_on_ecole_id"
     t.index ["user_id"], name: "index_heures_on_user_id"
   end
 
   create_table "inscriptions", force: :cascade do |t|
     t.bigint "etudiant_id", null: false
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
     t.bigint "annee_id", null: false
     t.bigint "classe_room_id", null: false
     t.bigint "ecole_id", null: false
     t.bigint "montant"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_inscriptions_on_admin_id"
     t.index ["annee_id"], name: "index_inscriptions_on_annee_id"
     t.index ["classe_room_id"], name: "index_inscriptions_on_classe_room_id"
     t.index ["ecole_id"], name: "index_inscriptions_on_ecole_id"
@@ -251,11 +220,9 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   create_table "jours", force: :cascade do |t|
     t.string "libelle"
     t.bigint "ecole_id"
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_jours_on_admin_id"
     t.index ["ecole_id"], name: "index_jours_on_ecole_id"
     t.index ["user_id"], name: "index_jours_on_user_id"
   end
@@ -263,11 +230,10 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   create_table "matieres", force: :cascade do |t|
     t.string "libelle"
     t.bigint "ecole_id", null: false
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_matieres_on_admin_id"
     t.index ["ecole_id"], name: "index_matieres_on_ecole_id"
     t.index ["user_id"], name: "index_matieres_on_user_id"
   end
@@ -275,11 +241,10 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   create_table "salles", force: :cascade do |t|
     t.string "libelle"
     t.bigint "ecole_id", null: false
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_salles_on_admin_id"
     t.index ["ecole_id"], name: "index_salles_on_ecole_id"
     t.index ["user_id"], name: "index_salles_on_user_id"
   end
@@ -287,11 +252,10 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   create_table "semestres", force: :cascade do |t|
     t.string "libelle"
     t.bigint "ecole_id", null: false
-    t.bigint "admin_id"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_semestres_on_admin_id"
     t.index ["ecole_id"], name: "index_semestres_on_ecole_id"
     t.index ["user_id"], name: "index_semestres_on_user_id"
   end
@@ -318,10 +282,8 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
     t.datetime "date_derniere_connexion"
     t.datetime "date_derniere_deconnexion"
     t.bigint "crea_user"
-    t.bigint "admin_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_users_on_admin_id"
     t.index ["ecole_id"], name: "index_users_on_ecole_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -329,32 +291,26 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
 
   create_table "versements", force: :cascade do |t|
     t.bigint "montant"
-    t.bigint "user_id"
-    t.bigint "admin_id"
+    t.bigint "user_id", null: false
     t.bigint "ecole_id", null: false
     t.bigint "annee_id", null: false
     t.bigint "etudiant_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_versements_on_admin_id"
     t.index ["annee_id"], name: "index_versements_on_annee_id"
     t.index ["ecole_id"], name: "index_versements_on_ecole_id"
     t.index ["etudiant_id"], name: "index_versements_on_etudiant_id"
     t.index ["user_id"], name: "index_versements_on_user_id"
   end
 
-  add_foreign_key "annees", "admins"
   add_foreign_key "annees", "users"
-  add_foreign_key "caisses", "admins"
   add_foreign_key "caisses", "annees"
   add_foreign_key "caisses", "ecoles"
   add_foreign_key "caisses", "users"
-  add_foreign_key "classe_rooms", "admins"
   add_foreign_key "classe_rooms", "ecoles"
   add_foreign_key "classe_rooms", "users"
   add_foreign_key "classe_rooms_matieres", "classe_rooms"
   add_foreign_key "classe_rooms_matieres", "matieres"
-  add_foreign_key "cours", "admins"
   add_foreign_key "cours", "annees"
   add_foreign_key "cours", "classe_rooms"
   add_foreign_key "cours", "creneaus"
@@ -365,50 +321,38 @@ ActiveRecord::Schema.define(version: 2019_08_29_130425) do
   add_foreign_key "cours", "salles"
   add_foreign_key "cours", "semestres"
   add_foreign_key "cours", "users"
-  add_foreign_key "creneaus", "admins"
   add_foreign_key "creneaus", "ecoles"
   add_foreign_key "creneaus", "users"
-  add_foreign_key "disponibilites", "admins"
   add_foreign_key "disponibilites", "creneaus"
   add_foreign_key "disponibilites", "ecoles"
   add_foreign_key "disponibilites", "enseignants"
   add_foreign_key "disponibilites", "jours"
   add_foreign_key "disponibilites", "users"
-  add_foreign_key "dossiers", "admins"
   add_foreign_key "dossiers", "ecoles"
   add_foreign_key "dossiers", "users"
-  add_foreign_key "ecoles", "admins"
-  add_foreign_key "enseignants", "admins"
+  add_foreign_key "ecoles", "users"
   add_foreign_key "enseignants", "ecoles"
   add_foreign_key "enseignants", "users"
   add_foreign_key "enseignants_matieres", "enseignants"
   add_foreign_key "enseignants_matieres", "matieres"
-  add_foreign_key "etudiants", "admins"
   add_foreign_key "etudiants", "classe_rooms"
   add_foreign_key "etudiants", "ecoles"
   add_foreign_key "etudiants", "users"
-  add_foreign_key "heures", "admins"
   add_foreign_key "heures", "ecoles"
   add_foreign_key "heures", "users"
-  add_foreign_key "inscriptions", "admins"
   add_foreign_key "inscriptions", "annees"
   add_foreign_key "inscriptions", "classe_rooms"
   add_foreign_key "inscriptions", "ecoles"
   add_foreign_key "inscriptions", "etudiants"
   add_foreign_key "inscriptions", "users"
-  add_foreign_key "jours", "admins"
   add_foreign_key "jours", "ecoles"
   add_foreign_key "jours", "users"
-  add_foreign_key "matieres", "admins"
   add_foreign_key "matieres", "ecoles"
   add_foreign_key "matieres", "users"
-  add_foreign_key "salles", "admins"
   add_foreign_key "salles", "ecoles"
   add_foreign_key "salles", "users"
-  add_foreign_key "semestres", "admins"
   add_foreign_key "semestres", "ecoles"
   add_foreign_key "semestres", "users"
-  add_foreign_key "versements", "admins"
   add_foreign_key "versements", "annees"
   add_foreign_key "versements", "ecoles"
   add_foreign_key "versements", "etudiants"

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     unauthenticated :user do
       root :to => 'users/sessions#new', as: :unauthenticated_root
     end
-end
+  end
 
   resources :cours do
     collection do

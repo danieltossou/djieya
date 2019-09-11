@@ -27,13 +27,7 @@ class SemestresController < ApplicationController
   # POST /semestres.json
   def create
 
-    if current_admin
-      @semestre = current_admin.semestres.new(semestre_params)
-    elsif current_user
-      @semestre = current_user.semestres.new(semestre_params)
-    else
-      redirect_to new_semestre_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+    @semestre = current_user.semestres.new(semestre_params)
 
     respond_to do |format|
       if @semestre.save

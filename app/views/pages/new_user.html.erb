@@ -72,11 +72,17 @@
             
                 </div>
                 </div>
-            
+            <% if Admin? %>
+                <div class="field">
+                    <%= f.label :Categorie %>
+                    <%= f.select :categorie, ['Directeur', 'Comptable', 'Secretaire', 'Autre'], :class => 'form-control' %>
+                </div>
+            <% else %>
                 <div class="field">
                     <%= f.label :Categorie %>
                     <%= f.select :categorie, ['Comptable', 'Secretaire', 'Autre'], :class => 'form-control' %>
                 </div>
+            <% end %>
         
             <div class="actions">
             <%= f.submit "VALIDER", :class => 'btn btn-success' %>

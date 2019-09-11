@@ -1,4 +1,5 @@
 class Cour < ApplicationRecord
+  belongs_to :user
   belongs_to :enseignant
   belongs_to :matiere
   belongs_to :classe_room

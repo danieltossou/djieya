@@ -12,9 +12,8 @@
         <thead class="thead-dark">
           <tr>
             <th>Libelle</th>
-            <th>Admin</th>
             <th>Utilisateur</th>
-            <% if admin_signed_in? %>
+            <% if Admin? %>
             <th colspan="1">Action</th>
             <% end %>
           </tr>
@@ -24,10 +23,9 @@
           <% @semestres.each do |semestre| %>
           <tr>
             <td><%= semestre.libelle %></td>
-            <td><%= Admin.find_by_id(semestre.admin_id).email if semestre.admin_id %></td>
-            <td><%= User.find_by_id(semestre.user_id).email if semestre.user_id %></td>
+            <td><%= semestre.user.email if semestre.user_id %></td>
             <!-- <td><%= link_to 'Show', semestre %></td> -->
-            <% if admin_signed_in? %>
+            <% if Admin? %>
               <td><%= link_to 'Modifier', edit_semestre_path(semestre), :class => 'action-link-color' %></td>
             <% end %>
             <!--<td><%= link_to 'Destroy', semestre, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->

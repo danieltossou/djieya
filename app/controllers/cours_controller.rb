@@ -34,19 +34,6 @@ class CoursController < ApplicationController
       @nombre_heure = params[:cour][:creneau_fin].to_i - params[:cour][:creneau_debut].to_i + 1
       @classe_rooms = params[:cour][:classe_room_id]
 
-    if current_admin
-      
-        # Enregistrement des cours pour chaque creneau
-        @nombre_heure.times do 
-          # Enregistrement pour chaque chaque par creneau
-          @classe_rooms.size.times do |i|
-            @cour = current_admin.cours.create(enseignant_id: params[:cour][:enseignant_id], matiere_id: params[:cour][:matiere_id], salle_id: params[:cour][:salle_id], creneau_id: @creneau, jour_id: params[:cour][:jour_id], nombre_heure: @nombre_heure, annee_id: params[:cour][:annee_id], ecole_id: params[:cour][:ecole_id], semestre_id: params[:cour][:annee_id], classe_room_id: @classe_rooms[i])
-          end
-          @creneau = @creneau + 1
-        end
-
-    elsif current_user
-
         # Enregistrement des cours pour chaque creneau
         @nombre_heure.times do 
           # Enregistrement pour chaque chaque par creneau
@@ -56,7 +43,6 @@ class CoursController < ApplicationController
           @creneau = @creneau + 1
         end
 
-     end
 
     respond_to do |format|
       if @cour
@@ -156,6 +142,6 @@ class CoursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cour_params
-      params.require(:cour).permit(:enseignant_id, :matiere_id, :salle_id, :creneau_debut, :creneau_fin, :jour_id, :nombre_heure, :numero_cours, :numero_cours_g, :annee_id, :ecole_id, :semestre_id, :user_id, :admin_id, :first_classe_room_id, :classe_room_id)
+      params.require(:cour).permit(:enseignant_id, :matiere_id, :salle_id, :creneau_debut, :creneau_fin, :jour_id, :nombre_heure, :numero_cours, :numero_cours_g, :annee_id, :ecole_id, :semestre_id, :user_id, :first_classe_room_id, :classe_room_id)
     end
 end

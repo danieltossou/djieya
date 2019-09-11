@@ -26,13 +26,7 @@ class CreneausController < ApplicationController
   # POST /creneaus.json
   def create
 
-    if current_admin
-      @creneau = current_admin.creneaus.new(creneau_params)
-    elsif current_user
-      @creneau = current_user.creneaus.new(creneau_params)
-    else
-      redirect_to new_creneau_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+    @creneau = current_user.creneaus.new(creneau_params)
 
     respond_to do |format|
       if @creneau.save
@@ -88,6 +82,6 @@ class CreneausController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def creneau_params
       params[:creneau][:ecole_id] = ecole.id
-      params.require(:creneau).permit(:debut, :fin, :admin_id, :user_id, :ecole_id)
+      params.require(:creneau).permit(:debut, :fin, :user_id, :ecole_id)
     end
 end

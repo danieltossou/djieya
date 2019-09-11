@@ -8,7 +8,7 @@
         <td><%= etudiant.ecole.libelle %></td>
         <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
         <td><%= link_to 'Show', etudiant %></td>
-        <% if admin_signed_in? %>
+        <% if Admin? %>
             <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
         <% end %>
     </tr>

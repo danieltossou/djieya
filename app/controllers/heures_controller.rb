@@ -27,13 +27,7 @@ class HeuresController < ApplicationController
   # POST /heures.json
   def create
 
-    if current_admin
-      @heure = current_admin.heures.new(heure_params)
-    elsif current_user
-      @heure = current_user.heures.new(heure_params)
-    else
-      redirect_to new_heure_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+    @heure = current_user.heures.new(heure_params)
 
     respond_to do |format|
       if @heure.save
@@ -79,6 +73,6 @@ class HeuresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def heure_params
       params[:heure][:ecole_id] = ecole.id if ecole?
-      params.require(:heure).permit(:libelle, :ecole_id, :user_id, :admin_id)
+      params.require(:heure).permit(:libelle, :ecole_id, :user_id)
     end
 end

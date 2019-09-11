@@ -1,4 +1,5 @@
 class Disponibilite < ApplicationRecord
+  belongs_to :user
   has_many :creneaus
   belongs_to :creneau
   belongs_to :enseignant

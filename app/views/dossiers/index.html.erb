@@ -13,7 +13,7 @@
           <tr>
             <th>Libelle</th>
             <th>Ecole</th>
-            <% if admin_signed_in? %>
+            <% if Admin? %>
             <th colspan="1">Action</th>
             <% end %>
           </tr>
@@ -25,7 +25,7 @@
               <td><%= dossier.libelle %></td>
               <td><%= dossier.ecole.libelle %></td>
               <!-- <td><%= link_to 'Show', dossier %></td> -->
-              <% if admin_signed_in? %>
+              <% if Admin? %>
                 <td><%= link_to 'Modifier', edit_dossier_path(dossier), :class => 'action-link-color' %></td>
               <% end %>
               <!-- <td><%= link_to 'Destroy', dossier, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->

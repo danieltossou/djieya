@@ -14,7 +14,7 @@
             <th>Libelle</th>
             <th>Etat</th>
             <th>Admin</th>
-            <% if admin_signed_in? %>
+            <% if Admin? %>
             <th colspan="1">Action</th>
             <% end %>
           </tr>
@@ -25,8 +25,8 @@
             <tr>
               <td><%= annee.libelle %></td>
               <td><%= "Active " if annee.etat %><%= "Non active " if !annee.etat %></td>
-              <td><%= annee.admin.email %></td>
-              <% if admin_signed_in? %>
+              <td><%= annee.user.email %></td>
+              <% if Admin? %>
                 <td><%= link_to 'Modifier', edit_annee_path(annee), :class => 'action-link-color' %></td>
               <% end %>
               <!--<td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->

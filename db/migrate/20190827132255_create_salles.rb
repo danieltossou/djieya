@@ -3,8 +3,8 @@ class CreateSalles < ActiveRecord::Migration[6.0]
     create_table :salles do |t|
       t.string :libelle
       t.references :ecole, null: false, foreign_key: true
-      t.references :user, null: true, foreign_key: true
-      t.references :admin, null: true, foreign_key: true
+      t.references :user, null: false, foreign_key: true
+      t.string :slug
 
       t.timestamps
     end

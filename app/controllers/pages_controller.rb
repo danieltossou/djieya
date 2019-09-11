@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   #authorize_resource :class => pages
-  skip_before_action :est_connecte?, on: :index
 
   def index
   end
@@ -13,13 +12,7 @@ class PagesController < ApplicationController
   def create_user
     authorize! :create_user, :pages
 
-    if admin_signed_in?
-      @user = current_admin.users.new(user_params)
-    elsif user_signed_in?
-      @user = User.new(user_params)
-    else
-      redirect_to root_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end 
+    @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
@@ -38,7 +31,7 @@ class PagesController < ApplicationController
 
     @ecole = ecole.id if ecole?
 
-    if admin_signed_in?
+    if current_user.categorie == "Admin"
       @users = User.ecole(@ecole).all.page(params[:page])
     elsif user_signed_in?
       @users = User.ecole(@ecole).where.not(categorie: 'Directeur').all.page(params[:page])
@@ -193,7 +186,7 @@ class PagesController < ApplicationController
     if user_signed_in?
       params[:user][:crea_user] = current_user.id
     end
-    params.require(:user).permit(:nom, :prenom, :adresse, :contact, :sexe, :matricule, :etat, :categorie, :ecole_id, :admin_id, :crea_user, :email, :password, :password_confirmation)
+    params.require(:user).permit(:nom, :prenom, :adresse, :contact, :sexe, :matricule, :etat, :categorie, :ecole_id, :crea_user, :email, :password, :password_confirmation)
   end
 
 end

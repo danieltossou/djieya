@@ -15,9 +15,8 @@
           <tr>
             <th>Libelle</th>
             <th>Ecole</th>
-            <th>Admin</th>
             <th>Utilisateur</th>
-            <% if admin_signed_in? %>
+            <% if Admin? %>
             <th colspan="1">Action</th>
             <% end %>
           </tr>
@@ -28,10 +27,9 @@
           <tr>
             <td><%= matiere.libelle %></td>
             <td><%= matiere.ecole.libelle %></td>
-            <td><%= Admin.find_by_id(matiere.admin_id).email if matiere.admin_id %></td>
-            <td><%= User.find_by_id(matiere.user_id).email if matiere.user_id %></td>
+            <td><%= matiere.user.email if matiere.user_id %></td>
             <!-- <td><%= link_to 'Show', matiere %></td> -->
-            <% if admin_signed_in? %>
+            <% if Admin? %>
               <td><%= link_to 'Modifier', edit_matiere_path(matiere), :class => 'action-link-color' %></td>
             <% end %>
             <!--<td><%= link_to 'Destroy', matiere, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->

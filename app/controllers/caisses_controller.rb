@@ -51,13 +51,7 @@ class CaissesController < ApplicationController
   # POST /caisses.json
   def create
     authorize! :create, Caisse
-    if current_admin
-      @caisse = current_admin.caisses.new(caisse_params)
-    elsif current_user
-      @caisse = current_user.caisses.new(caisse_params)
-    else
-      redirect_to new_caisse_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+    @caisse = current_user.caisses.new(caisse_params)
 
     respond_to do |format|
       if @caisse.save
@@ -114,14 +108,7 @@ class CaissesController < ApplicationController
     params[:caisse][:ecole_id] = ecole.id if ecole?
     params[:caisse][:annee_id] = annee_active.id if annee_active?
 
-    if admin_signed_in?
-      @caisse = Caisse.new(montant: params[:caisse][:montant], libelle: params[:caisse][:libelle], operation: params[:caisse][:operation], admin_id: current_admin.id, ecole_id: params[:caisse][:ecole_id], annee_id: params[:caisse][:annee_id])
-    elsif user_signed_in?
-      @caisse = Caisse.new(montant: params[:caisse][:montant], libelle: params[:caisse][:libelle], operation: params[:caisse][:operation], user_id: current_user.id, ecole_id: params[:caisse][:ecole_id], annee_id: params[:caisse][:annee_id])
-    else
-      redirect_to new_caisse_path, notice: 'Vous devez etre connecté pour effectuer cette operation.'
-    end
-
+    @caisse = Caisse.new(montant: params[:caisse][:montant], libelle: params[:caisse][:libelle], operation: params[:caisse][:operation], user_id: current_user.id, ecole_id: params[:caisse][:ecole_id], annee_id: params[:caisse][:annee_id])
     respond_to do |format|
       if @caisse.save
         format.html { redirect_to caisses_url, notice: 'Caisse was successfully created.' }
@@ -143,13 +130,13 @@ class CaissesController < ApplicationController
     def caisse_params
       params[:caisse][:ecole_id] = ecole.id if ecole?
       params[:caisse][:annee_id] = annee_active.id if annee_active?
-      params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :admin_id, :ecole_id, :annee_id)
+      params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :ecole_id, :annee_id)
     end
 
     def depense_params
       params[:caisse][:operation] = "sortie"
       params[:caisse][:ecole_id] = ecole.id if ecole?
       params[:caisse][:annee_id] = annee_active.id if annee_active?
-      params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :admin_id, :ecole_id, :annee_id)
+      params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :ecole_id, :annee_id)
     end
 end

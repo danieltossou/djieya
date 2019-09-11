@@ -20,7 +20,6 @@ class User < ApplicationRecord
   has_many :disponibilites
   has_many :semestres
   has_many :cours
-  # belongs_to :admin
 
   default_scope { order(nom: :asc) }
   scope :ecole, -> (ecole) { where(ecole_id: ecole) }

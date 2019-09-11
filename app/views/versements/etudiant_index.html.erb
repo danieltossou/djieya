@@ -10,7 +10,6 @@
         <thead class="thead-dark">
           <tr>
             <th>Montant</th>
-            <th>Admin</th>
             <th>User</th>
             <th>Ecole</th>
             <th>Annee</th>
@@ -22,8 +21,7 @@
           <% @versements.each do |versement| %>
             <tr>
               <td><%= versement.montant %></td>
-              <td><%= Admin.find_by_id(versement.admin_id).email if versement.admin_id %></td>
-              <td><%= User.find_by_id(versement.user_id).email if versement.user_id %></td>
+              <td><%= versement.user.email if versement.user_id %></td>
               <td><%= versement.ecole.libelle %></td>
               <td><%= versement.annee.libelle %></td>
               <!-- <td><%= link_to 'Show', versement %></td>

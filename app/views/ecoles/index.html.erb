@@ -30,9 +30,9 @@
               <tr>
                 <td><%= ecole.libelle %></td>
                 <td><%= ecole.etat %></td>
-                <td><%= ecole.admin_id %></td>
+                <td><%= ecole.user_id %></td>
                 <td><%= link_to 'Show', ecole %></td>
-                <% if admin_signed_in? %>
+                <% if Admin? %>
                   <td><%= link_to 'Edit', edit_ecole_path(ecole) %></td>
                 <% end %>
                 <!--<td><%= link_to 'Destroy', ecole, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->

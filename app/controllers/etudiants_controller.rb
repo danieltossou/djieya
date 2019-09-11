@@ -27,13 +27,8 @@ class EtudiantsController < ApplicationController
   # POST /etudiants
   # POST /etudiants.json
   def create
-    if current_admin
-      @etudiant = current_admin.etudiants.new(etudiant_params)
-    elsif current_user
       @etudiant = current_user.etudiants.new(etudiant_params)
-    else
-      redirect_to new_etudiant_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+      
     @montant = @etudiant.classe_room.montant
     respond_to do |format|
       if @etudiant.save

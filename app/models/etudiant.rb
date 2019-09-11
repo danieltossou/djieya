@@ -1,4 +1,5 @@
 class Etudiant < ApplicationRecord
+  belongs_to :user
   belongs_to :classe_room
   belongs_to :ecole
   has_one :inscription
@@ -17,7 +18,7 @@ class Etudiant < ApplicationRecord
     @montant = @etudiant.classe_room.montant
     @a = Annee.where(etat: true).first
     @annee = @a.id
-    Inscription.create(etudiant_id: @etudiant.id, user_id: @etudiant.user_id, admin_id: @etudiant.admin_id, annee_id: @annee, classe_room_id: @etudiant.classe_room_id, ecole_id: @etudiant.ecole_id, montant: @montant)
+    Inscription.create(etudiant_id: @etudiant.id, user_id: @etudiant.user_id, annee_id: @annee, classe_room_id: @etudiant.classe_room_id, ecole_id: @etudiant.ecole_id, montant: @montant)
   end
 
 

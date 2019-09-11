@@ -26,13 +26,8 @@ class AnneesController < ApplicationController
   # POST /annees
   # POST /annees.json
   def create
-    if current_admin
-      @annee = current_admin.annees.new(annee_params)
-    elsif current_user
-      @annee = current_user.annees.new(annee_params)
-    else
-      redirect_to new_annee_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+
+    @annee = current_user.annees.new(annee_params)
 
     respond_to do |format|
       if @annee.save
@@ -87,6 +82,6 @@ class AnneesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def annee_params
-      params.require(:annee).permit(:libelle, :etat, :admin_id)
+      params.require(:annee).permit(:libelle, :etat, :user_id)
     end
 end

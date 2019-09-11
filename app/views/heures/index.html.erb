@@ -8,7 +8,6 @@
       <th>Libelle</th>
       <th>Ecole</th>
       <th>User</th>
-      <th>Admin</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,7 +18,6 @@
         <td><%= heure.libelle %></td>
         <td><%= heure.ecole_id %></td>
         <td><%= heure.user_id %></td>
-        <td><%= heure.admin_id %></td>
         <td><%= link_to 'Show', heure %></td>
         <td><%= link_to 'Edit', edit_heure_path(heure) %></td>
         <td><%= link_to 'Destroy', heure, method: :delete, data: { confirm: 'Are you sure?' } %></td>

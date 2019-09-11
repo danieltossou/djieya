@@ -28,13 +28,7 @@ class JoursController < ApplicationController
   # POST /jours.json
   def create
 
-    if current_admin
-      @jour = current_admin.jours.new(jour_params)
-    elsif current_user
-      @jour = current_user.jours.new(jour_params)
-    else
-      redirect_to new_jour_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+    @jour = current_user.jours.new(jour_params)
 
     respond_to do |format|
       if @jour.save
@@ -90,6 +84,6 @@ class JoursController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def jour_params
       params[:jour][:ecole_id] = ecole.id if ecole?
-      params.require(:jour).permit(:libelle, :ecole_id, :user_id, :admin_id)
+      params.require(:jour).permit(:libelle, :ecole_id, :user_id)
     end
 end

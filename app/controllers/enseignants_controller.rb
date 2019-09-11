@@ -28,13 +28,7 @@ class EnseignantsController < ApplicationController
   # POST /enseignants.json
   def create
 
-    if current_admin
-      @enseignant = current_admin.enseignants.new(enseignant_params)
-    elsif current_user
-      @enseignant = current_user.enseignants.new(enseignant_params)
-    else
-      redirect_to new_enseignant_path, notice: 'Vous devez etre connecté pour effectuer cette operation.' 
-    end
+    @enseignant = current_user.enseignants.new(enseignant_params)
 
     respond_to do |format|
       if @enseignant.save
@@ -90,6 +84,6 @@ class EnseignantsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def enseignant_params
       params[:enseignant][:ecole_id] = ecole.id if ecole?
-      params.require(:enseignant).permit(:nom, :prenom, :sexe, :contact, :email, :adresse, :ecole_id, :user_id, :admin_id, matiere_ids: [])
+      params.require(:enseignant).permit(:nom, :prenom, :sexe, :contact, :email, :adresse, :ecole_id, :user_id, matiere_ids: [])
     end
 end

@@ -34,7 +34,7 @@
               <td><%= etudiant.ecole.libelle %></td>
               <td><%= link_to 'Versement', etudiant_versements_path(etudiant), :class => 'action-link-color' %></td>
               <!-- <td><%= link_to 'Show', etudiant, :class => 'action-link-color' %></td> -->
-              <% if admin_signed_in? %>
+              <% if Admin? %>
                 <td><%= link_to 'Modifier', edit_etudiant_path(etudiant), :class => 'action-link-color' %></td>
               <% end %>
                 <!-- <td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->

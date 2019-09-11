@@ -1,4 +1,5 @@
 class Semestre < ApplicationRecord
+  belongs_to :user
   belongs_to :ecole
   
   default_scope { order(libelle: :asc) }
