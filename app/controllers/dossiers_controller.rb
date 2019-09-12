@@ -1,7 +1,6 @@
 class DossiersController < ApplicationController
   before_action :set_dossier, only: [:show, :edit, :update, :destroy]
   #load_and_authorize_resource
-  skip_before_action :est_connecte?, only: :new
   
   # GET /dossiers
   # GET /dossiers.json
