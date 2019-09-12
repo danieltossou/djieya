@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <% @ecoles.each do |ecole| %>
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3><%= ecole.libelle %></h3>
+                    <%= form_for(@ecole, url: ecoles_liste_choix_path, method: :post) do |f| %>
+                        <button type="submit" class="btn btn-success" style="float: right">Sélectionner</button>
+                        <input type="hidden" value="<%= ecole.id %>" name="ecole">
+                    <% end %>
+                </div>
+                <div class="card-body">
+                    <%= image_tag 'university.png', :class => 'img-responsive' %>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

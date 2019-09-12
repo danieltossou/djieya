@@ -18,7 +18,7 @@
             <th>Classe</th>
             <th>Oriente</th>
             <th>Ecole</th>
-            <!-- <th colspan="2">Actions</th> -->
+            <th colspan="2">Actions</th>
           </tr>
         </thead>
       
@@ -33,7 +33,7 @@
             <td><%= 'Oui' if etudiant.oriente %><%= 'Non' if !etudiant.oriente %></td>
             <td><%= etudiant.ecole.libelle %></td>
             <!-- <td><%= link_to 'Versement', etudiant_versements_path(etudiant), :class => 'action-link-color' %></td> -->
-            <!-- <td><%= link_to 'Afficher', etudiant, :class => 'action-link-color' %></td> -->
+            <td><%= link_to 'Afficher', etudiant, :class => 'action-link-color' %></td>
             <% if Admin? %>
               <td><%= link_to 'Modifier', edit_etudiant_path(etudiant), :class => 'action-link-color' %></td>
             <% end %>

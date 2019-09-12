@@ -2,65 +2,82 @@
 
 <div class="container">
   <div class="row">
-    <div class="media">
-        <%= image_tag(@etudiant.photo_url, class: "mr-3 img-responsive img-circle") if @etudiant.photo_url %>
-        <div class="media-body">
-          <h4>
-            <%= @etudiant.nom %>&nbsp;
-            <%= @etudiant.prenom %>
-          </h4>
-          <p><%= @etudiant.nationnalite %> &nbsp;&nbsp; <%= @etudiant.sexe %></p>
+    <div class="card col-12 etudiant-card-space">
+      <div class="card-body">
+        <div class="col-4">
+            <%= image_tag(@etudiant.photo_url, class: "mr-3 img-responsive img-circle") if @etudiant.photo_url %>
         </div>
+        <div class="col-8">
+            <h4>
+              <%= @etudiant.nom %>&nbsp;
+              <%= @etudiant.prenom %>
+            </h4><br>
+            <p><%= @etudiant.nationnalite %> &nbsp;&nbsp; <%= @etudiant.sexe %></p>
+            <p>Né le <%= @etudiant.date_naissance %></p>,&nbsp;
+            <p>
+              De matricule:
+              <strong><%= @etudiant.matricule %></strong>
+            </p>
+            <p>
+              Habite au:
+              <%= @etudiant.adresse %>
+            </p>
+            <p><%= @etudiant.email %> - <%= @etudiant.contact %></p>
       </div>
-      <p>Né le <%= @etudiant.date_naissance %></p>,&nbsp;
-      <p>
-        De matricule:
-        <strong><%= @etudiant.matricule %></strong>
-      </p>
-      <p>
-        Habite au:
-        <%= @etudiant.adresse %>
-      </p>
-      <p><%= @etudiant.email %> - <%= @etudiant.contact %></p>
-      <h5>INFORMATIONS SCOLAIRES</h5>
-      <p>
-        Numéro inscription:
-        <strong><%= @etudiant.num_inscription %></strong><br>
-        Ecole:
-        <strong><%= @etudiant.ecole.libelle %></strong><br>
-        Classe:
-        <%= @etudiant.classe_room.libelle %><br>
-        Orienté? <strong><%= @etudiant.oriente %></strong>
-      </p>
-      <h5>AUTRES INFOS UTILES</h5>
-      <p>
-        Maladies connues:<br>
-        <%= @etudiant.maladie %>
-      </p>
-      <p>
-        Nom parent:
-        <%= @etudiant.nom_parent %>
-      </p>
-      <p>
-        Contact parent:
-        <%= @etudiant.contact_parent %>
-      </p>
-      <p>
-        Lien parente:
-        <%= @etudiant.lien_parente %>
-      </p>
-      <p>
-        Email parent:
-        <%= @etudiant.email_parent %>
-      </p>
-      <% unless @etudiant.dossiers.empty? %>
-          <p><b>Dossiers fournis</b></p>
-          <p><%= @etudiant.dossiers.map(&:libelle).join(' - ') %></p>
-      <% end %>
-      <p>
-        Autre:
-        <%= @etudiant.autre %>
-      </p>
+      </div>
+    </div>
+     <div class="col">
+        <h5>INFORMATIONS SCOLAIRES</h5><br>
+        <p>
+          Numéro inscription:
+          <strong><%= @etudiant.num_inscription %></strong>
+        </p>
+        <p>
+          Ecole:
+          <strong><%= @etudiant.ecole.libelle %></strong>
+        </p>
+        <p>
+          Classe:
+          <%= @etudiant.classe_room.libelle %>
+        </p>
+        <p>
+          Orienté? <strong><%= @etudiant.oriente %></strong>
+        </p>
+     </div> 
+
+     <div class="col">
+        <h5>AUTRES INFOS UTILES</h5>
+        <p>
+          Maladies connues:<br>
+          <%= @etudiant.maladie %>
+        </p>
+        <p>
+          Nom parent:
+          <%= @etudiant.nom_parent %>
+        </p>
+        <p>
+          Contact parent:
+          <%= @etudiant.contact_parent %>
+        </p>
+        <p>
+          Lien parente:
+          <%= @etudiant.lien_parente %>
+        </p>
+        <p>
+          Email parent:
+          <%= @etudiant.email_parent %>
+        </p>
+        <% unless @etudiant.dossiers.empty? %>
+            <p><b>Dossiers fournis</b></p>
+            <p><%= @etudiant.dossiers.map(&:libelle).join(' - ') %></p>
+        <% end %>
+        <p>
+          Autre:
+          <%= @etudiant.autre %>
+        </p>
+     </div> 
+      
+      
   </div>
 </div>
 <%= link_to 'RETOUR', etudiants_path, :class => 'btn btn-default' %>

@@ -16,7 +16,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'Utilisateur was successfully created.' }
+        format.html { redirect_to users_path, notice: 'Utilisateur was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new_user }
@@ -166,6 +166,16 @@ class PagesController < ApplicationController
     if request.xhr?
       render :partial => 'users', locals: {:users => @users}
     end
+  end
+
+  def ecoles_liste
+    @ecoles = Ecole.all
+    @ecole = Ecole.new
+  end
+
+  def ecoles_liste_choix
+    puts session[:ecole_id] = params[:ecole]
+    redirect_to dashboard_path
   end
   
   def user_params
