@@ -31,7 +31,6 @@ class Users::SessionsController < Devise::SessionsController
     else
       session.clear
       redirect_to user_session_path, notice: "Désolé votre compte à été desactiver"
-      return
     end
   end
 

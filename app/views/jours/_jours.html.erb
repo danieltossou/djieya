@@ -1,12 +1,13 @@
-<% jours.each do |jour| %>
-      <tr>
-        <td><%= jour.libelle %></td>
-        <td><%= jour.ecole_id %></td>
-        <td><%= jour.user.email if jour.user_id %></td>
-        <td><%= link_to 'Show', jour %></td>
-        <% if Admin? %>
-          <td><%= link_to 'Edit', edit_jour_path(jour) %></td>
-        <% end %>
-        <!--<td><%= link_to 'Destroy', jour, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-      </tr>
+
+    <% jours.each do |jour| %>
+    <tr>
+      <td><%= jour.libelle %></td>
+      <td><%= jour.ecole_id %></td>
+      <td><%= jour.user.email if jour.user_id %></td>
+      <td><%= link_to 'Show', jour %></td>
+      <% if Admin? %>
+        <td><%= link_to 'Edit', edit_jour_path(jour) %></td>
+      <% end %>
+      <!--<td><%= link_to 'Destroy', jour, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    </tr>
     <% end %>

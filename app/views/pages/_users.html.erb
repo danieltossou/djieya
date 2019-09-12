@@ -1,19 +1,22 @@
 
-          <% users.each do |user| %>
-          <tr>
-            <td><%= user.email %></td>
-            <td><%= user.nom %></td>
-            <td><%= user.prenom %></td>
-            <td><%= user.contact %></td>
-            <td><%= 'Connecter' if user.presence %><%= 'Non connecter' if !user.presence %></td>
-            <td><%= user.date_derniere_connexion %></td>
-            <td><%= user.date_derniere_deconnexion %></td>
-            <td>
-              <%= link_to 'Activer', activer_path(user), method: :put unless user.etat %> 
-              <%= link_to 'Desactiver', desactiver_path(user), method: :patch, data: { confirm: 'Voulez-vous desactiver l\'user?' } if user.etat %> 
-    
-            </td>
-            <td><%= link_to 'Show', user %></td>
-            <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
-          </tr>
-        <% end %>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.nom %></td>
+      <td><%= user.prenom %></td>
+      <td><%= user.contact %></td>
+      <td><%= 'Connecter' if user.presence %><%= 'Non connecter' if !user.presence %></td>
+      <td><%= user.date_derniere_connexion %></td>
+      <td><%= user.date_derniere_deconnexion %></td>
+      <td>
+        <%= link_to 'Activer', activer_path(user), :class => 'action-link-color', method: :put unless user.etat %> 
+        <%= link_to 'Desactiver', desactiver_path(user), :class => 'action-link-color', method: :patch, data: { confirm: 'Voulez-vous desactiver l\'user?' } if user.etat %> 
+
+      </td>
+      <!-- <td><%= link_to 'Afficher', user, :class => 'action-link-color' %></td> -->
+      <% if Admin? %>
+      <!--  <td><%= link_to 'Modifier', edit_user_registration_path(user), :class => 'action-link-color' %></td> -->
+      <% end %>
+      <!-- <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+    </tr>
+  <% end %>

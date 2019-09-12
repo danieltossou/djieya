@@ -1,10 +1,11 @@
-<% semestres.each do |semestre| %>
+
+          <% @semestres.each do |semestre| %>
           <tr>
             <td><%= semestre.libelle %></td>
             <td><%= semestre.user.email if semestre.user_id %></td>
-            <td><%= link_to 'Show', semestre %></td>
+            <!-- <td><%= link_to 'Show', semestre %></td> -->
             <% if Admin? %>
-              <td><%= link_to 'Edit', edit_semestre_path(semestre) %></td>
+              <td><%= link_to 'Modifier', edit_semestre_path(semestre), :class => 'action-link-color' %></td>
             <% end %>
             <!--<td><%= link_to 'Destroy', semestre, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
           </tr>

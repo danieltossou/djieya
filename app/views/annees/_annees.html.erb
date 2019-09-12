@@ -1,12 +1,11 @@
 <% annees.each do |annee| %>
     <tr>
-    <td><%= annee.libelle %></td>
-    <td><%= "Active " if annee.etat %><%= "Non active " if !annee.etat %></td>
-    <td><%= annee.user.email %></td>
-    <td><%= link_to 'Show', annee %></td>
-    <% if Admin? %>
-        <td><%= link_to 'Edit', edit_annee_path(annee) %></td>
-    <% end %>
-    <!--<td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+        <td><%= annee.libelle %></td>
+        <td><%= "Active " if annee.etat %><%= "Non active " if !annee.etat %></td>
+        <td><%= annee.user.email %></td>
+        <% if Admin? %>
+        <td><%= link_to 'Modifier', edit_annee_path(annee), :class => 'action-link-color' %></td>
+        <% end %>
+        <!--<td><%= link_to 'Destroy', annee, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
     </tr>
 <% end %>

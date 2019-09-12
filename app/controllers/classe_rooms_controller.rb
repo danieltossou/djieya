@@ -83,6 +83,6 @@ class ClasseRoomsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def classe_room_params
       params[:classe_room][:ecole_id] = ecole.id if ecole?
-      params.require(:classe_room).permit(:libelle, :etat, :user_id, :montant, :ecole_id, matiere_ids: [])
+      params.require(:classe_room).permit(:libelle, :etat, :user_id, :montant, :contenance, :ecole_id, matiere_ids: [])
     end
 end

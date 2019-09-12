@@ -1,13 +1,14 @@
-<% creneaus.each do |creneau| %>
-<tr>
-    <td><%= creneau.debut %></td>
-    <td><%= creneau.fin %></td>
-    <td><%= creneau.user.email if creneau.user_id %></td>
-    <td><%= creneau.ecole.libelle %></td>
-    <td><%= link_to 'Show', creneau %></td>
-    <% if Admin? %>
-    <td><%= link_to 'Edit', edit_creneau_path(creneau) %></td>
-    <% end %>
-    <!--<td><%= link_to 'Destroy', creneau, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-</tr>
-<% end %>
+
+            <% creneaus.each do |creneau| %>
+            <tr>
+              <td><%= creneau.debut %></td>
+              <td><%= creneau.fin %></td>
+              <td><%= creneau.user.email if creneau.user_id %></td>
+              <td><%= creneau.ecole.libelle %></td>
+             <!--  <td><%= link_to 'Show', creneau %></td> -->
+             <% if Admin? %>
+              <td><%= link_to 'Modifier', edit_creneau_path(creneau), :class => 'action-link-color' %></td>
+             <% end %>
+              <!-- <td><%= link_to 'Destroy', creneau, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+            </tr>
+            <% end %>

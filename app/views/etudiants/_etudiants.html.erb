@@ -1,15 +1,18 @@
-<% etudiants.each do |etudiant| %>
-    <tr>
-        <td><%= etudiant.nom %></td>
-        <td><%= etudiant.matricule %></td>
-        <td><%= etudiant.num_inscription %></td>
-        <td><%= etudiant.classe_room.libelle %></td>
-        <td><%= etudiant.oriente %></td>
-        <td><%= etudiant.ecole.libelle %></td>
-        <td><%= link_to 'Versement', etudiant_versements_path(etudiant) %></td>
-        <td><%= link_to 'Show', etudiant %></td>
-        <% if Admin? %>
-            <td><%= link_to 'Edit', edit_etudiant_path(etudiant) %></td>
-        <% end %>
-    </tr>
-<% end %>
+
+          <% etudiants.each do |etudiant| %>
+          <tr>
+            <td><%= etudiant.nom %></td>
+            <td><%= etudiant.prenom %></td>
+            <td><%= etudiant.matricule %></td>
+            <td><%= etudiant.num_inscription %></td>
+            <td><%= etudiant.classe_room.libelle %></td>
+            <td><%= 'Oui' if etudiant.oriente %><%= 'Non' if !etudiant.oriente %></td>
+            <td><%= etudiant.ecole.libelle %></td>
+            <!-- <td><%= link_to 'Versement', etudiant_versements_path(etudiant), :class => 'action-link-color' %></td> -->
+            <td><%= link_to 'Afficher', etudiant, :class => 'action-link-color' %></td>
+            <% if Admin? %>
+              <td><%= link_to 'Modifier', edit_etudiant_path(etudiant), :class => 'action-link-color' %></td>
+            <% end %>
+            <!--<td><%= link_to 'Destroy', etudiant, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+          </tr>
+          <% end %>
