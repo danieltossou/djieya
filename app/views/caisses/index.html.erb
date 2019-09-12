@@ -37,7 +37,7 @@
           <td><%= sortie.created_at %></td>
           <td><%= sortie.libelle %></td>
           <td>
-            <%= sortie.email if sortie.user_id %>
+            <%= sortie.user.email if sortie.user_id %>
           </td>
           <td><%= sortie.montant %></td> </tr>
       <% end %>

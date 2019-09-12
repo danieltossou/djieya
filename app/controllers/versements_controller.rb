@@ -120,7 +120,7 @@ class VersementsController < ApplicationController
         Caisse.create!(montant: @versement.montant, libelle: @libelle, operation: 'entrée', ecole_id: @versement.ecole_id, annee_id: @versement.annee_id, user_id: current_user.id)
 
 
-        format.html { redirect_to @versement, notice: 'Versement was successfully created.' }
+        format.html { redirect_to etudiant_versements_path(@versement.etudiant), notice: 'Versement was successfully created.' }
         format.json { render :show, status: :created, location: @versement }
       else
         format.html { render :new }
