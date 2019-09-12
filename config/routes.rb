@@ -74,7 +74,6 @@ Rails.application.routes.draw do
     put '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_update'
     delete '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_destroy'
 
-  devise_for :admins, path: 'admins', controllers: { sessions: 'admins/sessions' }
   resources :dossiers do
     collection do
       get 'search', to: 'dossiers/search'
