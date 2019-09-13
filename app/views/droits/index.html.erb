@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Droits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tableau board</th>
+      <th>Annee</th>
+      <th>Utilisateur</th>
+      <th>Etudiant</th>
+      <th>Emploi temps</th>
+      <th>Versement</th>
+      <th>Caisse</th>
+      <th>Classe</th>
+      <th>Matiere</th>
+      <th>Salle</th>
+      <th>Semestre</th>
+      <th>Dossier</th>
+      <th>Enseignant</th>
+      <th>Admin</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @droits.each do |droit| %>
+      <tr>
+        <td><%= droit.tableau_board %></td>
+        <td><%= droit.annee %></td>
+        <td><%= droit.utilisateur %></td>
+        <td><%= droit.etudiant %></td>
+        <td><%= droit.emploi_du_temps %></td>
+        <td><%= droit.versement %></td>
+        <td><%= droit.caisse %></td>
+        <td><%= droit.classe_room %></td>
+        <td><%= droit.matiere %></td>
+        <td><%= droit.salle %></td>
+        <td><%= droit.semestre %></td>
+        <td><%= droit.dossier %></td>
+        <td><%= droit.enseignant %></td>
+        <td><%= droit.admin %></td>
+        <td><%= droit.user.email %></td>
+        <td><%= link_to 'Show', droit %></td>
+        <td><%= link_to 'Edit', edit_droit_path(droit) %></td>
+        <td><%= link_to 'Destroy', droit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Droit', new_droit_path %>

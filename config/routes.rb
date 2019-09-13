@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
       
+  resources :droits
   devise_scope :user do    
     authenticated :user do
       root :to => 'pages#dashboard'

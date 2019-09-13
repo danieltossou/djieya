@@ -1,0 +1,89 @@
+<%= form_with(model: droit, local: true) do |form| %>
+  <% if droit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(droit.errors.count, "error") %> prohibited this droit from being saved:</h2>
+
+      <ul>
+        <% droit.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :tableau_board %>
+    <%= form.check_box :tableau_board %>
+  </div>
+
+  <div class="field">
+    <%= form.label :annee %>
+    <%= form.check_box :annee %>
+  </div>
+
+  <div class="field">
+    <%= form.label :utilisateur %>
+    <%= form.check_box :utilisateur %>
+  </div>
+
+  <div class="field">
+    <%= form.label :etudiant %>
+    <%= form.check_box :etudiant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :emploi_du_temps %>
+    <%= form.check_box :emploi_du_temps %>
+  </div>
+
+  <div class="field">
+    <%= form.label :versement %>
+    <%= form.check_box :versement %>
+  </div>
+
+  <div class="field">
+    <%= form.label :caisse %>
+    <%= form.check_box :caisse %>
+  </div>
+
+  <div class="field">
+    <%= form.label :classe %>
+    <%= form.check_box :classe_room %>
+  </div>
+
+  <div class="field">
+    <%= form.label :matiere %>
+    <%= form.check_box :matiere %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salle %>
+    <%= form.check_box :salle %>
+  </div>
+
+  <div class="field">
+    <%= form.label :semestre %>
+    <%= form.check_box :semestre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dossier %>
+    <%= form.check_box :dossier %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enseignant %>
+    <%= form.check_box :enseignant %>
+  </div>
+
+  <% if !droit.persisted? %>
+    <div class="field">
+      <%= form.label :user_id %>
+      <%= form.collection_select :user_id, User.ecole(ecole.id).where.not(id: [Droit.select(:user_id).all]).all, :id, :full_name, :prompt => true %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :disponibilites
   has_many :semestres
   has_many :cours
+  has_one :droit
 
   default_scope { order(nom: :asc) }
   scope :ecole, -> (ecole) { where(ecole_id: ecole) }
@@ -33,6 +34,11 @@ class User < ApplicationRecord
   #  @matricule = @date+'-'+@id+'-'+@nom+''+@prenom
   #  @user.update(matricule: @matricule)
   #end
+
+  def full_name
+    "#{nom} #{prenom}"
+  end
   
+
 
 end

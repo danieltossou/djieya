@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_12_024709) do
+ActiveRecord::Schema.define(version: 2019_09_12_205614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,27 @@ ActiveRecord::Schema.define(version: 2019_09_12_024709) do
     t.bigint "etudiant_id"
     t.index ["dossier_id"], name: "index_dossiers_etudiants_on_dossier_id"
     t.index ["etudiant_id"], name: "index_dossiers_etudiants_on_etudiant_id"
+  end
+
+  create_table "droits", force: :cascade do |t|
+    t.boolean "tableau_board", default: false
+    t.boolean "annee", default: false
+    t.boolean "utilisateur"
+    t.boolean "etudiant", default: false
+    t.boolean "emploi_du_temps", default: false
+    t.boolean "versement", default: false
+    t.boolean "caisse", default: false
+    t.boolean "classe_room", default: false
+    t.boolean "matiere", default: false
+    t.boolean "salle", default: false
+    t.boolean "semestre", default: false
+    t.boolean "dossier", default: false
+    t.boolean "enseignant", default: false
+    t.bigint "admin", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_droits_on_user_id"
   end
 
   create_table "ecoles", force: :cascade do |t|
@@ -331,6 +352,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_024709) do
   add_foreign_key "disponibilites", "users"
   add_foreign_key "dossiers", "ecoles"
   add_foreign_key "dossiers", "users"
+  add_foreign_key "droits", "users"
   add_foreign_key "ecoles", "users"
   add_foreign_key "enseignants", "ecoles"
   add_foreign_key "enseignants", "users"
