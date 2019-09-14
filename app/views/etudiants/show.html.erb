@@ -5,10 +5,10 @@
     <div class="card col-12 etudiant-card-space">
       <div class="card-body">
         <div class="row">
-            <div class="col-4">
+            <div class="col-6">
                 <%= image_tag(@etudiant.photo_url, width: '50%', height: '50%', class: "mr-3 img-responsive img-circle") if @etudiant.photo_url %>
             </div>
-            <div class="col-8">
+            <div class="col-6">
               <h4>
                 <%= @etudiant.nom %>&nbsp;
                 <%= @etudiant.prenom %>
