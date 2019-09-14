@@ -76,7 +76,9 @@
 <main class="col offset-2 h-100">
 <div class="row">
   <div class="col-12 py-2">
-        <%= yield %>
-  </div> 
+    <h2><%= ecole.libelle if ecole?%></h2>
+      <div id="notice"><%= notice %></div>
+      <%= yield %>
+  </div>
   </body>
 </html>
