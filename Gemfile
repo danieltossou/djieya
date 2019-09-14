@@ -69,3 +69,7 @@ gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 
 # Pagination
 gem 'kaminari'
+
+# Generation de pdf
+gem 'wkhtmltopdf-binary' # si Wkhtmltopdf n'est pas déjà installé
+gem 'wicked_pdf'

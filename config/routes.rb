@@ -58,10 +58,13 @@ Rails.application.routes.draw do
     end
   end
   resources :versements
+
   resources :inscriptions
+  
   resources :etudiants do
     collection do
       get 'search', to: 'etudiants/search'
+      get 'fiche_inscription/:id', to: 'etudiants#fiche_inscription', as: 'fiche_inscription', defaults: { format: 'pdf' }
     end
   end
   

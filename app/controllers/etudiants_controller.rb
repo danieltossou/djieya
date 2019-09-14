@@ -1,5 +1,5 @@
 class EtudiantsController < ApplicationController
-  before_action :set_etudiant, only: [:show, :edit, :update, :destroy]
+  before_action :set_etudiant, only: [:show, :edit, :update, :destroy, :fiche_inscription]
   #load_and_authorize_resource
   
   # GET /etudiants
@@ -32,8 +32,8 @@ class EtudiantsController < ApplicationController
     @montant = @etudiant.classe_room.montant
     respond_to do |format|
       if @etudiant.save
-        
-        format.html { redirect_to etudiants_url, notice: 'Etudiant was successfully created.' }
+        format.pdf { render template: 'etudiants/inscription', pdf: 'Inscription' }
+        # format.html { redirect_to etudiants_url, notice: 'Etudiant was successfully created.' }
         format.json { render :show, status: :created, location: @etudiant }
       else
         format.html { render :new }
@@ -73,6 +73,13 @@ class EtudiantsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to etudiants_url, notice: 'Etudiant was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # PDF de la fiche d'inscription
+  def fiche_inscription
+    respond_to do |format|
+      format.pdf { render template: 'etudiants/fiche_inscription', pdf: 'Inscription' }
     end
   end
 
