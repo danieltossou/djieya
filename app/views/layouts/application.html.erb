@@ -41,16 +41,27 @@
 <p>Année: <%= annee_active.libelle if annee_active? %></p>
 </div><br>
 <ul class="list-group">
-<a href="<%= dashboard_path %>"><li class="list-group-item"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;TABLEAU DE BORD</li></a><br>
-
+  <% if can_tableau_board? %>
+    <a href="<%= dashboard_path %>"><li class="list-group-item"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;TABLEAU DE BORD</li></a><br>
+  <% end %>
 <!-- <h6><i class="far fa-calendar"></i>&nbsp;&nbsp;<%= link_to 'Année scolaire', annees_path %></h6><br> -->
-  <a href="<%= users_path %>"><li class="list-group-item"><i class="fas fa-users"></i>&nbsp;&nbsp;UTILISATEURS</li></a><br>
-  <a href="<%= etudiants_path %>"><li class="list-group-item"><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;ETUDIANTS</li></a><br>
+  <% if can_utilisateur? %>
+    <a href="<%= users_path %>"><li class="list-group-item"><i class="fas fa-users"></i>&nbsp;&nbsp;UTILISATEURS</li></a><br>
+  <% end %>
+  <% if can_tableau_board? %>
+    <a href="<%= etudiants_path %>"><li class="list-group-item"><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;ETUDIANTS</li></a><br>
+  <% end %>
   <!-- <h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', classe_rooms_path %></h6><br> -->
-  <a href="#!"><li class="list-group-item"><i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;EMPLOI DU TEMPS</li></a><br>
-  <a href="<%= versements_path %>"><li class="list-group-item"><i class="fas fa-credit-card"></i>&nbsp;&nbsp;VERSEMENTS</li></a><br>
-  <a href="<%= caisses_path %>"><li class="list-group-item"><i class="fas fa-coins"></i>&nbsp;&nbsp;CAISSE</li></a><br>
 
+  <% if can_etudiant? %>
+    <a href="#!"><li class="list-group-item"><i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;EMPLOI DU TEMPS</li></a><br>
+  <% end %>
+  <% if can_versement? %>
+    <a href="<%= versements_path %>"><li class="list-group-item"><i class="fas fa-credit-card"></i>&nbsp;&nbsp;VERSEMENTS</li></a><br>
+  <% end %>
+  <% if can_caisse? %>
+    <a href="<%= caisses_path %>"><li class="list-group-item"><i class="fas fa-coins"></i>&nbsp;&nbsp;CAISSE</li></a><br>
+  <% end %>
   <% if Admin? || current_user.categorie == "Directeur" %>
     <a href="<%= configuration_path %>"><li class="list-group-item"><i class="fas fa-cogs"></i>&nbsp;&nbsp;CONFIGURATION</a></li>
   <% end %>

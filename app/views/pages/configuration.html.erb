@@ -12,6 +12,7 @@
             </div>  
         </div>
         <% end %>
+        <% if can_classe_room? %>
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
@@ -22,6 +23,8 @@
                 </div>
             </div>  
         </div>
+        <% end %>
+        <% if can_matiere? %>
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
@@ -32,6 +35,8 @@
                 </div>
             </div>
         </div>
+        <% end %>
+        <% if can_salle? %>
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
@@ -43,7 +48,9 @@
             </div>  
         </div>
     </div><br>
+    <% end %>
     <div class="row">
+    <% if can_semestre? %>
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
@@ -53,7 +60,9 @@
                     </a>
                 </div>
             </div>  
-            </div>
+        </div>
+    <% end %>
+    <% if can_dossier? %>
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
@@ -64,6 +73,8 @@
                 </div>
             </div>  
         </div>
+    <% end %>
+    <% if can_enseignant? %>
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
@@ -74,6 +85,7 @@
                 </div>
             </div>  
         </div>
+    <% end %>
         <!-- <div class="col-md-3">
             <div class="card">
                 <div class="card-body">

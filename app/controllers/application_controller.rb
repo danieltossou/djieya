@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
-  helper_method :annee_active, :annee_active?, :ecole, :ecole?, :Admin?
+  helper_method :annee_active, :annee_active?, :ecole, :ecole?, :Admin?, :can_tableau_board?, :can_utilisateur?, :can_etudiant?, :can_versement?, :can_caisse?, :can_matiere?, :can_classe_room?, :can_dossier?, :can_salle?, :can_semestre?, :can_enseignant?
 
   def Admin?
     return true if current_user.categorie == "Admin"
@@ -17,14 +17,61 @@ class ApplicationController < ActionController::Base
     !annee_active.nil?
   end
 
-    # Recuperation de l'ecole
-    def ecole
-      Ecole.find_by_id(session[:ecole_id]) ? Ecole.find_by_id(session[:ecole_id]) : nil
-    end
+  # Recuperation de l'ecole
+  def ecole
+    Ecole.find_by_id(session[:ecole_id]) ? Ecole.find_by_id(session[:ecole_id]) : nil
+  end
+
+  def ecole?
+    !ecole.nil?
+  end
+
+  # Gestion des droits
+  def can_tableau_board?
+    return true if Admin?
+    current_user.droit.tableau_board if current_user.droit
+  end
+  def can_utilisateur?
+    return true if Admin?
+    current_user.droit.utilisatire if current_user.droit
+  end
+  def can_etudiant?
+    return true if Admin?
+    current_user.droit.etudiant if current_user.droit
+  end
+  def can_versement?
+    return true if Admin?
+    current_user.droit.versement if current_user.droit
+  end
+  def can_caisse?
+    return true if Admin?
+    current_user.droit.caisse if current_user.droit
+  end
+  def can_matiere?
+    return true if Admin?
+    current_user.droit.matiere if current_user.droit
+  end
+  def can_classe_room?
+    return true if Admin?
+    current_user.droit.classe_room if current_user.droit
+  end
+  def can_dossier?
+    return true if Admin?
+    current_user.droit.dossier if current_user.droit
+  end
+  def can_salle?
+    return true if Admin?
+    current_user.droit.salle if current_user.droit
+  end
+  def can_semestre?
+    return true if Admin?
+    current_user.droit.semestre if current_user.droit
+  end
+  def can_enseignant?
+    return true if Admin?
+    current_user.droit.enseignant if current_user.droit
+  end
   
-    def ecole?
-      !ecole.nil?
-    end
 
 
   # Message d'erreur lorsqu'on accède aux interdits
