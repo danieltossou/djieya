@@ -1,0 +1,9 @@
+<h1>Versement</h1>
+<div class="container">
+    <div class="row">
+        <p>Versement de <%= "#{@versement.etudiant.nom} #{@versement.etudiant.prenom} en classe de #{@versement.etudiant.classe_room.libelle} d'une sommes de #{@versement.montant}" %>
+    </div>
+    <div>
+        Il vous reste <b><%= @reste %></b> à payer
+    </div>
+</div>

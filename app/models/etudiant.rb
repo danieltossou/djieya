@@ -2,7 +2,7 @@ class Etudiant < ApplicationRecord
   belongs_to :user
   belongs_to :classe_room
   belongs_to :ecole
-  has_one :inscription
+  has_many :inscriptions
   has_many :versements
   has_and_belongs_to_many :dossiers
 

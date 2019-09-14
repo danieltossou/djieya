@@ -77,6 +77,7 @@ Rails.application.routes.draw do
     patch '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_update', as: 'update_etudiant_versement'
     put '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_update'
     delete '/etudiants/:etudiant_id/versements/:id', to: 'versements#etudiant_destroy'
+    get 'recu_versement/:id', to: 'versements#recu_versement', as: 'recu_versement', defaults: { format: 'pdf' }
 
   resources :dossiers do
     collection do

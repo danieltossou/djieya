@@ -1,6 +1,6 @@
 class VersementsController < ApplicationController
   before_action :set_etudiant, only: [:etudiant_index, :etudiant_show, :etudiant_new, :etudiant_create, :etudiant_edit, :etudiant_update, :etudiant_destroy]
-  before_action :set_versement, only: [:show, :edit, :update, :destroy, :etudiant_edit, :etudiant_update]
+  before_action :set_versement, only: [:show, :edit, :update, :destroy, :etudiant_edit, :etudiant_update, :recu_versement]
   #load_and_authorize_resource
   
   # GET /versements
@@ -83,13 +83,14 @@ class VersementsController < ApplicationController
     @versements = Versement.etudiant(@etudiant).annee(@annee).all.page(params[:page])
 
   # Generation du reste à payer
-    @montant_a_paye = @etudiant.inscription.montant
+    @inscription = @etudiant.inscriptions.select(:montant).where(annee_id: @annee)
+    @montant_a_paye = @inscription.map(&:montant)
     @versement_etudiant = @etudiant.versements
     @montant_paye = 0
     @versement_etudiant.each do |versement|
       @montant_paye += versement.montant
     end
-    @reste = @montant_a_paye - @montant_paye
+    @reste = @montant_a_paye[0] - @montant_paye
     
   end
 
@@ -150,6 +151,25 @@ class VersementsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to versements_url, notice: 'Versement was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # PDF de versement
+  def recu_versement
+    @annee = annee_active.id if annee_active?
+    # Montant à payer
+    @inscription = @versement.etudiant.inscriptions.select(:montant).where(annee_id: @annee)
+    @montant_a_paye = @inscription.map(&:montant)
+
+    @versement_etudiant = @versement.etudiant.versements.where("id <= #{@versement.id}").all
+    @montant_paye = 0
+    @versement_etudiant.each do |versement|
+      @montant_paye += versement.montant
+    end
+    @reste = @montant_a_paye[0] - @montant_paye
+    
+    respond_to do |format|
+      format.pdf { render template: 'versements/recu_versement', pdf: 'Versement'  }
     end
   end
 
