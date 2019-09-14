@@ -24,9 +24,9 @@ class Users::SessionsController < Devise::SessionsController
     if is_active?
       current_user.update(presence: true, date_derniere_connexion: Time.now.utc)
       if current_user.categorie == "Admin"
-        redirect_to ecoles_liste_path, notice: 'Bienvenue !!!'
+        redirect_to ecoles_liste_path, notice: "Bienvenue !!!"
       else
-        redirect_to root_path, notice: 'Bienvenue !!!'
+        redirect_to root_path, notice: "Bienvenue !!!"
       end
     else
       session.clear

@@ -4,26 +4,28 @@
   <div class="row">
     <div class="card col-12 etudiant-card-space">
       <div class="card-body">
-        <div class="col-4">
-            <%= image_tag(@etudiant.photo_url, class: "mr-3 img-responsive img-circle") if @etudiant.photo_url %>
+        <div class="row">
+            <div class="col-4">
+                <%= image_tag(@etudiant.photo_url, width: '50%', height: '50%', class: "mr-3 img-responsive img-circle") if @etudiant.photo_url %>
+            </div>
+            <div class="col-8">
+              <h4>
+                <%= @etudiant.nom %>&nbsp;
+                <%= @etudiant.prenom %>
+              </h4><br>
+              <p><%= @etudiant.nationnalite %> &nbsp;&nbsp; <%= @etudiant.sexe %></p>
+              <p>Né le <%= @etudiant.date_naissance %></p>,&nbsp;
+              <p>
+                De matricule:
+                <strong><%= @etudiant.matricule %></strong>
+              </p>
+              <p>
+                Habite au:
+                <%= @etudiant.adresse %>
+              </p>
+              <p><%= @etudiant.email %> - <%= @etudiant.contact %></p>
+          </div>
         </div>
-        <div class="col-8">
-            <h4>
-              <%= @etudiant.nom %>&nbsp;
-              <%= @etudiant.prenom %>
-            </h4><br>
-            <p><%= @etudiant.nationnalite %> &nbsp;&nbsp; <%= @etudiant.sexe %></p>
-            <p>Né le <%= @etudiant.date_naissance %></p>,&nbsp;
-            <p>
-              De matricule:
-              <strong><%= @etudiant.matricule %></strong>
-            </p>
-            <p>
-              Habite au:
-              <%= @etudiant.adresse %>
-            </p>
-            <p><%= @etudiant.email %> - <%= @etudiant.contact %></p>
-      </div>
       </div>
     </div>
      <div class="col">
