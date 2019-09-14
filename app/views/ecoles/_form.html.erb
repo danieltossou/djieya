@@ -7,6 +7,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :Image %>
+    <%= form.file_field :image, :class => 'form-control' %>
+  </div>
+
+  <div class="field">
     <%= form.label :etat %>
     <%= form.check_box :etat %>
   </div>

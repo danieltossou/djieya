@@ -42,6 +42,11 @@
                 </div>
         
                 <div class="field">
+                    <%= f.label :Fonction %><br />
+                    <%= f.text_field :fonction, autocomplete: "fonction", :class => 'form-control' %>
+                </div>
+        
+                <div class="field">
                     <%= f.label :Adresse %><br />
                     <%= f.text_field :adresse, autocomplete: "adresse", :class => 'form-control' %>
                 </div>

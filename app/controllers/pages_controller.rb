@@ -196,7 +196,7 @@ class PagesController < ApplicationController
     if user_signed_in?
       params[:user][:crea_user] = current_user.id
     end
-    params.require(:user).permit(:nom, :prenom, :adresse, :contact, :sexe, :matricule, :etat, :categorie, :ecole_id, :crea_user, :email, :password, :password_confirmation)
+    params.require(:user).permit(:nom, :prenom, :fonction, :adresse, :contact, :sexe, :matricule, :etat, :categorie, :ecole_id, :crea_user, :email, :password, :password_confirmation)
   end
 
 end

@@ -6,6 +6,8 @@ class Ecole < ApplicationRecord
   has_many :etudiants
   has_many :users
 
+  mount_uploader :image, PhotoUploader
+
   default_scope { order(libelle: :asc) }
 
   private
