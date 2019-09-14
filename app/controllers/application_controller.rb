@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
   def can_utilisateur?
     return true if Admin?
-    current_user.droit.utilisatire if current_user.droit
+    current_user.droit.utilisateur if current_user.droit
   end
   def can_etudiant?
     return true if Admin?
