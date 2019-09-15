@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-  #authorize_resource :class => pages
+  before_action :autorisation
+  skip_before_action :autorisation, only: [:dashboard]
 
   def index
   end
@@ -199,4 +200,9 @@ class PagesController < ApplicationController
     params.require(:user).permit(:nom, :prenom, :fonction, :adresse, :contact, :sexe, :matricule, :etat, :categorie, :ecole_id, :crea_user, :email, :password, :password_confirmation)
   end
 
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_page?
+    end
 end

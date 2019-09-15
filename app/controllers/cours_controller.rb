@@ -1,6 +1,7 @@
 class CoursController < ApplicationController
   before_action :set_cour, only: [:show, :edit, :update, :destroy]
-
+  before_action :autorisation
+  
   # GET /cours
   # GET /cours.json
   def index
@@ -143,5 +144,10 @@ class CoursController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cour_params
       params.require(:cour).permit(:enseignant_id, :matiere_id, :salle_id, :creneau_debut, :creneau_fin, :jour_id, :nombre_heure, :numero_cours, :numero_cours_g, :annee_id, :ecole_id, :semestre_id, :user_id, :first_classe_room_id, :classe_room_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_cour?
     end
 end

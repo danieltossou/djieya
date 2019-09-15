@@ -1,6 +1,7 @@
 class AnneesController < ApplicationController
   before_action :set_annee, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  #load_and_authorize_resource
+  before_action :autorisation
   
   # GET /annees
   # GET /annees.json
@@ -83,5 +84,10 @@ class AnneesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def annee_params
       params.require(:annee).permit(:libelle, :etat, :user_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_annee?
     end
 end

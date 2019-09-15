@@ -1,6 +1,7 @@
 class ClasseRoomsController < ApplicationController
   before_action :set_classe_room, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  # load_and_authorize_resource
+  before_action :autorisation
   
   # GET /classe_rooms
   # GET /classe_rooms.json
@@ -84,5 +85,10 @@ class ClasseRoomsController < ApplicationController
     def classe_room_params
       params[:classe_room][:ecole_id] = ecole.id if ecole?
       params.require(:classe_room).permit(:libelle, :etat, :user_id, :montant, :contenance, :ecole_id, matiere_ids: [])
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_classe_room?
     end
 end

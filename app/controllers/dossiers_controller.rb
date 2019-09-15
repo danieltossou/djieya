@@ -1,5 +1,6 @@
 class DossiersController < ApplicationController
   before_action :set_dossier, only: [:show, :edit, :update, :destroy]
+  before_action :autorisation
   #load_and_authorize_resource
   
   # GET /dossiers
@@ -84,5 +85,10 @@ class DossiersController < ApplicationController
     def dossier_params
       params[:dossier][:ecole_id] = ecole.id if ecole?
       params.require(:dossier).permit(:libelle, :ecole_id, :user_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_dossier?
     end
 end

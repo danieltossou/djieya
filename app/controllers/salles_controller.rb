@@ -1,6 +1,7 @@
 class SallesController < ApplicationController
   before_action :set_salle, only: [:show, :edit, :update, :destroy]
   #load_and_authorize_resource
+  before_action :autorisation
   
   # GET /salles
   # GET /salles.json
@@ -85,5 +86,10 @@ class SallesController < ApplicationController
     def salle_params
       params[:salle][:ecole_id] = ecole.id if ecole?
       params.require(:salle).permit(:libelle, :ecole_id, :user_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_salle?
     end
 end

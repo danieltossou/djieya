@@ -1,6 +1,7 @@
 class DroitsController < ApplicationController
   before_action :set_droit, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :autorisation
 
   # GET /droits
   # GET /droits.json
@@ -73,5 +74,10 @@ class DroitsController < ApplicationController
     def droit_params
       params[:droit][:admin] = current_user.id
       params.require(:droit).permit(:tableau_board, :annee, :utilisateur, :etudiant, :emploi_du_temps, :versement, :caisse, :classe_room, :matiere, :salle, :semestre, :dossier, :enseignant, :admin, :user_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_droit?
     end
 end

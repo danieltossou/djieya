@@ -1,5 +1,6 @@
 class CaissesController < ApplicationController
   before_action :set_caisse, only: [:show, :edit, :update, :destroy]
+  before_action :autorisation
   
   # GET /caisses
   # GET /caisses.json
@@ -138,5 +139,10 @@ class CaissesController < ApplicationController
       params[:caisse][:ecole_id] = ecole.id if ecole?
       params[:caisse][:annee_id] = annee_active.id if annee_active?
       params.require(:caisse).permit(:montant, :libelle, :operation, :user_id, :ecole_id, :annee_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_caisse?
     end
 end

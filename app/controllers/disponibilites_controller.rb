@@ -1,5 +1,6 @@
 class DisponibilitesController < ApplicationController
   before_action :set_disponibilite, only: [:show, :edit, :update, :destroy]
+  before_action :autorisation
 
   # GET /disponibilites
   # GET /disponibilites.json
@@ -76,5 +77,10 @@ class DisponibilitesController < ApplicationController
     def disponibilite_params
       params[:disponibilite][:ecole_id] = ecole.id if ecole?
       params.require(:disponibilite).permit(:enseignant_id, :jour_id, :user_id, :ecole_id, creneau_ids: [])
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_disponibilite?
     end
 end

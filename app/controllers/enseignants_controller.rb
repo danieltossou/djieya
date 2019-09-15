@@ -1,6 +1,7 @@
 class EnseignantsController < ApplicationController
   before_action :set_enseignant, only: [:show, :edit, :update, :destroy]
   #load_and_authorize_resource
+  before_action :autorisation
   
   # GET /enseignants
   # GET /enseignants.json
@@ -85,5 +86,10 @@ class EnseignantsController < ApplicationController
     def enseignant_params
       params[:enseignant][:ecole_id] = ecole.id if ecole?
       params.require(:enseignant).permit(:nom, :prenom, :sexe, :contact, :email, :adresse, :ecole_id, :user_id, matiere_ids: [])
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_enseignant?
     end
 end

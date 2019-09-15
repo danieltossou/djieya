@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
-  helper_method :annee_active, :annee_active?, :ecole, :ecole?, :Admin?, :can_tableau_board?, :can_utilisateur?, :can_etudiant?, :can_versement?, :can_caisse?, :can_matiere?, :can_classe_room?, :can_dossier?, :can_salle?, :can_semestre?, :can_enseignant?
+  helper_method :annee_active, :annee_active?, :ecole, :ecole?, :Admin?, :can_tableau_board?, :can_utilisateur?, :can_etudiant?, :can_versement?, :can_caisse?, :can_matiere?, :can_classe_room?, :can_dossier?, :can_salle?, :can_semestre?, :can_enseignant?, :can_creneau?, :can_disponibilite?, :can_cour?, :can_droit?, :can_jour?, :can_page?,
 
   def Admin?
     return true if current_user.categorie == "Admin"
@@ -70,6 +70,30 @@ class ApplicationController < ActionController::Base
   def can_enseignant?
     return true if Admin?
     current_user.droit.enseignant if current_user.droit
+  end
+  def can_creneau?
+    return true if Admin?
+    current_user.droit.creneau if current_user.droit
+  end
+  def can_jour?
+    return true if Admin?
+    current_user.droit.jour if current_user.droit
+  end
+  def can_disponibilite?
+    return true if Admin?
+    current_user.droit.disponibilite if current_user.droit
+  end
+  def can_cour?
+    return true if Admin?
+    current_user.droit.cour if current_user.droit
+  end
+  def can_droit?
+    return true if Admin?
+    current_user.droit.droit if current_user.droit
+  end
+  def can_page?
+    return true if Admin?
+    current_user.droit.page if current_user.droit
   end
   
 

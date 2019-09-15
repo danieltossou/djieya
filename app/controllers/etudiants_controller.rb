@@ -1,10 +1,11 @@
 class EtudiantsController < ApplicationController
   before_action :set_etudiant, only: [:show, :edit, :update, :destroy, :fiche_inscription]
   #load_and_authorize_resource
-  
+  before_action :autorisation
   # GET /etudiants
   # GET /etudiants.json
   def index
+
     @ecole = ecole.id if ecole?
     @etudiants = Etudiant.ecole(@ecole).all.page(params[:page])
     @etudiant = Etudiant.new
@@ -110,5 +111,9 @@ class EtudiantsController < ApplicationController
       params.require(:etudiant).permit(:nom, :prenom, :sexe, :date_naissance, :montant, :matricule, :num_inscription, :classe_room_id, :oriente, :nationnalite, :email, :adresse, :contact, :maladie, :nom_parent, :contact_parent, :lien_parente, :email_parent, :photo, :autre, :ecole_id, :user_id, dossier_ids: [])
     end
 
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_etudiant?
+    end
 
 end

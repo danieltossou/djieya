@@ -1,6 +1,7 @@
 class JoursController < ApplicationController
   before_action :set_jour, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  # load_and_authorize_resource
+  before_action :autorisation
   
   # GET /jours
   # GET /jours.json
@@ -85,5 +86,10 @@ class JoursController < ApplicationController
     def jour_params
       params[:jour][:ecole_id] = ecole.id if ecole?
       params.require(:jour).permit(:libelle, :ecole_id, :user_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_jour?
     end
 end

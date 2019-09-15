@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_12_205614) do
+ActiveRecord::Schema.define(version: 2019_09_15_022239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,12 @@ ActiveRecord::Schema.define(version: 2019_09_12_205614) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "creneau", default: false
+    t.boolean "disponibilite", default: false
+    t.boolean "cour", default: false
+    t.boolean "droit", default: false
+    t.boolean "jour", default: false
+    t.boolean "page", default: false
     t.index ["user_id"], name: "index_droits_on_user_id"
   end
 
@@ -159,6 +165,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_205614) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
     t.index ["user_id"], name: "index_ecoles_on_user_id"
   end
 
@@ -306,6 +313,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_205614) do
     t.bigint "crea_user"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "fonction"
     t.index ["ecole_id"], name: "index_users_on_ecole_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

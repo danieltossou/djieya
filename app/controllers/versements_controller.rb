@@ -2,6 +2,7 @@ class VersementsController < ApplicationController
   before_action :set_etudiant, only: [:etudiant_index, :etudiant_show, :etudiant_new, :etudiant_create, :etudiant_edit, :etudiant_update, :etudiant_destroy]
   before_action :set_versement, only: [:show, :edit, :update, :destroy, :etudiant_edit, :etudiant_update, :recu_versement]
   #load_and_authorize_resource
+  before_action :autorisation
   
   # GET /versements
   # GET /versements.json
@@ -196,5 +197,10 @@ class VersementsController < ApplicationController
         params[:versement][:ecole_id] = ecole.id if ecole?
       params[:versement][:annee_id] = annee_active.id 
       params.require(:versement).permit(:montant, :user_id, :ecole_id, :annee_id, :etudiant_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_versement?
     end
 end

@@ -1,5 +1,6 @@
 class CreneausController < ApplicationController
   before_action :set_creneau, only: [:show, :edit, :update, :destroy]
+  before_action :autorisation
 
   # GET /creneaus
   # GET /creneaus.json
@@ -83,5 +84,10 @@ class CreneausController < ApplicationController
     def creneau_params
       params[:creneau][:ecole_id] = ecole.id
       params.require(:creneau).permit(:debut, :fin, :user_id, :ecole_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_creneau?
     end
 end

@@ -1,6 +1,7 @@
 class MatieresController < ApplicationController
   before_action :set_matiere, only: [:show, :edit, :update, :destroy]
   #load_and_authorize_resource
+  before_action :autorisation
   
   # GET /matieres
   # GET /matieres.json
@@ -84,5 +85,10 @@ class MatieresController < ApplicationController
     def matiere_params
       params[:matiere][:ecole_id] = ecole.id if ecole?
       params.require(:matiere).permit(:libelle, :ecole_id, :user_id)
+    end
+
+    # Redirection à la page d'acceuil si il n'a pas le droit
+    def autorisation
+      redirect_to root_path, alert: "Vous n'avez pas le droit d'effectué cette action" if !can_matiere?
     end
 end

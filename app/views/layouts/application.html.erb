@@ -48,7 +48,7 @@
   <% if can_utilisateur? %>
     <a href="<%= users_path %>"><li class="list-group-item"><i class="fas fa-users"></i>&nbsp;&nbsp;UTILISATEURS</li></a><br>
   <% end %>
-  <% if can_tableau_board? %>
+  <% if can_etudiant? %>
     <a href="<%= etudiants_path %>"><li class="list-group-item"><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;ETUDIANTS</li></a><br>
   <% end %>
   <!-- <h6><i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;<%= link_to 'Classes', classe_rooms_path %></h6><br> -->
@@ -89,6 +89,7 @@
   <div class="col-12 py-2">
     <h2><%= ecole.libelle if ecole?%></h2><br>
       <div id="notice"><%= notice %></div>
+      <div id="alert"><%= alert %></div>
       <%= yield %>
   </div>
   </body>
