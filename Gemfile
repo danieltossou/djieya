@@ -57,7 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', '~> 4.2'
 
 # Upload de photo de l'etudiant
-gem 'carrierwave', '~> 0.11.2'
+gem 'carrierwave', '~> 1.3.2'
 
 # Limit des accès
 gem 'cancancan', '~> 1.13', '>= 1.13.1'
